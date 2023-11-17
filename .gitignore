@@ -30,7 +30,6 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
 .sass-cache/
 /connect.lock
 /coverage
@@ -42,5 +41,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Angular
+# Framework
+.angular
 package-lock.json
+android
+ios

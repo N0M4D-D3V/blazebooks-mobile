@@ -22,6 +22,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/detail/detail.module').then((m) => m.DetailPageModule),
   },
+  {
+    path: 'reader',
+    loadChildren: () =>
+      import('./pages/reader/reader.module').then((m) => m.ReaderPageModule),
+  },
 ];
 
 @NgModule({

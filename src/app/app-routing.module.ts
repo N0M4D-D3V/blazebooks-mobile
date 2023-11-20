@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/search/search.module').then((m) => m.SearchPageModule),
   },
+  {
+    path: 'detail',
+    loadChildren: () =>
+      import('./pages/detail/detail.module').then((m) => m.DetailPageModule),
+  },
 ];
 
 @NgModule({

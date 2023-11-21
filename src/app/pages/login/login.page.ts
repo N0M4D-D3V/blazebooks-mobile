@@ -12,8 +12,7 @@ export class LoginPage {
 
   constructor(private readonly router: Router) {}
 
-  loginUser() {
-    console.log(`Username: ${this.username}, Password: ${this.password}`);
+  public loginUser(): void {
     if (this.username === 'user' && this.password === 'pass')
       this.router.navigate(['/home']);
   }

@@ -1,28 +1,26 @@
-<div class="container">
-  <h2>Login</h2>
-  <form (ngSubmit)="loginUser()">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        [(ngModel)]="username"
-        name="username"
-        required
-      />
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        [(ngModel)]="password"
-        name="password"
-        required
-      />
-    </div>
-    <button type="submit" class="btn btn-primary mt-1login">Login</button>
-  </form>
+<div class="vertical-center text-center">
+  <div class="container">
+    <form (ngSubmit)="loginUser()" class="my-5">
+      <div class="form-group my-3">
+        <input
+          type="text"
+          class="form-control text-center"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="form-group my-3">
+        <input
+          type="password"
+          class="form-control text-center"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-dark w-100">Login</button>
+      <p>Recuperar contraseña</p>
+    </form>
+  </div>
 </div>

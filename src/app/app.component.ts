@@ -10,18 +10,39 @@ import { DemiToolbarConfig } from 'demiurge';
 export class AppComponent {
   public readonly toolbarConfig: DemiToolbarConfig = {
     title: 'Blazebooks',
-    toggleable: true,
     toggleTitle: 'Blazebooks',
     items: [
-      { label: 'home', url: '/home', icon: 'bi-house' },
-      { label: 'search', url: '/search', icon: 'bi-search' },
+      {
+        label: 'login',
+        url: '/login',
+        hidden: true,
+      },
+      {
+        label: 'home',
+        url: '/home',
+        icon: 'bi-house',
+        toggleable: true,
+        activeButtons: ['toggle'],
+      },
+      {
+        label: 'search',
+        url: '/search',
+        icon: 'bi-search',
+        toggleable: true,
+        activeButtons: ['back'],
+      },
+      {
+        label: 'reader',
+        url: '/reader',
+        activeButtons: ['back'],
+        hidden: true,
+      },
     ],
   };
 
   constructor(private readonly router: Router) {}
 
   public onLogout(): void {
-    console.log('que pasa');
     this.router.navigate(['/login']);
   }
 }

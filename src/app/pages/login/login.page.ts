@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: [],
+    selector: 'app-login',
+    templateUrl: './login.page.html',
+    styleUrls: [],
+    standalone: true,
+    imports: [FormsModule],
 })
 export class LoginPage {
   username: string = '';

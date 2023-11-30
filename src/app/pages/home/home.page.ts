@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DemiCardConfig, DemiCardModule } from 'demiurge';
+import { DemiCardComponent, DemiCardConfig } from 'demiurge';
 import { Observable, Subscription, of } from 'rxjs';
 import { BookService } from 'src/app/services/book.service';
 import { ToolbarService } from 'src/app/services/toolbar.service';
@@ -11,7 +11,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './home.page.html',
   styleUrls: [],
   standalone: true,
-  imports: [DemiCardModule, AsyncPipe, SearchPipe],
+  imports: [AsyncPipe, SearchPipe, DemiCardComponent],
 })
 export class HomePage implements OnInit, OnDestroy {
   private subToolbar!: Subscription;

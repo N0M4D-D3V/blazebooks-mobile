@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DemiToolbarConfig } from 'demiurge';
+import { Router, RouterOutlet } from '@angular/router';
+import { DemiToolbarConfig, DemiToolbarModule } from 'demiurge';
 import { ToolbarService } from './services/toolbar.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [DemiToolbarModule, RouterOutlet],
 })
 export class AppComponent {
   public readonly toolbarConfig: DemiToolbarConfig = {

@@ -7,15 +7,11 @@ import { SearchPipe } from '../../pipes/search.pipe';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.page.html',
-    styleUrls: [],
-    standalone: true,
-    imports: [
-        DemiCardModule,
-        AsyncPipe,
-        SearchPipe,
-    ],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: [],
+  standalone: true,
+  imports: [DemiCardModule, AsyncPipe, SearchPipe],
 })
 export class HomePage implements OnInit, OnDestroy {
   private subToolbar!: Subscription;
@@ -36,7 +32,7 @@ export class HomePage implements OnInit, OnDestroy {
       .searchObservable()
       .subscribe((value) => (this.searchValue = value ?? ''));
 
-    this.subBooks = this.books$.subscribe(console.log);
+    this.subBooks = this.books$.subscribe();
   }
 
   ngOnDestroy(): void {

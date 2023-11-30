@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DemiToolbarConfig } from 'demiurge';
+import { ToolbarService } from './services/toolbar.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent {
         url: '/home',
         icon: 'bi-house',
         toggleable: true,
-        activeButtons: ['toggle'],
+        activeButtons: ['toggle', 'search'],
       },
       {
         label: 'search',
@@ -37,10 +38,23 @@ export class AppComponent {
         activeButtons: ['back'],
         hidden: true,
       },
+      {
+        label: 'detail',
+        url: '/detail',
+        activeButtons: ['back'],
+        hidden: true,
+      },
     ],
   };
 
-  constructor(private readonly router: Router) {}
+  constructor(
+    private readonly router: Router,
+    private readonly toolbarService: ToolbarService
+  ) {}
+
+  public onSearch(ev: string): void {
+    this.toolbarService.searchIn(ev);
+  }
 
   public onLogout(): void {
     this.router.navigate(['/login']);

@@ -12,7 +12,10 @@ import { ToolbarService } from 'src/app/services/toolbar.service';
 export class HomePage implements OnInit, OnDestroy {
   private subToolbar!: Subscription;
 
+  public searchValue: string = '';
+
   public mainCard: DemiCardConfig = {
+    id: '01',
     title: 'Book',
     description: 'Continue reading ...',
     isClickable: true,
@@ -22,16 +25,118 @@ export class HomePage implements OnInit, OnDestroy {
     },
   };
 
-  public secondaryCard: DemiCardConfig = {
-    title: 'New',
-    description: 'Read Now!',
-    isClickable: true,
-    cssClass: 'mx-1',
-    size: DemiCardSize.S,
-    onCardTouched: () => {
-      this.router.navigate(['/detail']);
+  public books: DemiCardConfig[] = [
+    {
+      id: '02',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
     },
-  };
+    {
+      id: '03',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '04',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '05',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '06',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '07',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '08',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '09',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '10',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+    {
+      id: '11',
+      title: 'New',
+      description: 'Read Now!',
+      isClickable: true,
+      cssClass: 'mx-1',
+      size: DemiCardSize.S,
+      onCardTouched: () => {
+        this.router.navigate(['/detail']);
+      },
+    },
+  ];
 
   constructor(
     private readonly router: Router,
@@ -41,7 +146,7 @@ export class HomePage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subToolbar = this.toolbarService
       .searchObservable()
-      .subscribe(console.log);
+      .subscribe((value) => (this.searchValue = value ?? ''));
   }
 
   ngOnDestroy(): void {

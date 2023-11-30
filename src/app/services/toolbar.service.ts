@@ -15,6 +15,6 @@ export class ToolbarService {
   }
 
   public searchObservable(): Observable<string> {
-    return this.$searching.pipe(filter((value) => !!value && value !== ''));
+    return this.$searching;
   }
 }

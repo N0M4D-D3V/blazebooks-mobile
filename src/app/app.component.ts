@@ -32,7 +32,7 @@ export class AppComponent {
         url: '/search',
         icon: 'bi-search',
         toggleable: true,
-        activeButtons: ['back'],
+        activeButtons: ['back', 'search'],
       },
       {
         label: 'reader',

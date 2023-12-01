@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
-import { ToolbarService } from './services/toolbar.service';
+import {
+  DemiToolbarComponent,
+  DemiToolbarConfig,
+  DemiToolbarService,
+} from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
 
@@ -23,11 +26,11 @@ export class AppComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly toolbarService: ToolbarService
+    private readonly demiToolbarService: DemiToolbarService
   ) {}
 
   public onSearch(ev: string): void {
-    this.toolbarService.searchIn(ev);
+    this.demiToolbarService.searchIn(ev);
   }
 
   public onLogout(): void {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { ToolbarService } from './services/toolbar.service';
-import { TOOLBAR_CONFIG } from './config/toolbar.config';
+import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
 
 @Component({

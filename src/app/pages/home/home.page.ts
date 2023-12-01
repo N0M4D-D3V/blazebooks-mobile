@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DemiCardComponent, DemiCardConfig } from 'demiurge';
-import { Observable, Subscription, of } from 'rxjs';
-import { BookService } from 'src/app/services/book.service';
-import { ToolbarService } from 'src/app/services/toolbar.service';
-import { SearchPipe } from '../../pipes/search.pipe';
+import { Observable, Subscription } from 'rxjs';
+import { BookService } from '@services/book.service';
+import { ToolbarService } from '@services/toolbar.service';
+import { SearchPipe } from '@pipes/search.pipe';
 import { AsyncPipe } from '@angular/common';
 
 @Component({

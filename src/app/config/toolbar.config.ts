@@ -1,37 +1,37 @@
 import { DemiToolbarConfig } from 'demiurge';
-import { RoutePath } from '../interfaces/route.interface';
+import { RouteName, RoutePath } from '@interfaces/route.interface';
 
 export const TOOLBAR_CONFIG: DemiToolbarConfig = {
   title: 'Blazebooks',
   toggleTitle: 'Blazebooks',
   items: [
     {
-      label: 'login',
+      label: RouteName.Login,
       url: RoutePath.Login,
       hidden: true,
     },
     {
-      label: 'home',
+      label: RouteName.Home,
       url: RoutePath.Home,
       icon: 'bi-house',
       toggleable: true,
       activeButtons: ['toggle', 'search'],
     },
     {
-      label: 'search',
+      label: RouteName.Search,
       url: RoutePath.Search,
       icon: 'bi-search',
       toggleable: true,
       activeButtons: ['back', 'search'],
     },
     {
-      label: 'reader',
+      label: RouteName.Reader,
       url: RoutePath.Reader,
       activeButtons: ['back'],
       hidden: true,
     },
     {
-      label: 'detail',
+      label: RouteName.Detail,
       url: RoutePath.Detail,
       activeButtons: ['back'],
       hidden: true,

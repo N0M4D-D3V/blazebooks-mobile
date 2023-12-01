@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DemiCardConfig, DemiCardSize } from 'demiurge';
 import { Observable, of } from 'rxjs';
-import { RoutePath } from '../interfaces/route.interface';
+import { RoutePath } from '@interfaces/route.interface';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {

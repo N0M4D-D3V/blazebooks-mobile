@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DemiCardConfig, DemiCardSize } from 'demiurge';
 import { Observable, of } from 'rxjs';
+import { RoutePath } from '../interfaces/route.interface';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
   public currentBook$: Observable<DemiCardConfig> = of({
     id: '01',
-    title: 'Book',
+    title: '1984',
     description: 'Continue reading ...',
     isClickable: true,
     size: DemiCardSize.XL,
@@ -18,112 +19,112 @@ export class BookService {
   public books$: Observable<DemiCardConfig[]> = of([
     {
       id: '02',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Un mundo feliz',
+      description: 'Novela distopica',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '03',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Snow Crash',
+      description: 'Cyberpunk',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '04',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Eragon',
+      description: 'Fantasia',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '05',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Madrid Zombie',
+      description: 'Novela Interactiva',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '06',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Cisne Negro',
+      description: 'Ensayo',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '07',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Economia Basica',
+      description: 'Ensayo',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '08',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Lean Startup',
+      description: 'Ensayo',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '09',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Gambito de Caballo',
+      description: 'Novela',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '10',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Fahrenheit 451',
+      description: 'Distopía',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
     {
       id: '11',
-      title: 'New',
-      description: 'Read Now!',
+      title: 'Blade Runner',
+      description: 'Cyberpunk',
       isClickable: true,
       cssClass: 'mx-1',
       size: DemiCardSize.S,
       onCardTouched: () => {
-        this.router.navigate(['/detail']);
+        this.router.navigate([RoutePath.Detail]);
       },
     },
   ]);

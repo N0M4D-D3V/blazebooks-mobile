@@ -2,52 +2,24 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { ToolbarService } from './services/toolbar.service';
+import { TOOLBAR_CONFIG } from './config/toolbar.config';
+import { RoutePath } from './interfaces/route.interface';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
   imports: [DemiToolbarComponent, RouterOutlet],
+  template: `
+    <demi-toolbar
+      [config]="toolbarConfig"
+      (onLogout)="onLogout()"
+      (onSearch)="onSearch($event)"
+    ></demi-toolbar>
+    <router-outlet></router-outlet>
+  `,
 })
 export class AppComponent {
-  public readonly toolbarConfig: DemiToolbarConfig = {
-    title: 'Blazebooks',
-    toggleTitle: 'Blazebooks',
-    items: [
-      {
-        label: 'login',
-        url: '/login',
-        hidden: true,
-      },
-      {
-        label: 'home',
-        url: '/home',
-        icon: 'bi-house',
-        toggleable: true,
-        activeButtons: ['toggle', 'search'],
-      },
-      {
-        label: 'search',
-        url: '/search',
-        icon: 'bi-search',
-        toggleable: true,
-        activeButtons: ['back', 'search'],
-      },
-      {
-        label: 'reader',
-        url: '/reader',
-        activeButtons: ['back'],
-        hidden: true,
-      },
-      {
-        label: 'detail',
-        url: '/detail',
-        activeButtons: ['back'],
-        hidden: true,
-      },
-    ],
-  };
+  public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
 
   constructor(
     private readonly router: Router,
@@ -59,6 +31,6 @@ export class AppComponent {
   }
 
   public onLogout(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate([RoutePath.Login]);
   }
 }

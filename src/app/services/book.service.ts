@@ -22,8 +22,7 @@ export class BookService {
       title: 'Un mundo feliz',
       description: 'Novela distopica',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -33,8 +32,7 @@ export class BookService {
       title: 'Snow Crash',
       description: 'Cyberpunk',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -44,8 +42,7 @@ export class BookService {
       title: 'Eragon',
       description: 'Fantasia',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -55,8 +52,7 @@ export class BookService {
       title: 'Madrid Zombie',
       description: 'Novela Interactiva',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -66,8 +62,7 @@ export class BookService {
       title: 'Cisne Negro',
       description: 'Ensayo',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -77,8 +72,7 @@ export class BookService {
       title: 'Economia Basica',
       description: 'Ensayo',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -88,8 +82,7 @@ export class BookService {
       title: 'Lean Startup',
       description: 'Ensayo',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -99,8 +92,7 @@ export class BookService {
       title: 'Gambito de Caballo',
       description: 'Novela',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -110,8 +102,7 @@ export class BookService {
       title: 'Fahrenheit 451',
       description: 'Distopía',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },
@@ -121,8 +112,7 @@ export class BookService {
       title: 'Blade Runner',
       description: 'Cyberpunk',
       isClickable: true,
-      cssClass: 'mx-1',
-      size: DemiCardSize.S,
+      size: DemiCardSize.M,
       onCardTouched: () => {
         this.router.navigate([RoutePath.Detail]);
       },

@@ -9,13 +9,11 @@ import { ToolbarService } from 'src/app/services/toolbar.service';
 @Component({
   selector: 'app-search',
   template: `
-    <div class="d-flex flex-wrap justify-content-center">
-      <div class="d-flex flex-wrap justify-content-center">
-        @if(books$ | async; as books){ @for(book of books | search: searchBy;
-        track book.id){
-        <demi-card [config]="book"></demi-card>
-        } }
-      </div>
+    <div class="d-flex flex-wrap justify-content-around">
+      @if(books$ | async; as books){ @for(book of books | search: searchBy;
+      track book.id){
+      <demi-card [config]="book"></demi-card>
+      } }
     </div>
   `,
   styleUrls: [],

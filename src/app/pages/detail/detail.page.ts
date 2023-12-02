@@ -15,14 +15,20 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-detail',
   template: `
-    <demi-card-img [config]="selectedCard"></demi-card-img>
+    <demi-card-img
+      [config]="selectedCard"
+      (onReadTouched)="onRead($event)"
+    ></demi-card-img>
     <p class="genre-text text-end px-3">
       <b>Genres: </b> {{ selectedCard.data?.genres | separe }}
     </p>
     <div class="container px-3">
       <p>{{ selectedCard.data?.description }}</p>
     </div>
-    <demi-card-list [config$]="related"></demi-card-list>
+    <demi-card-list
+      [config$]="related"
+      (onCardTouched)="onCardTouched($event)"
+    ></demi-card-list>
   `,
   styleUrls: ['./detail.page.scss'],
   standalone: true,
@@ -42,7 +48,11 @@ export class DetailPage {
     private readonly bookService: BookService
   ) {}
 
-  public onRead(): void {
+  public onRead(card: DemiCardConfig<Book>): void {
     this.router.navigate([RoutePath.Reader]);
+  }
+
+  public onCardTouched(card: DemiCardConfig<Book>): void {
+    this.router.navigate([RoutePath.Detail]);
   }
 }

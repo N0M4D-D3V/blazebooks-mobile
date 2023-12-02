@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
-  DemiCardComponent,
   DemiCardConfig,
   DemiCardImgComponent,
   DemiCardListComponent,
@@ -19,14 +18,14 @@ import { RoutePath } from '@interfaces/route.interface';
     <div class="container">
       @if(currentBook$ | async; as current){
       <demi-card-img
-        [config]="current"
+        [item]="current"
         (onReadTouched)="onReadTouched($event)"
       ></demi-card-img>
       }
 
       <demi-card-list
-        [config$]="books$"
-        [canSearch]="true"
+        [items$]="books$"
+        [config]="cardListConfig"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-list>
     </div>
@@ -38,23 +37,13 @@ import { RoutePath } from '@interfaces/route.interface';
 export class HomePage implements OnInit, OnDestroy {
   private subBooks!: Subscription;
 
-  public currentBook$: Observable<DemiCardConfig<Book>> =
-    this.bookService.currentBook$.pipe(
-      map((x) => {
-        x.size = DemiCardSize.XL;
-        return x;
-      })
-    );
-  public books$: Observable<DemiCardConfig<Book>[]> =
-    this.bookService.books$.pipe(
-      map((x) => {
-        return x.map((book) => {
-          book.size = DemiCardSize.M;
-          book.isClickable = true;
-          return book;
-        });
-      })
-    );
+  public currentBook$: Observable<Book> = this.bookService.currentBook$;
+  public books$: Observable<Book[]> = this.bookService.books$;
+  public cardListConfig: DemiCardConfig = {
+    size: DemiCardSize.M,
+    isClickable: true,
+    canSearch: true,
+  };
 
   constructor(
     private readonly router: Router,
@@ -65,11 +54,11 @@ export class HomePage implements OnInit, OnDestroy {
     this.subBooks = this.books$.subscribe();
   }
 
-  public onReadTouched(card: DemiCardConfig<Book>): void {
+  public onReadTouched(card: Book): void {
     this.router.navigate([RoutePath.Reader]);
   }
 
-  public onCardTouched(card: DemiCardConfig<Book>): void {
+  public onCardTouched(card: Book): void {
     this.router.navigate([RoutePath.Detail]);
   }
 

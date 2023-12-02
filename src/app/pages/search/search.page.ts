@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from '@interfaces/book.interface';
 import { DemiCardConfig, DemiCardListComponent, DemiCardSize } from 'demiurge';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BookService } from '@services/book.service';
 import { Router } from '@angular/router';
 import { RoutePath } from '@interfaces/route.interface';
@@ -11,8 +11,8 @@ import { RoutePath } from '@interfaces/route.interface';
   selector: 'app-search',
   template: `
     <demi-card-list
-      [config$]="books$"
-      [canSearch]="true"
+      [items$]="books$"
+      [config]="configList"
       (onCardTouched)="onCardTouched($event)"
     ></demi-card-list>
   `,
@@ -22,16 +22,12 @@ import { RoutePath } from '@interfaces/route.interface';
 })
 export class SearchPage implements OnInit, OnDestroy {
   private subBooks!: Subscription;
-  public books$: Observable<DemiCardConfig<Book>[]> =
-    this.bookService.books$.pipe(
-      map((x) => {
-        return x.map((book) => {
-          book.size = DemiCardSize.M;
-          book.isClickable = true;
-          return book;
-        });
-      })
-    );
+  public books$: Observable<Book[]> = this.bookService.books$;
+  public configList: DemiCardConfig = {
+    size: DemiCardSize.M,
+    isClickable: true,
+    canSearch: true,
+  };
 
   constructor(
     private readonly router: Router,
@@ -42,7 +38,7 @@ export class SearchPage implements OnInit, OnDestroy {
     this.subBooks = this.books$.subscribe();
   }
 
-  public onCardTouched(card: DemiCardConfig<Book>): void {
+  public onCardTouched(card: Book): void {
     this.router.navigate([RoutePath.Detail]);
   }
 

@@ -1,9 +1,8 @@
-export interface Book {
-  id: string;
-  title: string;
-  author: string;
+import { DemiCardItem } from 'demiurge';
 
+export interface Book extends DemiCardItem {
+  id: string;
+  author: string;
   description?: string;
-  cover?: string;
   genres?: string[];
 }

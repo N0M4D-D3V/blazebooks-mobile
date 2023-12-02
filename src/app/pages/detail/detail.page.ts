@@ -16,17 +16,18 @@ import { Observable, of } from 'rxjs';
   selector: 'app-detail',
   template: `
     <demi-card-img
-      [config]="selectedCard"
+      [item]="currentBook"
       (onReadTouched)="onRead($event)"
     ></demi-card-img>
     <p class="genre-text text-end px-3">
-      <b>Genres: </b> {{ selectedCard.data?.genres | separe }}
+      <b>Genres: </b> {{ currentBook.genres | separe }}
     </p>
     <div class="container px-3">
-      <p>{{ selectedCard.data?.description }}</p>
+      <p>{{ currentBook.description }}</p>
     </div>
     <demi-card-list
-      [config$]="related"
+      [items$]="related"
+      [config]="cardListConfig"
       (onCardTouched)="onCardTouched($event)"
     ></demi-card-list>
   `,
@@ -35,24 +36,24 @@ import { Observable, of } from 'rxjs';
   imports: [DemiCardListComponent, DemiCardImgComponent, DemiSeparePipe],
 })
 export class DetailPage {
-  public selectedCard: DemiCardConfig<Book> = this.bookService.getCurrentBook();
-  public related: Observable<DemiCardConfig<Book>[]> = of(
-    this.bookService.getRelatedBooks().map((x) => {
-      x.size = DemiCardSize.S;
-      return x;
-    })
-  );
+  public currentBook: Book = this.bookService.getCurrentBook();
+  public cardListConfig: DemiCardConfig = {
+    isClickable: true,
+    size: DemiCardSize.S,
+  };
+
+  public related: Observable<Book[]> = of(this.bookService.getRelatedBooks());
 
   constructor(
     private readonly router: Router,
     private readonly bookService: BookService
   ) {}
 
-  public onRead(card: DemiCardConfig<Book>): void {
+  public onRead(card: Book): void {
     this.router.navigate([RoutePath.Reader]);
   }
 
-  public onCardTouched(card: DemiCardConfig<Book>): void {
+  public onCardTouched(card: Book): void {
     this.router.navigate([RoutePath.Detail]);
   }
 }

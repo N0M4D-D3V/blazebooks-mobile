@@ -37,8 +37,8 @@ import { RoutePath } from '@interfaces/route.interface';
 export class HomePage implements OnInit, OnDestroy {
   private subBooks!: Subscription;
 
-  public currentBook$: Observable<Book> = this.bookService.currentBook$;
-  public books$: Observable<Book[]> = this.bookService.books$;
+  public currentBook$: Observable<Book> = this.bookService.getCurrentBook$();
+  public books$: Observable<Book[]> = this.bookService.getBooks$();
   public cardListConfig: DemiCardConfig = {
     size: DemiCardSize.M,
     isClickable: true,
@@ -54,11 +54,13 @@ export class HomePage implements OnInit, OnDestroy {
     this.subBooks = this.books$.subscribe();
   }
 
-  public onReadTouched(card: Book): void {
+  public onReadTouched(book: Book): void {
+    this.bookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Reader]);
   }
 
-  public onCardTouched(card: Book): void {
+  public onCardTouched(book: Book): void {
+    this.bookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Detail]);
   }
 

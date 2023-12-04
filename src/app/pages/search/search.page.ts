@@ -22,7 +22,7 @@ import { RoutePath } from '@interfaces/route.interface';
 })
 export class SearchPage implements OnInit, OnDestroy {
   private subBooks!: Subscription;
-  public books$: Observable<Book[]> = this.bookService.books$;
+  public books$: Observable<Book[]> = this.bookService.getBooks$();
   public configList: DemiCardConfig = {
     size: DemiCardSize.M,
     isClickable: true,

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from '@interfaces/book.interface';
 import { RoutePath } from '@interfaces/route.interface';
@@ -15,11 +16,12 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-detail',
   template: `
+    @if(currentBook$ | async; as currentBook){
     <demi-card-img
       [item]="currentBook"
       (onReadTouched)="onRead($event)"
     ></demi-card-img>
-    <p class="genre-text text-end px-3">
+    <p class="genre-text text-end px-3 fadein">
       <b>Genres: </b> {{ currentBook.genres | separe }}
     </p>
     <div class="container px-3">
@@ -30,13 +32,19 @@ import { Observable, of } from 'rxjs';
       [config]="cardListConfig"
       (onCardTouched)="onCardTouched($event)"
     ></demi-card-list>
+    }
   `,
   styleUrls: ['./detail.page.scss'],
   standalone: true,
-  imports: [DemiCardListComponent, DemiCardImgComponent, DemiSeparePipe],
+  imports: [
+    DemiCardListComponent,
+    DemiCardImgComponent,
+    DemiSeparePipe,
+    AsyncPipe,
+  ],
 })
 export class DetailPage {
-  public currentBook: Book = this.bookService.getCurrentBook();
+  public currentBook$: Observable<Book> = this.bookService.getCurrentBook$();
   public cardListConfig: DemiCardConfig = {
     isClickable: true,
     size: DemiCardSize.S,
@@ -49,11 +57,13 @@ export class DetailPage {
     private readonly bookService: BookService
   ) {}
 
-  public onRead(card: Book): void {
+  public onRead(book: Book): void {
+    this.bookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Reader]);
   }
 
-  public onCardTouched(card: Book): void {
+  public onCardTouched(book: Book): void {
+    this.bookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Detail]);
   }
 }

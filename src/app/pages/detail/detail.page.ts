@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from '@interfaces/book.interface';
 import { RoutePath } from '@interfaces/route.interface';
@@ -16,7 +16,6 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-detail',
   template: `
-    @if(currentBook$ | async; as currentBook){
     <demi-card-img
       [item]="currentBook"
       (onReadTouched)="onRead($event)"
@@ -32,7 +31,6 @@ import { Observable, of } from 'rxjs';
       [config]="cardListConfig"
       (onCardTouched)="onCardTouched($event)"
     ></demi-card-list>
-    }
   `,
   styleUrls: ['./detail.page.scss'],
   standalone: true,
@@ -44,13 +42,12 @@ import { Observable, of } from 'rxjs';
   ],
 })
 export class DetailPage {
-  public currentBook$: Observable<Book> = this.bookService.getCurrentBook$();
+  public related: Observable<Book[]> = this.bookService.getRelatedBooks();
+  public currentBook: Book = this.bookService.getCurrentBook();
   public cardListConfig: DemiCardConfig = {
     isClickable: true,
     size: DemiCardSize.S,
   };
-
-  public related: Observable<Book[]> = of(this.bookService.getRelatedBooks());
 
   constructor(
     private readonly router: Router,

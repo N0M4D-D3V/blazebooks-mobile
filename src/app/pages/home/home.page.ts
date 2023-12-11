@@ -5,7 +5,7 @@ import {
   DemiCardListComponent,
   DemiCardSize,
 } from 'demiurge';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { BookService } from '@services/book.service';
 import { AsyncPipe } from '@angular/common';
 import { Book } from '@interfaces/book.interface';
@@ -16,14 +16,12 @@ import { RoutePath } from '@interfaces/route.interface';
   selector: 'app-home',
   template: `
     <div class="container">
-      @if(currentBook$ | async; as current){
       <demi-card-img
-        [item]="current"
+        [item]="currentBook"
         [config]="{ isClickable: true }"
         (onReadTouched)="onReadTouched($event)"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-img>
-      }
 
       <demi-card-list
         [items$]="books$"
@@ -39,8 +37,8 @@ import { RoutePath } from '@interfaces/route.interface';
 export class HomePage implements OnInit, OnDestroy {
   private subBooks!: Subscription;
 
-  public currentBook$: Observable<Book> = this.bookService.getCurrentBook$();
-  public books$: Observable<Book[]> = this.bookService.getBooks$();
+  public currentBook!: Book;
+  public books$!: Observable<Book[]>;
   public cardListConfig: DemiCardConfig = {
     size: DemiCardSize.M,
     isClickable: true,
@@ -53,6 +51,9 @@ export class HomePage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.currentBook = this.bookService.getCurrentBook();
+
+    this.books$ = this.bookService.getBooks$();
     this.subBooks = this.books$.subscribe();
   }
 

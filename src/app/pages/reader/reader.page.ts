@@ -7,17 +7,15 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-reader',
   template: `
-    @if (currentBook$ | async; as book) {
     <h1 class="text-center">Reader page</h1>
-    <p class="text-center">Reading {{ book.title }} ...</p>
-    }
+    <p class="text-center">Reading {{ currentBook.title }} ...</p>
   `,
   styleUrls: [],
   standalone: true,
   imports: [NgIf, AsyncPipe],
 })
 export class ReaderPage {
-  public currentBook$: Observable<Book> = this.bookService.getCurrentBook$();
+  public currentBook: Book = this.bookService.getCurrentBook();
 
   constructor(private readonly bookService: BookService) {}
 }

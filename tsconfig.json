@@ -25,7 +25,8 @@
       "@pages/*": ["src/app/pages/*"],
       "@services/*": ["src/app/services/*"],
       "@pipes/*": ["src/app/pipes/*"],
-      "@interfaces/*": ["src/app/interfaces/*"]
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@enum/*": ["src/app/enum/*"]
     }
   },
   "angularCompilerOptions": {

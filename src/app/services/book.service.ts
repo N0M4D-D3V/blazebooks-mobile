@@ -1,48 +1,40 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, filter, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Book } from '@interfaces/book.interface';
-import { MOCK_BOOKS } from './books.mock';
+import { FirestoreRepository } from '../repositories/firestore.repository';
+import { FirestoreCollection } from '@enum/firestore.collection.enum';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
-  private bsCurrentBook: BehaviorSubject<Book> = new BehaviorSubject<Book>({
-    ...MOCK_BOOKS[0],
-  });
-  private bsBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>(
-    MOCK_BOOKS
-  );
+  private currentBook!: Book;
 
-  private currentBook$: Observable<Book> = this.bsCurrentBook.asObservable();
-  private books$: Observable<Book[]> = this.bsBooks.asObservable();
-
-  private books: Book[] = MOCK_BOOKS;
-  private currentBook: Book = { ...MOCK_BOOKS[0] };
-
-  constructor() {}
+  constructor(private fireRep: FirestoreRepository) {}
 
   public getBooks$(): Observable<Book[]> {
-    return this.books$.pipe(
-      map((books: Book[]) =>
-        books.filter((book: Book) => book.id !== this.currentBook.id)
-      )
-    );
+    return this.fireRep
+      .getCollectionData<Book[]>(FirestoreCollection.Books)
+      .pipe(
+        map((books: Book[]) => {
+          if (this.currentBook)
+            return books.filter(
+              (book) => book.title !== this.currentBook.title
+            );
+          else return books;
+        })
+      );
   }
 
-  public getCurrentBook$(): Observable<Book> {
-    return this.currentBook$;
+  public getCurrentBook(): Book {
+    return this.currentBook;
   }
 
-  public getRelatedBooks(): Book[] {
-    return [MOCK_BOOKS[2], MOCK_BOOKS[7], MOCK_BOOKS[3]];
+  public getRelatedBooks(): Observable<Book[]> {
+    return this.fireRep
+      .getCollectionData<Book[]>(FirestoreCollection.Books)
+      .pipe(map((array) => array.slice(0, 3)));
   }
 
   public setCurrentBook(book: Book): void {
     this.currentBook = { ...book };
-    this.bsCurrentBook.next(this.currentBook);
-  }
-
-  public setBooks(books: Book[]): void {
-    this.books = books;
-    this.bsBooks.next(books);
   }
 }

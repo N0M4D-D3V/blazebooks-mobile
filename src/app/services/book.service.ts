@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, filter, map } from 'rxjs';
 import { Book } from '@interfaces/book.interface';
 import { MOCK_BOOKS } from './books.mock';
 
@@ -21,7 +21,11 @@ export class BookService {
   constructor() {}
 
   public getBooks$(): Observable<Book[]> {
-    return this.books$;
+    return this.books$.pipe(
+      map((books: Book[]) =>
+        books.filter((book: Book) => book.id !== this.currentBook.id)
+      )
+    );
   }
 
   public getCurrentBook$(): Observable<Book> {

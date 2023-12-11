@@ -19,7 +19,9 @@ import { RoutePath } from '@interfaces/route.interface';
       @if(currentBook$ | async; as current){
       <demi-card-img
         [item]="current"
+        [config]="{ isClickable: true }"
         (onReadTouched)="onReadTouched($event)"
+        (onCardTouched)="onCardTouched($event)"
       ></demi-card-img>
       }
 

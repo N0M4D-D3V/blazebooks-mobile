@@ -5,6 +5,7 @@ import { SearchPage } from '@pages/search/search.page';
 import { ReaderPage } from '@pages/reader/reader.page';
 import { DetailPage } from '@pages/detail/detail.page';
 import { RouteName } from '@interfaces/route.interface';
+import { AuthGuard } from '../guards/auth.guard';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: RouteName.Login, pathMatch: 'full' },
@@ -15,6 +16,7 @@ export const ROUTES: Routes = [
   {
     path: RouteName.Home,
     component: HomePage,
+    canActivate: [AuthGuard],
   },
   {
     path: RouteName.Search,

@@ -1,21 +1,23 @@
 <div class="vertical-center text-center">
   <div class="container fadein">
-    <form (ngSubmit)="loginUser()" class="my-5">
+    <form (ngSubmit)="loginUser()" class="my-5" [formGroup]="form">
       <div class="form-group my-3">
         <input
-          type="text"
+          type="email"
           class="form-control text-center"
-          [(ngModel)]="username"
-          name="username"
+          formControlName="email"
+          name="email"
           required
+          [ngClass]="{'border-danger': email?.invalid && (email?.dirty || email?.touched)}"
         />
       </div>
       <div class="form-group my-3">
         <input
           type="password"
           class="form-control text-center"
-          [(ngModel)]="password"
+          formControlName="pass"
           name="password"
+          [ngClass]="{'border-danger': pass?.invalid && (pass?.dirty || pass?.touched)}"
           required
         />
       </div>

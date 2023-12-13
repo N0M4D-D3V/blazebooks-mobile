@@ -1,0 +1,46 @@
+<div class="w-100 text-end">
+  <a class="btn btn-dark" (click)="onClose()">X</a>
+</div>
+<div class="vertical-center text-center">
+  <div class="container fadein">
+    <form (ngSubmit)="onCreateUser()" class="my-5">
+      <div class="form-group my-3">
+        <input
+          type="email"
+          class="form-control text-center"
+          name="email"
+          placeholder="Email"
+          required
+        />
+      </div>
+      <div class="form-group my-3">
+        <input
+          type="email"
+          class="form-control text-center"
+          name="repeatemail"
+          placeholder="Repeat email"
+          required
+        />
+      </div>
+      <div class="form-group my-3">
+        <input
+          type="password"
+          class="form-control text-center"
+          name="password"
+          placeholder="Password"
+          required
+        />
+      </div>
+      <div class="form-group my-3">
+        <input
+          type="password"
+          class="form-control text-center"
+          name="repeatpassword"
+          placeholder="Repeat Password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-dark w-100">CREATE</button>
+    </form>
+  </div>
+</div>

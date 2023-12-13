@@ -10,12 +10,12 @@ import {
 import { RoutePath } from 'src/app/interfaces/route.interface';
 import { NgClass } from '@angular/common';
 import { AuthService } from '@services/auth.service';
-import { DemiAlertService } from 'demiurge';
+import { DemiAlertService, DemiModalService } from 'demiurge';
+import { CreateUserFormComponent } from 'src/app/components/modal/create-user-form/create-user-form.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: [],
   standalone: true,
   imports: [NgClass, FormsModule, ReactiveFormsModule],
 })
@@ -38,10 +38,12 @@ export class LoginPage implements OnInit {
     private readonly router: Router,
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly demiAlertService: DemiAlertService
+    private readonly demiAlertService: DemiAlertService,
+    private readonly demiModalService: DemiModalService
   ) {}
 
   ngOnInit(): void {
+    this.demiModalService.initModalService(this.ref);
     this.demiAlertService.initAlertService(this.ref);
   }
 
@@ -60,5 +62,18 @@ export class LoginPage implements OnInit {
       message: message,
       buttons: [{ label: 'OK' }],
     });
+  }
+
+  public async onCreateNewUser(): Promise<void> {
+    this.demiModalService
+      .create({
+        component: CreateUserFormComponent,
+        data: '',
+        styles: {
+          width: { vertical: '90%' },
+          height: { vertical: '90%' },
+        },
+      })
+      .then((res) => console.error(res));
   }
 }

@@ -28,6 +28,8 @@
     "bootstrap-icons": "^1.11.1",
     "demiurge": "file:../demiurge/dist/demiurge",
     "firebase": "^10.7.1",
+    "ngx-bootstrap": "^11.0.2",
+    "postcss-scss": "^4.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

@@ -1,15 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormFactoryService } from '@services/form.service';
-import { DemiAlertService, DemiModalService } from 'demiurge';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { DemiAlertItem, DemiAlertService, DemiModalService } from 'demiurge';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { AlertEnum, getAlertConfig } from '@config/alert.config';
 
 export interface RegisterForm {
   email: string;
@@ -64,30 +59,15 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
   }
 
   public onCreateUser(): void {
-    if (this.form.invalid) {
-      this.demiAlertService.create({
-        title: 'ERROR',
-        message: 'Invalid form!',
-        buttons: [{ label: 'ok' }],
-      });
-      return;
-    }
+    let alert!: AlertEnum;
 
-    if (!this.isEmailOk) {
-      this.demiAlertService.create({
-        title: 'ERROR',
-        message: 'Email not match!',
-        buttons: [{ label: 'ok' }],
-      });
-      return;
-    }
+    if (this.form.invalid) alert = AlertEnum.InvalidForm;
+    if (!this.isEmailOk) alert = AlertEnum.EmailNotMatch;
+    if (!this.isPassOk) alert = AlertEnum.PassNotMatch;
 
-    if (!this.isPassOk) {
-      this.demiAlertService.create({
-        title: 'ERROR',
-        message: 'Password not match!',
-        buttons: [{ label: 'ok' }],
-      });
+    if (alert) {
+      const alertConfig: DemiAlertItem = getAlertConfig(alert);
+      this.demiAlertService.create(alertConfig);
       return;
     }
 

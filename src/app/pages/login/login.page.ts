@@ -1,18 +1,13 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutePath } from 'src/app/interfaces/route.interface';
 import { NgClass } from '@angular/common';
 import { AuthService } from '@services/auth.service';
 import { DemiAlertService, DemiModalService } from 'demiurge';
-import { CreateUserFormComponent } from 'src/app/components/modal/create-user-form/create-user-form.component';
 import { FormFactoryService } from '@services/form.service';
+import { ALERT_CONFIG, AlertEnum } from '@config/alert.config';
+import { ModalEnum, getModalConfig } from '@config/modal.config';
 
 @Component({
   selector: 'app-login',
@@ -49,29 +44,16 @@ export class LoginPage implements OnInit {
     if (this.form.valid) {
       this.authService
         .emailLogin(this.email?.value, this.pass?.value)
-        .then((res) => this.router.navigate([RoutePath.Home]))
-        .catch((err) => this.wrongCredentialsPopover(err.message));
+        .then(() => this.router.navigate([RoutePath.Home]))
+        .catch(() => this.wrongCredentialsPopover());
     }
   }
 
-  public wrongCredentialsPopover(message: string): void {
-    this.demiAlertService.create({
-      title: 'Error',
-      message: message,
-      buttons: [{ label: 'OK' }],
-    });
+  public wrongCredentialsPopover(): void {
+    this.demiAlertService.create(ALERT_CONFIG[AlertEnum.Login]);
   }
 
   public async onCreateNewUser(): Promise<void> {
-    this.demiModalService
-      .create({
-        component: CreateUserFormComponent,
-        data: '',
-        styles: {
-          width: { vertical: '90%' },
-          height: { vertical: '90%' },
-        },
-      })
-      .then((res) => console.error(res));
+    this.demiModalService.create(getModalConfig(ModalEnum.NewUser));
   }
 }

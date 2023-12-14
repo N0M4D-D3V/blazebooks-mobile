@@ -12,6 +12,7 @@ import { NgClass } from '@angular/common';
 import { AuthService } from '@services/auth.service';
 import { DemiAlertService, DemiModalService } from 'demiurge';
 import { CreateUserFormComponent } from 'src/app/components/modal/create-user-form/create-user-form.component';
+import { FormFactoryService } from '@services/form.service';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +21,7 @@ import { CreateUserFormComponent } from 'src/app/components/modal/create-user-fo
   imports: [NgClass, FormsModule, ReactiveFormsModule],
 })
 export class LoginPage implements OnInit {
-  public form: FormGroup = this.fb.group({
-    email: ['', Validators.compose([Validators.required, Validators.email])],
-    pass: ['', Validators.required],
-  });
+  public form: FormGroup = this.formFactory.getEmailLoginForm();
 
   public get email() {
     return this.form.get('email');
@@ -36,7 +34,7 @@ export class LoginPage implements OnInit {
   constructor(
     private readonly ref: ViewContainerRef,
     private readonly router: Router,
-    private readonly fb: FormBuilder,
+    private readonly formFactory: FormFactoryService,
     private readonly authService: AuthService,
     private readonly demiAlertService: DemiAlertService,
     private readonly demiModalService: DemiModalService

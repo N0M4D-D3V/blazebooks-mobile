@@ -3,44 +3,62 @@
 </div>
 <div class="vertical-center text-center">
   <div class="container fadein">
-    <form (ngSubmit)="onCreateUser()" class="my-5">
+    <form class="my-5" [formGroup]="form">
       <div class="form-group my-3">
         <input
           type="email"
           class="form-control text-center"
           name="email"
-          placeholder="Email"
-          required
+          placeholder="email"
+          formControlName="email"
+          [ngClass]="{
+            'border-danger': email?.invalid && (email?.dirty || email?.touched)
+          }"
         />
       </div>
       <div class="form-group my-3">
         <input
           type="email"
           class="form-control text-center"
-          name="repeatemail"
-          placeholder="Repeat email"
-          required
+          name="confirmEmail"
+          formControlName="confirmEmail"
+          placeholder="confirm email"
+          [ngClass]="{
+            'border-danger':
+              confirmEmail?.invalid &&
+              (confirmEmail?.dirty || confirmEmail?.touched)
+          }"
         />
       </div>
       <div class="form-group my-3">
         <input
           type="password"
           class="form-control text-center"
-          name="password"
-          placeholder="Password"
-          required
+          name="pass"
+          placeholder="password"
+          formControlName="pass"
+          [ngClass]="{
+            'border-danger': pass?.invalid && (pass?.dirty || pass?.touched)
+          }"
         />
       </div>
       <div class="form-group my-3">
         <input
           type="password"
           class="form-control text-center"
-          name="repeatpassword"
-          placeholder="Repeat Password"
-          required
+          name="confirmPass"
+          placeholder="confirm password"
+          formControlName="confirmPass"
+          [ngClass]="{
+            'border-danger':
+              confirmPass?.invalid &&
+              (confirmPass?.dirty || confirmPass?.touched)
+          }"
         />
       </div>
-      <button type="submit" class="btn btn-dark w-100">CREATE</button>
+      <button class="btn btn-dark w-100" (click)="onCreateUser()">
+        CREATE
+      </button>
     </form>
   </div>
 </div>

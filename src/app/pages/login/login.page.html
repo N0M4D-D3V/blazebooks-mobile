@@ -1,6 +1,6 @@
 <div class="vertical-center text-center">
   <div class="container fadein">
-    <form (ngSubmit)="loginUser()" class="my-5" [formGroup]="form">
+    <form class="my-5" [formGroup]="form">
       <div class="form-group my-3">
         <input
           type="email"
@@ -23,7 +23,15 @@
           required
         />
       </div>
-      <button type="submit" class="btn btn-dark w-100">Login</button>
+      <div class="row container">
+        <button class="btn btn-dark col-9" (click)="loginWithEmail()">
+          Login
+        </button>
+        <button class="btn btn-dark col-2 ms-4" (click)="loginWithGoogle()">
+          <i class="bi bi-google"></i>
+        </button>
+      </div>
+
       <p>
         <span (click)="onCreateNewUser()">Nueva cuenta</span> / Recuperar
         contraseña

@@ -40,20 +40,27 @@ export class LoginPage implements OnInit {
     this.demiAlertService.initAlertService(this.ref);
   }
 
-  public loginUser(): void {
+  public loginWithEmail(): void {
     if (this.form.valid) {
       this.authService
         .emailLogin(this.email?.value, this.pass?.value)
         .then(() => this.router.navigate([RoutePath.Home]))
-        .catch(() => this.wrongCredentialsPopover());
+        .catch(() => this.wrongCredentialsAlert());
     }
   }
 
-  public wrongCredentialsPopover(): void {
-    this.demiAlertService.create(ALERT_CONFIG[AlertEnum.Login]);
+  public loginWithGoogle(): void {
+    this.authService
+      .googleLogin()
+      .then(() => this.router.navigate([RoutePath.Home]))
+      .catch(() => this.wrongCredentialsAlert());
   }
 
   public async onCreateNewUser(): Promise<void> {
     this.demiModalService.create(getModalConfig(ModalEnum.NewUser));
+  }
+
+  private wrongCredentialsAlert(): void {
+    this.demiAlertService.create(ALERT_CONFIG[AlertEnum.Login]);
   }
 }

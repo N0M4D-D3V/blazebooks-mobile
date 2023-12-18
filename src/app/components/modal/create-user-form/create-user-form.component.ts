@@ -6,13 +6,8 @@ import { NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AlertEnum, getAlertConfig } from '@config/alert.config';
 import { AuthService } from '@services/auth.service';
+import { RegisterForm } from '@interfaces/register-form.interface';
 
-export interface RegisterForm {
-  email: string;
-  confirmEmail: string;
-  pass: string;
-  confirmPass: string;
-}
 @Component({
   selector: 'app-create-user-form',
   templateUrl: './create-user-form.component.html',

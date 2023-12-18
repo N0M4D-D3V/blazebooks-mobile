@@ -5,6 +5,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { AlertEnum, getAlertConfig } from '@config/alert.config';
+import { AuthService } from '@services/auth.service';
 
 export interface RegisterForm {
   email: string;
@@ -44,8 +45,9 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    public readonly demiModalService: DemiModalService,
-    public readonly demiAlertService: DemiAlertService,
+    private readonly demiModalService: DemiModalService,
+    private readonly demiAlertService: DemiAlertService,
+    private readonly authService: AuthService,
     private readonly formFactory: FormFactoryService
   ) {}
 
@@ -66,12 +68,25 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
     if (!this.isPassOk) alert = AlertEnum.PassNotMatch;
 
     if (alert) {
-      const alertConfig: DemiAlertItem = getAlertConfig(alert);
-      this.demiAlertService.create(alertConfig);
+      this.createAlertError(alert);
       return;
     }
 
-    this.demiModalService.close({ data: this.form.value });
+    if (this.email?.value && this.pass?.value) this.createEmailAccount();
+  }
+
+  public createEmailAccount(): void {
+    this.authService
+      .emailRegister(this.email!.value, this.pass!.value)
+      .then(() => this.demiModalService.close({ data: this.form.value }))
+      .catch(() => {
+        this.createAlertError(AlertEnum.CanNotCreateAccount);
+      });
+  }
+
+  private createAlertError(alert: AlertEnum): void {
+    const alertConfig: DemiAlertItem = getAlertConfig(alert);
+    this.demiAlertService.create(alertConfig);
   }
 
   public onClose(): void {

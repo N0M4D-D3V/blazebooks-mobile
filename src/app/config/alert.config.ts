@@ -5,6 +5,7 @@ export enum AlertEnum {
   InvalidForm,
   EmailNotMatch,
   PassNotMatch,
+  CanNotCreateAccount,
 }
 
 export const ALERT_CONFIG: DemiAlertItem[] = [
@@ -27,6 +28,11 @@ export const ALERT_CONFIG: DemiAlertItem[] = [
   {
     title: 'ERROR',
     message: 'Password not match! ',
+    buttons: [{ label: 'ok' }],
+  },
+  {
+    title: 'ERROR',
+    message: 'An error occurs. Try again later',
     buttons: [{ label: 'ok' }],
   },
 ];

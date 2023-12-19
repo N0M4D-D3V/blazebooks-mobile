@@ -1,9 +1,10 @@
 import { DemiToolbarConfig } from 'demiurge';
 import { RouteName, RoutePath } from '@interfaces/route.interface';
+import packageJson from '../../../package.json';
 
 export const TOOLBAR_CONFIG: DemiToolbarConfig = {
-  title: 'Blazebooks',
-  toggleTitle: 'Blazebooks',
+  title: packageJson.name,
+  toggleTitle: packageJson.name,
   items: [
     {
       label: RouteName.Login,

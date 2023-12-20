@@ -29,7 +29,8 @@
       "@pipes/*": ["src/app/pipes/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
       "@enum/*": ["src/app/enum/*"],
-      "@guard/*": ["src/app/guard/*"]
+      "@guard/*": ["src/app/guard/*"],
+      "@components/*": ["src/app/components/*"]
     }
   },
   "angularCompilerOptions": {

@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from '@interfaces/book.interface';
 import { RoutePath } from '@interfaces/route.interface';
@@ -9,30 +9,28 @@ import {
   DemiCardImgComponent,
   DemiCardListComponent,
   DemiCardSize,
+  DemiModalService,
   DemiSeparePipe,
 } from 'demiurge';
-import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: 'app-detail',
+  selector: 'app-book-detail',
   template: `
+    <a class="btn btn-dark btn-detail-close" (click)="onClose()">X</a>
+    @if (book) {
     <demi-card-img
-      [item]="currentBook"
+      [item]="book"
       (onReadTouched)="onRead($event)"
     ></demi-card-img>
     <p class="genre-text text-end px-3 fadein">
-      <b>Genres: </b> {{ currentBook.genres | separe }}
+      <b>Genres: </b> {{ book.genres | separe }}
     </p>
     <div class="container px-3">
-      <p>{{ currentBook.description }}</p>
+      <p>{{ book.description }}</p>
     </div>
-    <demi-card-list
-      [items$]="related"
-      [config]="cardListConfig"
-      (onCardTouched)="onCardTouched($event)"
-    ></demi-card-list>
+    }
   `,
-  styleUrls: ['./detail.page.scss'],
+  styleUrls: ['./book-detail.component.scss'],
   standalone: true,
   imports: [
     DemiCardListComponent,
@@ -41,9 +39,8 @@ import { Observable, of } from 'rxjs';
     AsyncPipe,
   ],
 })
-export class DetailPage {
-  public related: Observable<Book[]> = this.bookService.getRelatedBooks();
-  public currentBook: Book = this.bookService.getCurrentBook();
+export class BookDetailComponent implements OnInit {
+  @Input() book!: Book;
   public cardListConfig: DemiCardConfig = {
     isClickable: true,
     size: DemiCardSize.S,
@@ -51,8 +48,15 @@ export class DetailPage {
 
   constructor(
     private readonly router: Router,
+    private readonly demiModal: DemiModalService,
     private readonly bookService: BookService
   ) {}
+
+  ngOnInit(): void {}
+
+  public onClose(): void {
+    this.demiModal.close();
+  }
 
   public onRead(book: Book): void {
     this.bookService.setCurrentBook(book);
@@ -61,6 +65,5 @@ export class DetailPage {
 
   public onCardTouched(book: Book): void {
     this.bookService.setCurrentBook(book);
-    this.router.navigate([RoutePath.Detail]);
   }
 }

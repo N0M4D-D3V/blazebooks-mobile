@@ -1,27 +1,32 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import {
   DemiCardConfig,
   DemiCardImgComponent,
   DemiCardListComponent,
   DemiCardSize,
+  DemiModalInitialization,
+  DemiModalService,
 } from 'demiurge';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { BookService } from '@services/book.service';
 import { AsyncPipe } from '@angular/common';
 import { Book } from '@interfaces/book.interface';
 import { Router } from '@angular/router';
 import { RoutePath } from '@interfaces/route.interface';
+import { ModalEnum, getModalConfig } from '@config/modal.config';
 
 @Component({
   selector: 'app-home',
   template: `
     <div class="container">
+      @if(currentBook$ | async; as current){
       <demi-card-img
-        [item]="currentBook"
+        [item]="current"
         [config]="{ isClickable: true }"
         (onReadTouched)="onReadTouched($event)"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-img>
+      }
 
       <demi-card-list
         [items$]="books$"
@@ -35,9 +40,7 @@ import { RoutePath } from '@interfaces/route.interface';
   imports: [AsyncPipe, DemiCardImgComponent, DemiCardListComponent],
 })
 export class HomePage implements OnInit, OnDestroy {
-  private subBooks!: Subscription;
-
-  public currentBook!: Book;
+  public currentBook$!: Observable<Book>;
   public books$!: Observable<Book[]>;
   public cardListConfig: DemiCardConfig = {
     size: DemiCardSize.M,
@@ -46,28 +49,31 @@ export class HomePage implements OnInit, OnDestroy {
   };
 
   constructor(
+    private readonly ref: ViewContainerRef,
     private readonly router: Router,
+    private readonly demiModal: DemiModalService,
     private readonly bookService: BookService
   ) {}
 
   ngOnInit(): void {
-    this.currentBook = this.bookService.getCurrentBook();
+    this.demiModal.initModalService(this.ref);
+
+    this.bookService.initCurrentBook();
+    this.currentBook$ = this.bookService.getCurrentBookObservable();
 
     this.books$ = this.bookService.getBooks$();
-    this.subBooks = this.books$.subscribe();
   }
 
   public onReadTouched(book: Book): void {
     this.bookService.setCurrentBook(book);
-    this.router.navigate([RoutePath.Reader]);
+    this.router.navigate([RoutePath.Reader, book.id]);
   }
 
   public onCardTouched(book: Book): void {
-    this.bookService.setCurrentBook(book);
-    this.router.navigate([RoutePath.Detail]);
+    const config: DemiModalInitialization = getModalConfig(ModalEnum.Detail);
+
+    this.demiModal.create({ ...config, data: { book: book } });
   }
 
-  ngOnDestroy(): void {
-    this.subBooks.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

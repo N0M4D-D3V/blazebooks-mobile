@@ -1,0 +1,19 @@
+.container {
+  color: var(--color-white);
+  text-align: justify;
+}
+
+.genre-text {
+  color: var(--color-primary);
+}
+
+.btn-detail-close {
+  position: absolute;
+  color: red;
+  right: 0;
+
+  z-index: 9;
+
+  background: transparent;
+  border: none;
+}

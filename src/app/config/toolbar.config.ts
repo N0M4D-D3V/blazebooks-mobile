@@ -31,11 +31,5 @@ export const TOOLBAR_CONFIG: DemiToolbarConfig = {
       activeButtons: ['back'],
       hidden: true,
     },
-    {
-      label: RouteName.Detail,
-      url: RoutePath.Detail,
-      activeButtons: ['back'],
-      hidden: true,
-    },
   ],
 };

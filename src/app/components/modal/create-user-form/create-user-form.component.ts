@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { FormFactoryService } from '@services/form.service';
 import { DemiAlertItem, DemiAlertService, DemiModalService } from 'demiurge';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { RegisterForm } from '@interfaces/register-form.interface';
 @Component({
   selector: 'app-create-user-form',
   templateUrl: './create-user-form.component.html',
-  styleUrls: [],
+  styleUrls: ['./create-user-form.component.scss'],
   standalone: true,
   imports: [NgClass, FormsModule, ReactiveFormsModule],
 })

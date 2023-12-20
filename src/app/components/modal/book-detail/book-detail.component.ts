@@ -62,8 +62,4 @@ export class BookDetailComponent implements OnInit {
     this.bookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Reader]);
   }
-
-  public onCardTouched(book: Book): void {
-    this.bookService.setCurrentBook(book);
-  }
 }

@@ -40,7 +40,7 @@ import { ModalEnum, getModalConfig } from '@config/modal.config';
   imports: [AsyncPipe, DemiCardImgComponent, DemiCardListComponent],
 })
 export class HomePage implements OnInit, OnDestroy {
-  public currentBook$!: Observable<Book>;
+  public currentBook$!: Observable<Book | undefined>;
   public books$!: Observable<Book[]>;
   public cardListConfig: DemiCardConfig = {
     size: DemiCardSize.M,
@@ -66,12 +66,11 @@ export class HomePage implements OnInit, OnDestroy {
 
   public onReadTouched(book: Book): void {
     this.bookService.setCurrentBook(book);
-    this.router.navigate([RoutePath.Reader, book.id]);
+    this.router.navigate([RoutePath.Reader]);
   }
 
   public onCardTouched(book: Book): void {
     const config: DemiModalInitialization = getModalConfig(ModalEnum.Detail);
-
     this.demiModal.create({ ...config, data: { book: book } });
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, filter, map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Book } from '@interfaces/book.interface';
 import { FirestoreRepository } from '../repositories/firestore.repository';
 import { FirestoreCollection } from '@enum/firestore.collection.enum';
@@ -43,11 +43,8 @@ export class BookService {
       );
   }
 
-  public getCurrentBookObservable(): Observable<Book> {
-    return this.currentBook$.pipe(
-      filter((book: Book | undefined) => book !== undefined),
-      map((book: Book | undefined) => book as Book)
-    );
+  public getCurrentBookObservable(): Observable<Book | undefined> {
+    return this.currentBook$;
   }
 
   public getRelatedBooks(): Observable<Book[]> {

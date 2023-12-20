@@ -1,11 +1,16 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Book } from '@interfaces/book.interface';
-import { DemiCardConfig, DemiCardListComponent, DemiCardSize } from 'demiurge';
-import { Observable, Subscription } from 'rxjs';
+import {
+  DemiCardConfig,
+  DemiCardListComponent,
+  DemiCardSize,
+  DemiModalInitialization,
+  DemiModalService,
+} from 'demiurge';
+import { Observable } from 'rxjs';
 import { BookService } from '@services/book.service';
-import { Router } from '@angular/router';
-import { RoutePath } from '@interfaces/route.interface';
+import { ModalEnum, getModalConfig } from '@config/modal.config';
 
 @Component({
   selector: 'app-search',
@@ -20,9 +25,8 @@ import { RoutePath } from '@interfaces/route.interface';
   standalone: true,
   imports: [DemiCardListComponent, AsyncPipe],
 })
-export class SearchPage implements OnInit, OnDestroy {
-  private subBooks!: Subscription;
-  public books$: Observable<Book[]> = this.bookService.getBooks$();
+export class SearchPage implements OnInit {
+  public books$!: Observable<Book[]>;
   public configList: DemiCardConfig = {
     size: DemiCardSize.M,
     isClickable: true,
@@ -30,19 +34,18 @@ export class SearchPage implements OnInit, OnDestroy {
   };
 
   constructor(
-    private readonly router: Router,
-    private readonly bookService: BookService
+    private readonly ref: ViewContainerRef,
+    private readonly bookService: BookService,
+    private readonly demiModal: DemiModalService
   ) {}
 
   ngOnInit(): void {
-    this.subBooks = this.books$.subscribe();
+    this.demiModal.initModalService(this.ref);
+    this.books$ = this.bookService.getBooks$();
   }
 
-  public onCardTouched(card: Book): void {
-    this.router.navigate([RoutePath.Detail]);
-  }
-
-  ngOnDestroy(): void {
-    this.subBooks.unsubscribe();
+  public onCardTouched(book: Book): void {
+    const config: DemiModalInitialization = getModalConfig(ModalEnum.Detail);
+    this.demiModal.create({ ...config, data: { book: book } });
   }
 }

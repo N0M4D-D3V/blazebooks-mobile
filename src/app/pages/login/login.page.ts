@@ -14,6 +14,18 @@ import { ModalEnum, getModalConfig } from '@config/modal.config';
   templateUrl: './login.page.html',
   standalone: true,
   imports: [NgClass, FormsModule, ReactiveFormsModule],
+  styles: `
+  #new-account{
+    color: var(--color-secondary);
+    width:100%; height: 100%;
+  }
+
+  #create-recover{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+  `,
 })
 export class LoginPage implements OnInit {
   public form: FormGroup = this.formFactory.getEmailLoginForm();

@@ -1,43 +1,32 @@
-import { AsyncPipe, NgIf } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { AsyncPipe, NgIf, UpperCasePipe } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book } from '@interfaces/book.interface';
+import { Book, BookChapter, BookPage } from '@interfaces/book.interface';
 import { RoutePath } from '@interfaces/route.interface';
 import { BookService } from '@services/book.service';
+import { LocalBookService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reader',
-  template: `
-    @if (book$ | async; as book) {
-    <div #dynamicContainer [innerHTML]="trustedHtml"></div>
-    }
-  `,
-  styleUrls: [],
+  templateUrl: './reader.page.html',
+  styleUrls: ['./reader.page.scss'],
   standalone: true,
-  imports: [NgIf, AsyncPipe, HttpClientModule],
+  imports: [NgIf, AsyncPipe, UpperCasePipe],
 })
 export class ReaderPage implements OnInit, OnDestroy {
-  @ViewChild('dynamicContainer') dynamicContainer: ElementRef | undefined;
-
   private subBook!: Subscription;
+  private currentBook!: Book;
 
   public book$!: Observable<Book | undefined>;
-  public trustedHtml: SafeHtml | undefined;
+
+  public currentChapter!: BookChapter | undefined;
+  public currentPage!: BookPage | undefined;
 
   constructor(
     private readonly router: Router,
-    private readonly http: HttpClient,
-    private readonly sanitizer: DomSanitizer,
-    private readonly bookService: BookService
+    private readonly bookService: BookService,
+    private readonly localBookService: LocalBookService
   ) {}
 
   ngOnInit(): void {
@@ -45,23 +34,27 @@ export class ReaderPage implements OnInit, OnDestroy {
 
     this.subBook = this.book$.subscribe((book: Book | undefined) => {
       if (!book) this.router.navigate([RoutePath.Home]);
-      else this.loadTemplate();
+      else this.onLoadBook(book);
     });
   }
 
-  private loadTemplate(): void {
-    this.http
-      .get('assets/template.html', { responseType: 'text' })
-      .subscribe((data) => {
-        this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(data);
-        this.loadJS();
-      });
+  private onLoadBook(book: Book): void {
+    this.currentBook = book;
+    this.currentChapter = this.localBookService.getChapter(book.id);
+    this.currentPage = this.localBookService.getPage(
+      book.id,
+      this.currentChapter!.id
+    );
   }
 
-  private loadJS(): void {
-    const scriptElement = document.createElement('script');
-    scriptElement.src = 'assets/reader-script.js';
-    document.body.appendChild(scriptElement);
+  public loadPage(pageId: string): void {
+    console.log(pageId);
+
+    this.currentPage = this.localBookService.getPage(
+      this.currentBook.id,
+      this.currentChapter!.id,
+      pageId
+    );
   }
 
   ngOnDestroy(): void {

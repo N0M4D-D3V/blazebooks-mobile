@@ -1,0 +1,202 @@
+{
+  "id": "madridzombie",
+  "title": "Madrid Zombie",
+  "author": "Bruno Piqué",
+  "genres": ["zombies", "adventure"],
+  "chapters": [
+    {
+      "id": "chapterXXIX",
+      "title": "Capítulo XXIX",
+      "options": [
+        {
+          "id": "chapterXXIX_initial_option",
+          "text": "solo se oye un reloj de fondo",
+          "goToPage": "chapterXXIX_page1"
+        }
+      ],
+      "quote": {
+        "text": "En una tierra maravillosa yacen, soñando mientras los días pasan, soñando mientras los veranos mueren[...]",
+        "book": "Las aventuras de Alicia en el país de las maravillas",
+        "year": 1865
+      },
+      "pages": [
+        {
+          "id": "chapterXXIX_page1",
+          "paragraphs": [
+            "- ¿Cómo que no habéis traido nada?",
+            "El puño de Victor golpea la mesa.",
+            "- Ha sido imposible - responde John.",
+            "- ¿Por qué?",
+            "Claudia pestañea con cada grito."
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page1_option1",
+              "text": "estabamos ocupados sobreviviendo",
+              "goToPage": "chapterXXIX_page2"
+            },
+            {
+              "id": "chapterXXIX_page1_option2",
+              "text": "tranquilizate",
+              "goToPage": "chapterXXIX_page3"
+            },
+            {
+              "id": "chapterXXIX_page1_option3",
+              "text": "no dices nada",
+              "goToPage": "chapterXXIX_page4"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page2",
+          "paragraphs": [
+            "- ¿Sabes cómo se sobrevive en este y en cualquier otro mundo, querido Nomad? Con agua y comida...",
+            "- Y yo aquí sin mi libreta para apuntarlo ...",
+            "- Dame la pistola.",
+            "- Tranquilidad, por favor - la voz de Eduardo deselectriza el aire -. Creo que sé otro lugar donde puede haber comida."
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page2_option1",
+              "text": "siguiente",
+              "goToPage": "chapterXXIX_page5"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page3",
+          "paragraphs": ["Texto opción 2 seleccionada"],
+          "options": [
+            {
+              "id": "chapterXXIX_page3_option1",
+              "text": "siguiente",
+              "goToPage": "chapterXXIX_page5"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page4",
+          "paragraphs": ["Texto opción 3 seleccionada"],
+          "options": [
+            {
+              "id": "chapterXXIX_page4_option1",
+              "text": "siguiente",
+              "goToPage": "chapterXXIX_page5"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page5",
+          "paragraphs": [
+            "- ¿Y ahora nos lo dices?¿En dónde?",
+            "- En la iglesia.",
+            "- ¿La que está a unas calles de aquí?",
+            "- La misma.",
+            "- Insisto - dice Víctor conteniendo la respiración -, ¿por qué has esperado hasta ahora para decírnoslo?",
+            "La mirada de Eduardo ni se inmuta.",
+            "- Según nos dijiste, el supermercado era una excursión segura... Lo de la iglesia es solo una posibilidad",
+            "Víctor finje una sonrisa."
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page5_option1",
+              "text": "siguiente",
+              "goToPage": "chapterXXIX_page6"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page6",
+          "paragraphs": [
+            "- Conozco al padre Manuel - continúa Eduardo -. Semanas antes de perder contacto con el mundo exterior hablé con él. Me dijo que estaba aprovisionando la iglesia y que cualquier feligrés que no tuviese donde ir podía refugiarse allí. No he vuelto a saber nada de él desde entonces. Puede que haya gente y comida allí, o no. No lo sé.",
+            "- 'No lo sé' es nuestra mejor opción ahora mismo, ¿no? - pregunta María.",
+            "- Eso parece ...",
+            "- Muy bien - dice John mirándote -, a la iglesia.",
+            "- No, esta vez iré yo - Eduardo se dirige al inglés y pone una mano en su hombro -. Tú descansa."
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page6_option1",
+              "text": "siguiente",
+              "goToPage": "chapterXXIX_page7"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page7",
+          "paragraphs": [
+            "- Tienes razón, Eduardo, actuemos con calma. Repasaré el plan hoy por la noche y mañana organizo la misión. Ya han sido suficientes decepciones por hoy. ¿Cristina?",
+            "La joven se pone de pie y ambos desaparecen tras la puerta.",
+            "Quieres aportar algo al debate pero tus músculos están consumidos. Estar en pie es todo un esfuerzo.",
+            "- Iros a dormir - la voz de María es un somnífero -, mañana lo solucionaremos.",
+            "- Ok.",
+            "- ¿Quieres que me quede con Claudia por esta noche?"
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page6_option1",
+              "text": "sí",
+              "goToPage": "chapterXXIX_page8"
+            },
+            {
+              "id": "chapterXXIX_page6_option1",
+              "text": "no",
+              "goToPage": "chapterXXIX_page9"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page8",
+          "paragraphs": [
+            "- Vale, no hay problema. Dale un beso a tu padre, Claudia.",
+            "Los ojos de la niña recorren tu figura pero su cuerpo no se mueve.",
+            "- Está bien. Adiós, Claudia.",
+            "Cierras la puerta con la palabra 'padre' resonando en las paredes de tu mente y con Rambo siguiéndote (y olfateándote) a tus pies.",
+            "- ¿Listo para descansar?",
+            "- Jamás he estado más preparado.",
+            "John asiente, se detiene frente a la puerta como si hubiese llegado a la tierra prometida, y la abre.",
+            "- Si me necesitas estaré en mi cama.",
+            "- Lo mismo.",
+            "John entra en su habitación y un segundo después oyes su cuerpo chocando contra el colchón. A través de la ventana puede verse la Luna y en esa dirección miran tus ojos embobados. Te acuestas. Cierras los ojos y aún puedes ver el satélite;  blanco y esférico danza y tilila sobre sus párpados. La imagen te marea y te duermes."
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page8_option1",
+              "text": "siguiente capítulo",
+              "goToPage": "chapterXXX_page1"
+            }
+          ]
+        },
+        {
+          "id": "chapterXXIX_page9",
+          "paragraphs": [
+            "- No hace falta, gracias.",
+            "- Vale, Claudia, ve con tu padre.",
+            "La niña da un paso hacia ti. Extiendes tu mano. Ella la mira y extiende la suya. Envuelves su mano en tu palma y abandonas el piso de Eduardo con la palabra 'padre' resonando en las paredes de tu mente y con Rambo siguiéndote (y olfateándote) a tus pies.",
+            "- ¿Listo para descansar?",
+            "- Jamás he estado más preparado.",
+            "John asiente, se detiene frente a la puerta como si hubiese llegado a la tierra prometida, y la abre.",
+            "- Si me necesitas estaré desmayado en mi cama.",
+            "- Lo mismo.",
+            "John entra en su habitación y un segundo después oyes su cuerpo chocando contra el colchón. A través de la ventana puede verse la Luna y en esa dirección miran los ojos de Claudia cuando la acuestas en la cama.",
+            "- ¿Estas cansada?",
+            "- Sí.",
+            "- ¿Quieres dormir?",
+            "- Sí.",
+            "- ¿Quieres ver la Luna?",
+            "- Sí.",
+            "Una carcajada escapa de tu garganta. Te acuestas en la cama y posas la mejilla de la niña sobre tu pecho, en la dirección de la ventana.",
+            "- Buenas noches, Claudia..."
+          ],
+          "options": [
+            {
+              "id": "chapterXXIX_page8_option1",
+              "text": "siguiente capítulo",
+              "goToPage": "chapterXXX_page1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

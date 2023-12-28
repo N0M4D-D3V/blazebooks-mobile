@@ -1,0 +1,13 @@
+.btn-group-options {
+  display: flex;
+  flex-direction: column; /* Alinea los botones verticalmente uno encima del otro */
+  justify-content: center; /* Centra verticalmente los botones */
+  align-items: center; /* Centra horizontalmente los botones */
+}
+
+.btn-group-options button {
+  height: 10vh;
+  width: 45vw;
+  margin-top: 1vh;
+  display: block;
+}

@@ -1,0 +1,32 @@
+@if(!currentChapter && !currentPage){
+<p class="text-danger text-center">
+  Tuvimos un problema cargando su libro :( Por favor, intentelo de nuevo.
+</p>
+} @else if (currentChapter && !currentPage) {
+<div class="mx-5 mt-3 text-center">
+  <h1 class="fw-bolder">{{ currentChapter.title }}</h1>
+  <p class="fst-italic">{{ currentChapter.quote.text }}</p>
+  <p>{{ currentChapter.quote.book }}<br />{{ currentChapter.quote.year }}</p>
+
+  @for (btn of currentChapter.options; track btn.id) {
+  <button class="btn btn-dark" (click)="loadPage(btn.goToPage)">
+    {{ btn.text | uppercase }}
+  </button>
+  }
+</div>
+} @else if (currentChapter && currentPage) {
+<div class="mx-4 my-3">
+  @for (p of currentPage.paragraphs; track $index) {
+  <p>{{p}}</p>
+  }
+  <div class="btn-group-options">
+    @for (btn of currentPage.options; track btn.id) {
+    <button class="btn btn-dark" (click)="loadPage(btn.goToPage)">
+      {{ btn.text | uppercase }}
+    </button>
+    }
+  </div>
+</div>
+} @else {
+<p class="text-center text-success">Capítulo cargado correctamente</p>
+}

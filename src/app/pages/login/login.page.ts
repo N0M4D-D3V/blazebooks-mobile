@@ -16,7 +16,7 @@ import { ModalEnum, getModalConfig } from '@config/modal.config';
   imports: [NgClass, FormsModule, ReactiveFormsModule],
   styles: `
   #new-account{
-    color: var(--color-secondary);
+    color: var(--color-primary);
     width:100%; height: 100%;
   }
 

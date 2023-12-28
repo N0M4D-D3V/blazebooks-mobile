@@ -12,11 +12,11 @@ export class UserService {
     return this.fireAuth.authState.pipe(
       map((user: any) => {
         return {
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-          emailVerified: user.emailVerified,
+          uid: user?.uid,
+          email: user?.email,
+          displayName: user?.displayName,
+          photoURL: user?.photoURL,
+          emailVerified: user?.emailVerified,
         } as User;
       })
     );

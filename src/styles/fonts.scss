@@ -1,0 +1,47 @@
+$accent-font: "Kimberley";
+$regular-font: "Dyslexia";
+$format: "truetype";
+
+$accent-bold-url: "../assets/fonts/kimberley/kimberley_bl.otf";
+$regular-bold-url: "../assets/fonts/open-dyslexic/OpenDyslexic-Bold.otf";
+$regular-italic-url: "../assets/fonts/open-dyslexic/OpenDyslexic-Italic.otf";
+$regular-url: "../assets/fonts/open-dyslexic/OpenDyslexicMono-Regular.otf";
+
+@font-face {
+  font-family: $accent-font;
+  font-style: bold;
+  src: url($accent-bold-url) format($format);
+}
+
+@font-face {
+  font-family: $regular-font;
+  font-style: normal;
+  src: url($regular-url) format($format);
+}
+
+@font-face {
+  font-family: $regular-font;
+  font-style: bold;
+  src: url($regular-bold-url) format($format);
+}
+
+@font-face {
+  font-family: $regular-font;
+  font-style: italic;
+  src: url($regular-italic-url) format($format);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $accent-font, sans-serif;
+}
+
+p,
+a,
+span,
+input {
+  font-family: $regular-font, sans-serif;
+}

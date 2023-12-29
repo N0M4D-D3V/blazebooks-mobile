@@ -21,6 +21,6 @@ export class AuthService {
   }
 
   public async signOut(): Promise<void> {
-    this.fireAuth.signOut();
+    return this.fireAuth.signOut();
   }
 }

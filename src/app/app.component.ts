@@ -41,10 +41,10 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((user: User) => (this.user = user));
   }
 
-  public onLogout(): void {
-    this.userService;
-    this.authService.signOut();
-    this.router.navigate([RoutePath.Login]);
+  public async onLogout(): Promise<void> {
+    this.authService
+      .signOut()
+      .then(() => this.router.navigate([RoutePath.Login]));
   }
 
   ngOnDestroy(): void {

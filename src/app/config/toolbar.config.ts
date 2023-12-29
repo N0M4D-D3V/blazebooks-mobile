@@ -1,10 +1,12 @@
 import { DemiToolbarConfig } from 'demiurge';
 import { RouteName, RoutePath } from '@interfaces/route.interface';
 import packageJson from '../../../package.json';
+import { Assets } from '@enum/assets.enum';
 
 export const TOOLBAR_CONFIG: DemiToolbarConfig = {
   title: packageJson.name,
   toggleTitle: packageJson.name,
+  defaultProfileImgPath: Assets.DefaultProfileImgPath,
   items: [
     {
       label: RouteName.Login,

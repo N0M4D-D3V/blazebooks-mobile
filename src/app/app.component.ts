@@ -1,11 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import {
+  NavigationStart,
+  Router,
+  RouterEvent,
+  RouterOutlet,
+} from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
 import { UserService } from '@services/user.service';
 import { AuthService } from '@services/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, filter, map } from 'rxjs';
 import { User } from '@interfaces/user.interface';
 
 @Component({
@@ -13,7 +18,7 @@ import { User } from '@interfaces/user.interface';
   standalone: true,
   imports: [DemiToolbarComponent, RouterOutlet],
   template: `
-    @if (user) {
+    @if (user && !isLogin) {
     <demi-toolbar
       [user]="user"
       [config]="toolbarConfig"
@@ -28,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public user?: User;
 
   public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
+  public isLogin: boolean = false;
 
   constructor(
     private readonly router: Router,
@@ -39,6 +45,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subUser = this.userService
       .getUser()
       .subscribe((user: User) => (this.user = user));
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe((ev: any) => (this.isLogin = ev?.url === RoutePath.Login));
   }
 
   public async onLogout(): Promise<void> {

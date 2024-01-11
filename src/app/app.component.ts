@@ -1,16 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  NavigationStart,
-  Router,
-  RouterEvent,
-  RouterOutlet,
-} from '@angular/router';
+import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
 import { UserService } from '@services/user.service';
 import { AuthService } from '@services/auth.service';
-import { Subscription, filter, map } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { User } from '@interfaces/user.interface';
 
 @Component({

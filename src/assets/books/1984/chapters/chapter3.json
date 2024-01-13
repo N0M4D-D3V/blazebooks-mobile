@@ -1,0 +1,73 @@
+{
+  "id": "chapter3",
+  "title": "Chapter 3",
+  "quote": {
+    "text": "WOLOLOOOOH!!",
+    "book": "Monje promedio",
+    "year": 2002
+  },
+  "options": [
+    {
+      "id": "chapter3_initial_option",
+      "text": "Ahí está el Javi",
+      "goToPage": "chapter3_page1"
+    }
+  ],
+  "pages": [
+    {
+      "id": "chapter3_page1",
+      "paragraphs": [
+        "Proin varius vulputate tristique. Donec nec interdum ipsum, at commodo dolor. Nam ullamcorper scelerisque enim in mollis. Donec sodales neque sed tristique commodo.",
+        "Mauris ipsum mauris, interdum sed lacinia sit amet, fermentum quis nisl. Donec id hendrerit lorem, in eleifend est.",
+        "Etiam dignissim ligula in tortor maximus rhoncus. Quisque tempor sapien at nunc vestibulum, sit amet bibendum nunc semper.",
+        "Nunc condimentum, mauris et rutrum dapibus, mauris odio sodales eros, at lacinia metus mi sit amet lectus."
+      ],
+      "options": [
+        {
+          "id": "chapter3_page1_option1",
+          "text": "next",
+          "goToPage": "chapter3_page2"
+        }
+      ]
+    },
+    {
+      "id": "chapter3_page2",
+      "paragraphs": [
+        "Integer gravida lacinia risus, ac rutrum nibh volutpat et. Aliquam imperdiet urna eget dictum aliquam. Nam maximus tellus at sapien ultrices, eu consectetur neque volutpat.",
+        "Pellentesque hendrerit rutrum sapien, ut lacinia lorem imperdiet mattis. Nullam suscipit velit sed est fermentum, sit amet faucibus justo faucibus.",
+        "Integer dui turpis, mattis porta orci quis, condimentum venenatis est. Suspendisse maximus vulputate lectus eget venenatis.",
+        "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam ac porta orci. Sed viverra cursus malesuada.",
+        "Curabitur sed condimentum orci, vitae ultrices risus. Phasellus tincidunt hendrerit convallis. Cras ut aliquet mauris.",
+        "Donec at lorem porttitor, pellentesque augue non, interdum ex. Nullam sodales diam eget tincidunt malesuada."
+      ],
+      "options": [
+        {
+          "id": "chapter3_page2_option1",
+          "text": "yes",
+          "goToPage": "chapter3_page3"
+        },
+        {
+          "id": "chapter3_page2_option2",
+          "text": "no",
+          "goToPage": "chapter3_page3"
+        }
+      ]
+    },
+    {
+      "id": "chapter3_page3",
+      "paragraphs": [
+        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+        "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...",
+        "Lorem Ipsum"
+      ],
+      "options": [
+        {
+          "id": "chapter3_page3_option1",
+          "text": "no",
+          "goToPage": "chapter1",
+          "role": "end"
+        }
+      ]
+    }
+  ]
+}

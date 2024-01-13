@@ -1,21 +1,21 @@
 {
-  "id": "chapterXXIX",
-  "title": "Capítulo XXIX",
+  "id": "chapterXXX",
+  "title": "Capítulo XXX",
   "options": [
     {
-      "id": "chapterXXIX_initial_option",
+      "id": "chapterXXX_initial_option",
       "text": "solo se oye un reloj de fondo",
-      "goToPage": "chapterXXIX_page1"
+      "goToPage": "chapterXXX_page1"
     }
   ],
   "quote": {
-    "text": "En una tierra maravillosa yacen, soñando mientras los días pasan, soñando mientras los veranos mueren[...]",
-    "book": "Las aventuras de Alicia en el país de las maravillas",
-    "year": 1865
+    "text": "Este es un capítulo de prueba, réplica del capítulo anterior.",
+    "book": "Funcionalidad de cambio de capítulos",
+    "year": 2024
   },
   "pages": [
     {
-      "id": "chapterXXIX_page1",
+      "id": "chapterXXX_page1",
       "paragraphs": [
         "- ¿Cómo que no habéis traido nada?",
         "El puño de Victor golpea la mesa.",
@@ -25,24 +25,24 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page1_option1",
+          "id": "chapterXXX_page1_option1",
           "text": "estabamos ocupados sobreviviendo",
-          "goToPage": "chapterXXIX_page2"
+          "goToPage": "chapterXXX_page2"
         },
         {
-          "id": "chapterXXIX_page1_option2",
+          "id": "chapterXXX_page1_option2",
           "text": "tranquilizate",
-          "goToPage": "chapterXXIX_page3"
+          "goToPage": "chapterXXX_page3"
         },
         {
-          "id": "chapterXXIX_page1_option3",
+          "id": "chapterXXX_page1_option3",
           "text": "no dices nada",
-          "goToPage": "chapterXXIX_page4"
+          "goToPage": "chapterXXX_page4"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page2",
+      "id": "chapterXXX_page2",
       "paragraphs": [
         "- ¿Sabes cómo se sobrevive en este y en cualquier otro mundo, querido Nomad? Con agua y comida...",
         "- Y yo aquí sin mi libreta para apuntarlo ...",
@@ -51,36 +51,36 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page2_option1",
+          "id": "chapterXXX_page2_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXIX_page5"
+          "goToPage": "chapterXXX_page5"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page3",
+      "id": "chapterXXX_page3",
       "paragraphs": ["Texto opción 2 seleccionada"],
       "options": [
         {
-          "id": "chapterXXIX_page3_option1",
+          "id": "chapterXXX_page3_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXIX_page5"
+          "goToPage": "chapterXXX_page5"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page4",
+      "id": "chapterXXX_page4",
       "paragraphs": ["Texto opción 3 seleccionada"],
       "options": [
         {
-          "id": "chapterXXIX_page4_option1",
+          "id": "chapterXXX_page4_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXIX_page5"
+          "goToPage": "chapterXXX_page5"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page5",
+      "id": "chapterXXX_page5",
       "paragraphs": [
         "- ¿Y ahora nos lo dices?¿En dónde?",
         "- En la iglesia.",
@@ -93,14 +93,14 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page5_option1",
+          "id": "chapterXXX_page5_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXIX_page6"
+          "goToPage": "chapterXXX_page6"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page6",
+      "id": "chapterXXX_page6",
       "paragraphs": [
         "- Conozco al padre Manuel - continúa Eduardo -. Semanas antes de perder contacto con el mundo exterior hablé con él. Me dijo que estaba aprovisionando la iglesia y que cualquier feligrés que no tuviese donde ir podía refugiarse allí. No he vuelto a saber nada de él desde entonces. Puede que haya gente y comida allí, o no. No lo sé.",
         "- 'No lo sé' es nuestra mejor opción ahora mismo, ¿no? - pregunta María.",
@@ -110,14 +110,14 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page6_option1",
+          "id": "chapterXXX_page6_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXIX_page7"
+          "goToPage": "chapterXXX_page7"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page7",
+      "id": "chapterXXX_page7",
       "paragraphs": [
         "- Tienes razón, Eduardo, actuemos con calma. Repasaré el plan hoy por la noche y mañana organizo la misión. Ya han sido suficientes decepciones por hoy. ¿Cristina?",
         "La joven se pone de pie y ambos desaparecen tras la puerta.",
@@ -128,19 +128,19 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page6_option1",
+          "id": "chapterXXX_page6_option1",
           "text": "sí",
-          "goToPage": "chapterXXIX_page8"
+          "goToPage": "chapterXXX_page8"
         },
         {
-          "id": "chapterXXIX_page6_option1",
+          "id": "chapterXXX_page6_option1",
           "text": "no",
-          "goToPage": "chapterXXIX_page9"
+          "goToPage": "chapterXXX_page9"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page8",
+      "id": "chapterXXX_page8",
       "paragraphs": [
         "- Vale, no hay problema. Dale un beso a tu padre, Claudia.",
         "Los ojos de la niña recorren tu figura pero su cuerpo no se mueve.",
@@ -155,15 +155,15 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page8_option1",
+          "id": "chapterXXX_page8_option1",
           "text": "siguiente capítulo",
-          "goToPage": "chapterXXX",
+          "goToPage": "chapterXXXI",
           "role": "end"
         }
       ]
     },
     {
-      "id": "chapterXXIX_page9",
+      "id": "chapterXXX_page9",
       "paragraphs": [
         "- No hace falta, gracias.",
         "- Vale, Claudia, ve con tu padre.",
@@ -185,9 +185,9 @@
       ],
       "options": [
         {
-          "id": "chapterXXIX_page8_option1",
+          "id": "chapterXXX_page8_option1",
           "text": "siguiente capítulo",
-          "goToPage": "chapterXXX",
+          "goToPage": "chapterXXXI",
           "role": "end"
         }
       ]

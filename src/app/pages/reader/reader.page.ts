@@ -1,7 +1,13 @@
 import { AsyncPipe, NgIf, UpperCasePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Book, BookChapter, BookPage } from '@interfaces/book.interface';
+import {
+  Book,
+  BookChapter,
+  BookOption,
+  BookPage,
+  OptionRole,
+} from '@interfaces/book.interface';
 import { RoutePath } from '@interfaces/route.interface';
 import { BookService } from '@services/book.service';
 import { LocalBookService } from '@services/local-book.service';
@@ -42,20 +48,25 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   private onLoadBook(book: Book): void {
     this.currentBook = book;
+    this.getChapter();
+  }
 
+  public loadPage(option: BookOption): void {
+    if (!option.role) this.currentPage = this.getPage(option);
+    else if (option.role === OptionRole.End) this.getChapter(option);
+  }
+
+  private getChapter(option?: BookOption): void {
     this.subChapter = this.localBookService
-      .getChapter(book)
+      .getChapter(this.currentBook, option?.goToPage)
       .subscribe((response) => {
         this.currentChapter = response;
-        this.currentPage = this.localBookService.getPage(this.currentChapter!);
+        this.currentPage = this.localBookService.getPage(this.currentChapter);
       });
   }
 
-  public loadPage(pageId: string): void {
-    this.currentPage = this.localBookService.getPage(
-      this.currentChapter!,
-      pageId
-    );
+  private getPage(option?: BookOption): BookPage | undefined {
+    return this.localBookService.getPage(this.currentChapter, option?.goToPage);
   }
 
   ngOnDestroy(): void {

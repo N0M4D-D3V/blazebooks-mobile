@@ -32,10 +32,16 @@ export interface BookOption {
   id: string;
   text: string;
   goToPage: string;
+
+  role?: OptionRole;
 }
 
 export interface BookQuote {
   text: string;
   book: string;
   year: number;
+}
+
+export enum OptionRole {
+  End = 'end',
 }

@@ -20,7 +20,7 @@ export class LocalBookService {
     }
   }
 
-  public getPage(chapter: BookChapter, pageId?: string): BookPage | undefined {
+  public getPage(chapter?: BookChapter, pageId?: string): BookPage | undefined {
     if (chapter && pageId) return chapter.pages.find((p) => p.id === pageId);
     return;
   }

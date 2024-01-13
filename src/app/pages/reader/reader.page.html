@@ -8,9 +8,9 @@
   <p class="fst-italic">{{ currentChapter.quote.text }}</p>
   <p>{{ currentChapter.quote.book }}<br />{{ currentChapter.quote.year }}</p>
 
-  @for (btn of currentChapter.options; track btn.id) {
-  <button class="btn btn-dark" (click)="loadPage(btn.goToPage)">
-    {{ btn.text | uppercase }}
+  @for (option of currentChapter.options; track option.id) {
+  <button class="btn btn-dark" (click)="loadPage(option)">
+    {{ option.text | uppercase }}
   </button>
   }
 </div>
@@ -20,9 +20,9 @@
   <p>{{p}}</p>
   }
   <div class="btn-group-options">
-    @for (btn of currentPage.options; track btn.id) {
-    <button class="btn btn-dark" (click)="loadPage(btn.goToPage)">
-      {{ btn.text | uppercase }}
+    @for (option of currentPage.options; track option.id) {
+    <button class="btn btn-dark" (click)="loadPage(option)">
+      {{ option.text | uppercase }}
     </button>
     }
   </div>

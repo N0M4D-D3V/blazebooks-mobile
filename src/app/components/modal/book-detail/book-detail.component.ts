@@ -5,6 +5,7 @@ import { Book } from '@interfaces/book.interface';
 import { RoutePath } from '@interfaces/route.interface';
 import { BookService } from '@services/book.service';
 import {
+  BsIcon,
   DemiCardConfig,
   DemiCardImgComponent,
   DemiCardListComponent,
@@ -21,6 +22,7 @@ import {
     <demi-card-img
       [item]="book"
       (onReadTouched)="onRead($event)"
+      [config]="cardConfig"
     ></demi-card-img>
     <p class="genre-text text-end px-3 fadein">
       <b>Genres: </b> {{ book.genres | separe }}
@@ -41,9 +43,10 @@ import {
 })
 export class BookDetailComponent implements OnInit {
   @Input() book!: Book;
-  public cardListConfig: DemiCardConfig = {
+  public cardConfig: DemiCardConfig = {
     isClickable: true,
     size: DemiCardSize.S,
+    icon: BsIcon.Glasses,
   };
 
   constructor(

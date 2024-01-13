@@ -16,6 +16,8 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subBook!: Subscription;
+  private subChapter!: Subscription;
+
   private currentBook!: Book;
 
   public book$!: Observable<Book | undefined>;
@@ -40,24 +42,24 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   private onLoadBook(book: Book): void {
     this.currentBook = book;
-    this.currentChapter = this.localBookService.getChapter(book.id);
-    this.currentPage = this.localBookService.getPage(
-      book.id,
-      this.currentChapter!.id
-    );
+
+    this.subChapter = this.localBookService
+      .getChapter(book)
+      .subscribe((response) => {
+        this.currentChapter = response;
+        this.currentPage = this.localBookService.getPage(this.currentChapter!);
+      });
   }
 
   public loadPage(pageId: string): void {
-    console.log(pageId);
-
     this.currentPage = this.localBookService.getPage(
-      this.currentBook.id,
-      this.currentChapter!.id,
+      this.currentChapter!,
       pageId
     );
   }
 
   ngOnDestroy(): void {
-    this.subBook.unsubscribe();
+    this.subBook?.unsubscribe();
+    this.subChapter?.unsubscribe();
   }
 }

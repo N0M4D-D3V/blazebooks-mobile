@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import {
+  BsIcon,
   DemiCardConfig,
   DemiCardImgComponent,
   DemiCardListComponent,
@@ -22,7 +23,7 @@ import { ModalEnum, getModalConfig } from '@config/modal.config';
       @if(currentBook$ | async; as current){
       <demi-card-img
         [item]="current"
-        [config]="{ isClickable: true }"
+        [config]="mainCardConfig"
         (onReadTouched)="onReadTouched($event)"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-img>
@@ -42,6 +43,11 @@ import { ModalEnum, getModalConfig } from '@config/modal.config';
 export class HomePage implements OnInit, OnDestroy {
   public currentBook$!: Observable<Book | undefined>;
   public books$!: Observable<Book[]>;
+
+  public mainCardConfig: DemiCardConfig = {
+    isClickable: true,
+    icon: BsIcon.Glasses,
+  };
   public cardListConfig: DemiCardConfig = {
     size: DemiCardSize.M,
     isClickable: true,

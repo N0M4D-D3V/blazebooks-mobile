@@ -15,7 +15,7 @@ export class UserService {
           uid: user?.uid,
           email: user?.email,
           displayName: user?.displayName,
-          photoURL: user?.photoURL,
+          photoURL: 'assets/images/default-profile.jpg',
           emailVerified: user?.emailVerified,
         } as User;
       })

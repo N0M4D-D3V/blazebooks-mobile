@@ -25,7 +25,8 @@ export class BookService {
   public initCurrentBook(): void {
     this.currentBook =
       this.currentBook ?? this.ls.get<Book>(LocalStorageKey.CurrentBook);
-    this.setCurrentBook(this.currentBook);
+
+    if (this.currentBook) this.setCurrentBook(this.currentBook);
   }
 
   public getBooks$(): Observable<Book[]> {

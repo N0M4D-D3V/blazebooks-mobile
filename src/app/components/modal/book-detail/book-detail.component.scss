@@ -1,6 +1,9 @@
 .container {
   color: var(--color-white);
   text-align: justify;
+
+  max-height: 45vh;
+  overflow: auto;
 }
 
 .genre-text {

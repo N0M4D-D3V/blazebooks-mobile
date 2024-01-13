@@ -8,9 +8,11 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient } from '@angular/common/http';
 
 export const APP_CONFIG: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideAnimations(),
     provideRouter(ROUTES),
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },

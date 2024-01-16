@@ -24,11 +24,15 @@ import {
       (onReadTouched)="onRead($event)"
       [config]="cardConfig"
     ></demi-card-img>
-    <p class="genre-text text-end px-3 fadein">
-      <b>Genres: </b> {{ book.genres | separe }}
-    </p>
-    <div class="container px-3">
-      <p>{{ book.description }}</p>
+
+    <div class="px-3 fadein">
+      <p class="text-primary text-end">
+        <b>Géneros: </b> {{ book.genres | separe }}
+      </p>
+      <h5 class="text-primary">Sinopsis</h5>
+      <div class="container">
+        <p>{{ book.description }}</p>
+      </div>
     </div>
     }
   `,

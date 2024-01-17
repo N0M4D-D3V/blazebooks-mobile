@@ -3,19 +3,19 @@ import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
-import { UserService } from '@services/user.service';
 import { AuthService } from '@services/auth.service';
-import { Subscription, filter } from 'rxjs';
+import { Observable, filter, tap } from 'rxjs';
 import { User } from '@interfaces/user.interface';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [DemiToolbarComponent, RouterOutlet],
+  imports: [DemiToolbarComponent, RouterOutlet, AsyncPipe],
   template: `
-    @if (user && !isLogin) {
+    @if (($user | async); as usr) {
     <demi-toolbar
-      [user]="user"
+      [user]="usr"
       [config]="toolbarConfig"
       (onLogout)="onLogout()"
     ></demi-toolbar>
@@ -24,22 +24,20 @@ import { User } from '@interfaces/user.interface';
   `,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private subUser!: Subscription;
-  public user?: User;
+  public $user?: Observable<User | undefined>;
 
   public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
   public isLogin: boolean = false;
 
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService,
-    private readonly userService: UserService
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.subUser = this.userService
-      .getUser()
-      .subscribe((user: User) => (this.user = user));
+    this.$user = this.authService
+      .$getUser()
+      .pipe(filter((response) => !!response));
 
     this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
@@ -52,7 +50,5 @@ export class AppComponent implements OnInit, OnDestroy {
       .then(() => this.router.navigate([RoutePath.Login]));
   }
 
-  ngOnDestroy(): void {
-    this.subUser.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

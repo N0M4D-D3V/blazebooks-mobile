@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, of } from 'rxjs';
 import { Book } from '@interfaces/book.interface';
-import { FirestoreRepository } from '../repositories/firestore.repository';
-import { FirestoreCollection } from '@enum/firestore.collection.enum';
 import { DemiLocalStorageService } from 'demiurge';
 import { LocalStorageKey } from '@enum/local-storage.enum';
+import mockDBJson from '../../assets/mock/books-db.json';
 
 @Injectable({ providedIn: 'root' })
 export class BookService {
@@ -14,13 +13,10 @@ export class BookService {
   private currentBook$: Observable<Book | undefined> =
     this.sCurrentBook.asObservable();
 
-  private books!: Book[];
+  private books: Book[] = mockDBJson.books;
   private currentBook!: Book;
 
-  constructor(
-    private readonly fireRep: FirestoreRepository,
-    private readonly ls: DemiLocalStorageService
-  ) {}
+  constructor(private readonly ls: DemiLocalStorageService) {}
 
   public initCurrentBook(): void {
     this.currentBook =
@@ -30,28 +26,18 @@ export class BookService {
   }
 
   public getBooks$(): Observable<Book[]> {
-    return this.fireRep
-      .getCollectionData<Book[]>(FirestoreCollection.Books)
-      .pipe(
-        map((books: Book[]) => {
-          this.books = books;
-          if (this.currentBook)
-            return books.filter(
-              (book) => book.title !== this.currentBook.title
-            );
-          else return books;
-        })
-      );
+    return of(this.books).pipe(
+      map((books: Book[]) => {
+        this.books = books;
+        if (this.currentBook)
+          return books.filter((book) => book.title !== this.currentBook.title);
+        else return books;
+      })
+    );
   }
 
   public getCurrentBookObservable(): Observable<Book | undefined> {
     return this.currentBook$;
-  }
-
-  public getRelatedBooks(): Observable<Book[]> {
-    return this.fireRep
-      .getCollectionData<Book[]>(FirestoreCollection.Books)
-      .pipe(map((array) => array.slice(0, 3)));
   }
 
   public setCurrentBook(book: Book): void {

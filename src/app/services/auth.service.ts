@@ -1,26 +1,57 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from '@firebase/app-compat';
+import { LocalStorageKey } from '@enum/local-storage.enum';
+import { User } from '@interfaces/user.interface';
+import { DemiLocalStorageService } from 'demiurge';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private readonly fireAuth: AngularFireAuth) {}
+  private bsUser: BehaviorSubject<User | undefined> = new BehaviorSubject<
+    User | undefined
+  >(undefined);
 
-  public async emailLogin(email: string, pass: string): Promise<any> {
-    return this.fireAuth.signInWithEmailAndPassword(email, pass);
-  }
+  private $current: Observable<User | undefined> = this.bsUser.asObservable();
 
-  public async googleLogin(): Promise<any> {
-    return this.fireAuth.signInWithPopup(
-      new firebase.auth.GoogleAuthProvider()
-    );
+  constructor(private readonly localStorage: DemiLocalStorageService) {}
+
+  public emailLogin(email: string, pass: string): boolean {
+    const isAuth: boolean = email === 'test@test' && pass === 'test';
+    if (isAuth) {
+      this.setUser({
+        email,
+        displayName: 'Test User',
+        photoURL: 'assets/images/default-profile.jpg',
+      });
+    }
+
+    return isAuth;
   }
 
   public async emailRegister(email: string, pass: string) {
-    return this.fireAuth.createUserWithEmailAndPassword(email, pass);
+    return false;
   }
 
   public async signOut(): Promise<void> {
-    return this.fireAuth.signOut();
+    this.unsetUser();
+  }
+
+  public $getUser(): Observable<User | undefined> {
+    const usr: User | undefined = this.localStorage.get<User>(
+      LocalStorageKey.LoggedUser
+    );
+
+    if (usr) this.bsUser.next(usr);
+
+    return this.$current;
+  }
+
+  public setUser(usr: User): void {
+    this.localStorage.save(LocalStorageKey.LoggedUser, usr);
+    this.bsUser.next(usr);
+  }
+
+  public unsetUser(): void {
+    this.localStorage.delete(LocalStorageKey.LoggedUser);
+    this.bsUser.next(undefined);
   }
 }

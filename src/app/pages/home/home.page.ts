@@ -46,7 +46,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   public mainCardConfig: DemiCardConfig = {
     isClickable: true,
-    icon: BsIcon.Glasses,
+    icon: BsIcon.Play,
   };
   public cardListConfig: DemiCardConfig = {
     size: DemiCardSize.M,

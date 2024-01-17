@@ -1,29 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { UserService } from '@services/user.service';
-import { RoutePath } from '@interfaces/route.interface';
+import { Injectable, inject } from '@angular/core';
+import { CanActivateFn } from '@angular/router';
+import { DemiLocalStorageService } from 'demiurge';
+import { LocalStorageKey } from '@enum/local-storage.enum';
+import { User } from '@interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
-  constructor(
-    private readonly router: Router,
-    private readonly userService: UserService
-  ) {}
+class AuthGuard {
+  constructor(private readonly localstorage: DemiLocalStorageService) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.userService
-      .getUser()
-      .pipe(map((auth) => auth || this.router.parseUrl(RoutePath.Login)));
+  canActivate(): boolean {
+    const isAuth: User | undefined = this.localstorage.get<User>(
+      LocalStorageKey.LoggedUser
+    );
+
+    return isAuth !== undefined;
   }
 }
+
+export const authGuard: CanActivateFn = (route, state) => {
+  return inject(AuthGuard).canActivate();
+};

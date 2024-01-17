@@ -1,13 +1,19 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutePath } from 'src/app/interfaces/route.interface';
 import { NgClass } from '@angular/common';
 import { AuthService } from '@services/auth.service';
-import { DemiAlertService, DemiModalService } from 'demiurge';
+import {
+  DemiAlertService,
+  DemiLocalStorageService,
+  DemiModalService,
+} from 'demiurge';
 import { FormFactoryService } from '@services/form.service';
 import { ALERT_CONFIG, AlertEnum } from '@config/alert.config';
 import { ModalEnum, getModalConfig } from '@config/modal.config';
+import { LocalStorageKey } from '@enum/local-storage.enum';
+import { Subscription, filter, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +33,8 @@ import { ModalEnum, getModalConfig } from '@config/modal.config';
   }
   `,
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
+  private subUser!: Subscription;
   public form: FormGroup = this.formFactory.getEmailLoginForm();
 
   public get email() {
@@ -50,22 +57,26 @@ export class LoginPage implements OnInit {
   ngOnInit(): void {
     this.demiModalService.initModalService(this.ref);
     this.demiAlertService.initAlertService(this.ref);
+
+    this.subUser = this.authService
+      .$getUser()
+      .pipe(
+        filter((response) => !!response),
+        tap(() => this.router.navigate([RoutePath.Home]))
+      )
+      .subscribe();
   }
 
   public loginWithEmail(): void {
     if (this.form.valid) {
-      this.authService
-        .emailLogin(this.email?.value, this.pass?.value)
-        .then(() => this.router.navigate([RoutePath.Home]))
-        .catch(() => this.wrongCredentialsAlert());
-    }
-  }
+      const isAuth: boolean = this.authService.emailLogin(
+        this.email?.value,
+        this.pass?.value
+      );
 
-  public loginWithGoogle(): void {
-    this.authService
-      .googleLogin()
-      .then(() => this.router.navigate([RoutePath.Home]))
-      .catch(() => this.wrongCredentialsAlert());
+      if (isAuth) this.router.navigate([RoutePath.Home]);
+      else this.wrongCredentialsAlert();
+    }
   }
 
   public async onCreateNewUser(): Promise<void> {
@@ -74,5 +85,9 @@ export class LoginPage implements OnInit {
 
   private wrongCredentialsAlert(): void {
     this.demiAlertService.create(ALERT_CONFIG[AlertEnum.Login]);
+  }
+
+  ngOnDestroy(): void {
+    this.subUser.unsubscribe();
   }
 }

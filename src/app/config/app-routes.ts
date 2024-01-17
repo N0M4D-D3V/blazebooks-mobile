@@ -4,7 +4,7 @@ import { HomePage } from '@pages/home/home.page';
 import { SearchPage } from '@pages/search/search.page';
 import { ReaderPage } from '@pages/reader/reader.page';
 import { RouteName } from '@interfaces/route.interface';
-import { AuthGuard } from '../guards/auth.guard';
+import { authGuard } from '../guards/auth.guard';
 
 export const ROUTES: Routes = [
   { path: '', redirectTo: RouteName.Login, pathMatch: 'full' },
@@ -15,16 +15,16 @@ export const ROUTES: Routes = [
   {
     path: RouteName.Home,
     component: HomePage,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: RouteName.Search,
     component: SearchPage,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
   {
     path: RouteName.Reader,
     component: ReaderPage,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
 ];

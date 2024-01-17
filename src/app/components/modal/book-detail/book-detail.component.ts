@@ -47,10 +47,11 @@ import {
 })
 export class BookDetailComponent implements OnInit {
   @Input() book!: Book;
+
   public cardConfig: DemiCardConfig = {
     isClickable: true,
     size: DemiCardSize.S,
-    icon: BsIcon.Glasses,
+    icon: BsIcon.Play,
   };
 
   constructor(

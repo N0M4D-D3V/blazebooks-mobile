@@ -11,8 +11,7 @@ export enum AlertEnum {
 export const ALERT_CONFIG: DemiAlertItem[] = [
   {
     title: 'ERROR',
-    message:
-      'The supplied auth credential is incorrect, malformed or has expired. ',
+    message: 'Credentials are incorrect, malformed or has expired. ',
     buttons: [{ label: 'OK' }],
   },
   {

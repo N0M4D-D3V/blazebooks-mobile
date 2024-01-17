@@ -7,6 +7,7 @@ export const TOOLBAR_CONFIG: DemiToolbarConfig = {
   title: packageJson.name,
   toggleTitle: packageJson.name,
   defaultProfileImgPath: Assets.DefaultProfileImgPath,
+  defaultTitle: 'Anónimo',
   items: [
     {
       label: RouteName.Login,

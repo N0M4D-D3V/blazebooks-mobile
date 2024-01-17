@@ -1,3 +1,3 @@
 export enum Assets {
-  DefaultProfileImgPath = 'assets/default-profile.jpg',
+  DefaultProfileImgPath = 'assets/images/default-profile.jpg',
 }

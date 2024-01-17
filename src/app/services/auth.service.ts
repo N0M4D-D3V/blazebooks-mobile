@@ -19,8 +19,6 @@ export class AuthService {
     if (isAuth) {
       this.setUser({
         email,
-        displayName: 'Test User',
-        photoURL: 'assets/images/default-profile.jpg',
       });
     }
 

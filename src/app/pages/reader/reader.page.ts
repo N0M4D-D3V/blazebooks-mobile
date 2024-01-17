@@ -8,7 +8,7 @@ import {
   BookPage,
   OptionRole,
 } from '@interfaces/book.interface';
-import { RoutePath } from '@interfaces/route.interface';
+import { RoutePath } from '@enum/route.enum';
 import { BookService } from '@services/book.service';
 import { LocalBookService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';

@@ -1,5 +1,5 @@
 import { DemiToolbarConfig } from 'demiurge';
-import { RouteName, RoutePath } from '@interfaces/route.interface';
+import { RouteName, RoutePath } from '@enum/route.enum';
 import packageJson from '../../../package.json';
 import { Assets } from '@enum/assets.enum';
 

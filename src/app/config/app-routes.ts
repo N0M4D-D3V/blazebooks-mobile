@@ -3,7 +3,7 @@ import { LoginPage } from '@pages/login/login.page';
 import { HomePage } from '@pages/home/home.page';
 import { SearchPage } from '@pages/search/search.page';
 import { ReaderPage } from '@pages/reader/reader.page';
-import { RouteName } from '@interfaces/route.interface';
+import { RouteName } from '@enum/route.enum';
 import { authGuard } from '../guards/auth.guard';
 
 export const ROUTES: Routes = [

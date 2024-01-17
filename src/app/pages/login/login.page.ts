@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RoutePath } from 'src/app/interfaces/route.interface';
+import { RoutePath } from '@enum/route.enum';
 import { NgClass } from '@angular/common';
 import { AuthService } from '@services/auth.service';
 import {

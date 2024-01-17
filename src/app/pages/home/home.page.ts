@@ -13,7 +13,7 @@ import { BookService } from '@services/book.service';
 import { AsyncPipe } from '@angular/common';
 import { Book } from '@interfaces/book.interface';
 import { Router } from '@angular/router';
-import { RoutePath } from '@interfaces/route.interface';
+import { RoutePath } from '@enum/route.enum';
 import { ModalEnum, getModalConfig } from '@config/modal.config';
 
 @Component({

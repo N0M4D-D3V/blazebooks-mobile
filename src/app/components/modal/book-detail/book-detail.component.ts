@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from '@interfaces/book.interface';
-import { RoutePath } from '@interfaces/route.interface';
+import { RoutePath } from '@enum/route.enum';
 import { BookService } from '@services/book.service';
 import {
   BsIcon,

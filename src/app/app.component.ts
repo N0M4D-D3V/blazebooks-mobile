@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
-import { RoutePath } from './interfaces/route.interface';
+import { RoutePath } from './enum/route.enum';
 import { AuthService } from '@services/auth.service';
 import { Subscription, filter } from 'rxjs';
 import { User } from '@interfaces/user.interface';

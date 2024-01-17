@@ -4,9 +4,11 @@ import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
 import { AuthService } from '@services/auth.service';
-import { Observable, Subscription, filter, tap } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 import { User } from '@interfaces/user.interface';
 import { AsyncPipe } from '@angular/common';
+import { StatusBar } from '@capacitor/status-bar';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    if (Capacitor.isNativePlatform()) await StatusBar.hide();
+
     this.subUser = this.authService
       .$getUser()
       .pipe(filter((response) => !!response))

@@ -27,10 +27,12 @@ import { Capacitor } from '@capacitor/core';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private subUser?: Subscription;
-  public user?: User;
+  private subRoute!: Subscription;
 
   public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
   public isLogin: boolean = false;
+
+  public user?: User;
 
   constructor(
     private readonly cdref: ChangeDetectorRef,
@@ -38,9 +40,16 @@ export class AppComponent implements OnInit, OnDestroy {
     private readonly authService: AuthService
   ) {}
 
-  async ngOnInit(): Promise<void> {
-    if (Capacitor.isNativePlatform()) await StatusBar.hide();
+  ngOnInit(): void {
+    this.managePlugins();
+    this.manageSubscriptions();
+  }
 
+  private async managePlugins(): Promise<void> {
+    if (Capacitor.isNativePlatform()) await StatusBar.hide();
+  }
+
+  private manageSubscriptions(): void {
     this.subUser = this.authService
       .$getUser()
       .pipe(filter((response) => !!response))
@@ -49,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.cdref.detectChanges();
       });
 
-    this.router.events
+    this.subRoute = this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((ev: any) => (this.isLogin = ev?.url === RoutePath.Login));
   }
@@ -62,5 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subUser?.unsubscribe();
+    this.subRoute.unsubscribe();
   }
 }

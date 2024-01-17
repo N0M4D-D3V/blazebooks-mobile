@@ -8,6 +8,7 @@
           formControlName="email"
           name="email"
           placeholder="email"
+          autocomplete="email"
           required
           [ngClass]="{'border-danger': email?.invalid && (email?.dirty || email?.touched)}"
         />
@@ -15,6 +16,7 @@
       <div class="form-group my-3">
         <input
           type="password"
+          autocomplete="current-password"
           class="form-control text-center"
           formControlName="pass"
           name="password"

@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
 import { TOOLBAR_CONFIG } from '@config/toolbar.config';
 import { RoutePath } from './interfaces/route.interface';
 import { AuthService } from '@services/auth.service';
-import { Observable, filter, tap } from 'rxjs';
+import { Observable, Subscription, filter, tap } from 'rxjs';
 import { User } from '@interfaces/user.interface';
 import { AsyncPipe } from '@angular/common';
 
@@ -13,9 +13,9 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   imports: [DemiToolbarComponent, RouterOutlet, AsyncPipe],
   template: `
-    @if (($user | async); as usr) {
+    @if (user) {
     <demi-toolbar
-      [user]="usr"
+      [user]="user"
       [config]="toolbarConfig"
       (onLogout)="onLogout()"
     ></demi-toolbar>
@@ -24,20 +24,26 @@ import { AsyncPipe } from '@angular/common';
   `,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  public $user?: Observable<User | undefined>;
+  private subUser?: Subscription;
+  public user?: User;
 
   public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
   public isLogin: boolean = false;
 
   constructor(
+    private readonly cdref: ChangeDetectorRef,
     private readonly router: Router,
     private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.$user = this.authService
+    this.subUser = this.authService
       .$getUser()
-      .pipe(filter((response) => !!response));
+      .pipe(filter((response) => !!response))
+      .subscribe((usr) => {
+        this.user = usr;
+        this.cdref.detectChanges();
+      });
 
     this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
@@ -50,5 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .then(() => this.router.navigate([RoutePath.Login]));
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subUser?.unsubscribe();
+  }
 }

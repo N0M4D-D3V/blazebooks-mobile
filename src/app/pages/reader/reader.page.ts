@@ -10,7 +10,7 @@ import {
 } from '@interfaces/book.interface';
 import { RoutePath } from '@enum/route.enum';
 import { BookService } from '@services/book.service';
-import { LocalBookService } from '@services/local-book.service';
+import { BookControllerService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -34,7 +34,7 @@ export class ReaderPage implements OnInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly bookService: BookService,
-    private readonly localBookService: LocalBookService
+    private readonly localBookService: BookControllerService
   ) {}
 
   ngOnInit(): void {

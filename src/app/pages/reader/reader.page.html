@@ -1,6 +1,8 @@
-<button class="btn text-primary m-1 back-btn" (click)="onBack()">
-  <i class="bi bi-arrow-return-left"></i>
-</button>
+<div id="back-btn-container" class="w-100">
+  <button class="btn text-primary m-1" (click)="onBack()">
+    <i class="bi bi-arrow-return-left"></i>
+  </button>
+</div>
 
 @if(!currentChapter && !currentPage){
 <p class="text-danger text-center">
@@ -26,7 +28,7 @@
 </div>
 } @else if (currentChapter && currentPage) {
 <!-- NORMAL PAGE -->
-<div id="chapter-page" class="px-4 py-3" bookstyles [book]="currentBook">
+<div id="chapter-page" class="px-4 py-3 pt-5" bookstyles [book]="currentBook">
   @for (p of currentPage.paragraphs; track $index) {
   <p>{{p}}</p>
   }

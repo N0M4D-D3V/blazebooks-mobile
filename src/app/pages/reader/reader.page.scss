@@ -12,8 +12,13 @@
   display: block;
 }
 
-.back-btn {
-  position: absolute;
+#back-btn-container {
+  position: fixed;
   top: 0;
   left: 0;
+}
+
+#chapter-main,
+#chapter-page {
+  min-height: 100vh;
 }

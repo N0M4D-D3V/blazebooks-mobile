@@ -13,6 +13,7 @@ import { BookControllerService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';
 import { CurrentBookService } from '@services/current-book.service';
 import { BookStylesDirective } from '@directives/book-styles.directive';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-reader',
@@ -31,6 +32,7 @@ export class ReaderPage implements OnInit, OnDestroy {
   public currentPage!: BookPage | undefined;
 
   constructor(
+    private readonly location: Location,
     private readonly router: Router,
     private readonly currentBookService: CurrentBookService,
     private readonly localBookService: BookControllerService
@@ -53,6 +55,10 @@ export class ReaderPage implements OnInit, OnDestroy {
   public loadPage(option: BookOption): void {
     if (!option.role) this.currentPage = this.getPage(option);
     else if (option.role === OptionRole.End) this.getChapter(option);
+  }
+
+  public onBack(): void {
+    this.location.back();
   }
 
   private getChapter(option?: BookOption): void {

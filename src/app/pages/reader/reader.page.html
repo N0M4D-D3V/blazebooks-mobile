@@ -1,11 +1,16 @@
+<button class="btn text-primary m-1 back-btn" (click)="onBack()">
+  <i class="bi bi-arrow-return-left"></i>
+</button>
+
 @if(!currentChapter && !currentPage){
 <p class="text-danger text-center">
   Tuvimos un problema cargando su libro :( Por favor, intentelo de nuevo.
 </p>
 } @else if (currentChapter && !currentPage) {
-<!-- TITTLE -->
+<!-- CHAPTER MAIN PAGE -->
 <div
-  class="px-5 pt-3 text-center overflow-visible"
+  id="chapter-main"
+  class="px-5 pt-5 text-center overflow-visible"
   bookstyles
   [book]="currentBook"
 >
@@ -20,8 +25,8 @@
   }
 </div>
 } @else if (currentChapter && currentPage) {
-<!-- CONTENT -->
-<div class="px-4 py-3">
+<!-- NORMAL PAGE -->
+<div id="chapter-page" class="px-4 py-3" bookstyles [book]="currentBook">
   @for (p of currentPage.paragraphs; track $index) {
   <p>{{p}}</p>
   }

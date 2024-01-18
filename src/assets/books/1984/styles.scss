@@ -3,8 +3,9 @@ app-reader {
     color: red !important;
   }
 
-  div {
+  #chapter-main,
+  #chapter-page {
     background-color: wheat;
-    height: 100vh;
+    min-height: 100vh;
   }
 }

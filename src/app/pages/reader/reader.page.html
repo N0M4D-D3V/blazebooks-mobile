@@ -3,7 +3,12 @@
   Tuvimos un problema cargando su libro :( Por favor, intentelo de nuevo.
 </p>
 } @else if (currentChapter && !currentPage) {
-<div class="mx-5 mt-3 text-center">
+<!-- TITTLE -->
+<div
+  class="px-5 pt-3 text-center overflow-visible"
+  bookstyles
+  [book]="currentBook"
+>
   <h1 class="fw-bolder">{{ currentChapter.title }}</h1>
   <p class="fst-italic">{{ currentChapter.quote.text }}</p>
   <p>{{ currentChapter.quote.book }}<br />{{ currentChapter.quote.year }}</p>
@@ -15,7 +20,8 @@
   }
 </div>
 } @else if (currentChapter && currentPage) {
-<div class="mx-4 my-3">
+<!-- CONTENT -->
+<div class="px-4 py-3">
   @for (p of currentPage.paragraphs; track $index) {
   <p>{{p}}</p>
   }

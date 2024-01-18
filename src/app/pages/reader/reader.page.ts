@@ -12,22 +12,21 @@ import { RoutePath } from '@enum/route.enum';
 import { BookControllerService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';
 import { CurrentBookService } from '@services/current-book.service';
+import { BookStylesDirective } from '@directives/book-styles.directive';
 
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.page.html',
   styleUrls: ['./reader.page.scss'],
   standalone: true,
-  imports: [NgIf, AsyncPipe, UpperCasePipe],
+  imports: [NgIf, AsyncPipe, UpperCasePipe, BookStylesDirective],
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subBook!: Subscription;
   private subChapter!: Subscription;
+  private book$!: Observable<Book | undefined>;
 
-  private currentBook!: Book;
-
-  public book$!: Observable<Book | undefined>;
-
+  public currentBook!: Book;
   public currentChapter!: BookChapter | undefined;
   public currentPage!: BookPage | undefined;
 

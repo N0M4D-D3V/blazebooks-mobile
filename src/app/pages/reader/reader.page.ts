@@ -9,9 +9,9 @@ import {
   OptionRole,
 } from '@interfaces/book.interface';
 import { RoutePath } from '@enum/route.enum';
-import { BookService } from '@services/book.service';
-import { LocalBookService } from '@services/local-book.service';
+import { BookControllerService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';
+import { CurrentBookService } from '@services/current-book.service';
 
 @Component({
   selector: 'app-reader',
@@ -33,12 +33,12 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   constructor(
     private readonly router: Router,
-    private readonly bookService: BookService,
-    private readonly localBookService: LocalBookService
+    private readonly currentBookService: CurrentBookService,
+    private readonly localBookService: BookControllerService
   ) {}
 
   ngOnInit(): void {
-    this.book$ = this.bookService.getCurrentBookObservable();
+    this.book$ = this.currentBookService.$getCurrentBook();
 
     this.subBook = this.book$.subscribe((book: Book | undefined) => {
       if (!book) this.router.navigate([RoutePath.Home]);

@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Book } from '@interfaces/book.interface';
 import { RoutePath } from '@enum/route.enum';
-import { BookService } from '@services/book.service';
 import {
   BsIcon,
   DemiCardConfig,
@@ -13,6 +12,7 @@ import {
   DemiModalService,
   DemiSeparePipe,
 } from 'demiurge';
+import { CurrentBookService } from '@services/current-book.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -57,7 +57,7 @@ export class BookDetailComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
-    private readonly bookService: BookService
+    private readonly currentBookService: CurrentBookService
   ) {}
 
   ngOnInit(): void {}
@@ -67,7 +67,7 @@ export class BookDetailComponent implements OnInit {
   }
 
   public onRead(book: Book): void {
-    this.bookService.setCurrentBook(book);
+    this.currentBookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Reader]);
   }
 }

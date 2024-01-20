@@ -10,11 +10,13 @@
 
 .btn-detail-close {
   position: absolute;
-  color: red;
+  color: var(--color-primary);
   right: 0;
 
   z-index: 9;
 
   background: transparent;
   border: none;
+
+  font-weight: bolder;
 }

@@ -1,6 +1,6 @@
-import { DemiModalInitialization } from 'demiurge';
-import { CreateUserFormComponent } from '@components/modal/create-user-form/create-user-form.component';
-import { BookDetailComponent } from '@components/modal/book-detail/book-detail.component';
+import { DemiModalInitialization } from "demiurge";
+import { CreateUserFormComponent } from "@components/modal/create-user-form/create-user-form.component";
+import { BookDetailComponent } from "@components/modal/book-detail/book-detail.component";
 
 export enum ModalEnum {
   NewUser,
@@ -10,18 +10,18 @@ export enum ModalEnum {
 export const MODAL_CONFIG: DemiModalInitialization[] = [
   {
     component: CreateUserFormComponent,
-    data: '',
+    data: "",
     styles: {
-      width: { vertical: '90%' },
-      height: { vertical: '90%' },
+      width: { vertical: "90%" },
+      height: { vertical: "90%" },
     },
   },
   {
     component: BookDetailComponent,
-    data: '',
+    data: "",
     styles: {
-      width: { vertical: '90%' },
-      height: { vertical: '90%' },
+      width: { vertical: "99%" },
+      height: { vertical: "99%" },
     },
   },
 ];

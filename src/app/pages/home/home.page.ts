@@ -15,6 +15,7 @@ import { Book } from '@interfaces/book.interface';
 import { Router } from '@angular/router';
 import { RoutePath } from '@enum/route.enum';
 import { ModalEnum, getModalConfig } from '@config/modal.config';
+import { CurrentBookService } from '@services/current-book.service';
 
 @Component({
   selector: 'app-home',
@@ -58,20 +59,20 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly ref: ViewContainerRef,
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
-    private readonly bookService: BookService
+    private readonly bookService: BookService,
+    private readonly currentBookService: CurrentBookService
   ) {}
 
   ngOnInit(): void {
     this.demiModal.initModalService(this.ref);
 
-    this.bookService.initCurrentBook();
-    this.currentBook$ = this.bookService.getCurrentBookObservable();
+    this.currentBook$ = this.currentBookService.$getCurrentBook();
 
     this.books$ = this.bookService.getBooks$();
   }
 
   public onReadTouched(book: Book): void {
-    this.bookService.setCurrentBook(book);
+    this.currentBookService.setCurrentBook(book);
     this.router.navigate([RoutePath.Reader]);
   }
 

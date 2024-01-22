@@ -9,36 +9,37 @@ import {
   OptionRole,
 } from '@interfaces/book.interface';
 import { RoutePath } from '@enum/route.enum';
-import { BookService } from '@services/book.service';
-import { LocalBookService } from '@services/local-book.service';
+import { BookControllerService } from '@services/local-book.service';
 import { Observable, Subscription } from 'rxjs';
+import { CurrentBookService } from '@services/current-book.service';
+import { BookStylesDirective } from '@directives/book-styles.directive';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.page.html',
   styleUrls: ['./reader.page.scss'],
   standalone: true,
-  imports: [NgIf, AsyncPipe, UpperCasePipe],
+  imports: [NgIf, AsyncPipe, UpperCasePipe, BookStylesDirective],
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subBook!: Subscription;
   private subChapter!: Subscription;
+  private book$!: Observable<Book | undefined>;
 
-  private currentBook!: Book;
-
-  public book$!: Observable<Book | undefined>;
-
+  public currentBook!: Book;
   public currentChapter!: BookChapter | undefined;
   public currentPage!: BookPage | undefined;
 
   constructor(
+    private readonly location: Location,
     private readonly router: Router,
-    private readonly bookService: BookService,
-    private readonly localBookService: LocalBookService
+    private readonly currentBookService: CurrentBookService,
+    private readonly localBookService: BookControllerService
   ) {}
 
   ngOnInit(): void {
-    this.book$ = this.bookService.getCurrentBookObservable();
+    this.book$ = this.currentBookService.$getCurrentBook();
 
     this.subBook = this.book$.subscribe((book: Book | undefined) => {
       if (!book) this.router.navigate([RoutePath.Home]);
@@ -54,6 +55,10 @@ export class ReaderPage implements OnInit, OnDestroy {
   public loadPage(option: BookOption): void {
     if (!option.role) this.currentPage = this.getPage(option);
     else if (option.role === OptionRole.End) this.getChapter(option);
+  }
+
+  public onBack(): void {
+    this.location.back();
   }
 
   private getChapter(option?: BookOption): void {

@@ -4,18 +4,20 @@ import { Book, BookChapter, BookPage } from '@interfaces/book.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class LocalBookService {
+export class BookControllerService {
+  private path: string = 'assets/books';
+
   constructor(private readonly http: HttpClient) {}
 
   public getChapter(book: Book, chapterId?: string): Observable<BookChapter> {
     if (chapterId)
       return this.http.get<BookChapter>(
-        `assets/books/${book.id}/chapters/${chapterId}.json`
+        `${this.path}/${book.id}/chapters/${chapterId}.json`
       );
     else {
       const chapters: string[] = book.chapterIDs;
       return this.http.get<BookChapter>(
-        `assets/books/${book.id}/chapters/${chapters[0]}.json`
+        `${this.path}/${book.id}/chapters/${chapters[0]}.json`
       );
     }
   }

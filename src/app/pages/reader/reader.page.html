@@ -1,9 +1,21 @@
+<div id="back-btn-container" class="w-100">
+  <button class="btn text-primary m-1" (click)="onBack()">
+    <i class="bi bi-arrow-return-left"></i>
+  </button>
+</div>
+
 @if(!currentChapter && !currentPage){
 <p class="text-danger text-center">
   Tuvimos un problema cargando su libro :( Por favor, intentelo de nuevo.
 </p>
 } @else if (currentChapter && !currentPage) {
-<div class="mx-5 mt-3 text-center">
+<!-- CHAPTER MAIN PAGE -->
+<div
+  id="chapter-main"
+  class="px-5 pt-5 text-center overflow-visible"
+  bookstyles
+  [book]="currentBook"
+>
   <h1 class="fw-bolder">{{ currentChapter.title }}</h1>
   <p class="fst-italic">{{ currentChapter.quote.text }}</p>
   <p>{{ currentChapter.quote.book }}<br />{{ currentChapter.quote.year }}</p>
@@ -15,7 +27,8 @@
   }
 </div>
 } @else if (currentChapter && currentPage) {
-<div class="mx-4 my-3">
+<!-- NORMAL PAGE -->
+<div id="chapter-page" class="px-4 py-3 pt-5" bookstyles [book]="currentBook">
   @for (p of currentPage.paragraphs; track $index) {
   <p>{{p}}</p>
   }

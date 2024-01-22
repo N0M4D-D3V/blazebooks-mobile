@@ -11,3 +11,14 @@
   margin-top: 1vh;
   display: block;
 }
+
+#back-btn-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#chapter-main,
+#chapter-page {
+  min-height: 100vh;
+}

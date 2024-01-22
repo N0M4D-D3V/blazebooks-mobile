@@ -15,7 +15,7 @@ import { Capacitor } from '@capacitor/core';
   standalone: true,
   imports: [DemiToolbarComponent, RouterOutlet, AsyncPipe],
   template: `
-    @if (user) {
+    @if (user && !isReader) {
     <demi-toolbar
       [user]="user"
       [config]="toolbarConfig"
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private subRoute!: Subscription;
 
   public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
-  public isLogin: boolean = false;
+  public isReader: boolean = false;
 
   public user?: User;
 
@@ -60,7 +60,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subRoute = this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
-      .subscribe((ev: any) => (this.isLogin = ev?.url === RoutePath.Login));
+      .subscribe((ev: any) => {
+        this.isReader = ev?.url === RoutePath.Reader;
+        this.cdref.detectChanges();
+      });
   }
 
   public async onLogout(): Promise<void> {

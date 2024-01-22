@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^17.0.4",
     "@angular/platform-browser-dynamic": "^17.0.4",
     "@angular/router": "^17.0.4",
-    "@capacitor/android": "^5.5.1",
+    "@capacitor/android": "^5.6.0",
     "@capacitor/angular": "^2.0.3",
     "@capacitor/core": "latest",
     "@capacitor/ios": "^5.5.1",

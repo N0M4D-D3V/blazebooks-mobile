@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
-import { FormFactoryService } from '@services/form.service';
-import { DemiAlertItem, DemiAlertService, DemiModalService } from 'demiurge';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { AlertEnum, getAlertConfig } from '@config/alert.config';
-import { AuthService } from '@services/auth.service';
-import { RegisterForm } from '@interfaces/register-form.interface';
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { FormFactoryService } from "@services/form.service";
+import { DemiAlertItem, DemiAlertService, DemiModalService } from "demiurge";
+import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgClass } from "@angular/common";
+import { Subscription } from "rxjs";
+import { AlertEnum, getAlertConfig } from "@config/alert.config";
+import { AuthService } from "@services/auth.service";
+import { RegisterForm } from "@interfaces/register-form.interface";
 
 @Component({
-  selector: 'app-create-user-form',
-  templateUrl: './create-user-form.component.html',
-  styleUrls: ['./create-user-form.component.scss'],
+  selector: "app-create-user-form",
+  templateUrl: "./create-user-form.component.html",
+  styleUrls: ["./create-user-form.component.scss"],
   standalone: true,
   imports: [NgClass, FormsModule, ReactiveFormsModule],
 })
@@ -24,19 +24,19 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
   public form: FormGroup = this.formFactory.getEmailRegistrationForm();
 
   public get email() {
-    return this.form.get('email');
+    return this.form.get("email");
   }
 
   public get confirmEmail() {
-    return this.form.get('confirmEmail');
+    return this.form.get("confirmEmail");
   }
 
   public get pass() {
-    return this.form.get('pass');
+    return this.form.get("pass");
   }
 
   public get confirmPass() {
-    return this.form.get('confirmPass');
+    return this.form.get("confirmPass");
   }
 
   constructor(
@@ -72,11 +72,9 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
 
   public createEmailAccount(): void {
     this.authService
-      .emailRegister(this.email!.value, this.pass!.value)
+      .register({ email: this.email!.value, passwd: this.pass!.value })
       .then(() => this.demiModalService.close({ data: this.form.value }))
-      .catch(() => {
-        this.createAlertError(AlertEnum.CanNotCreateAccount);
-      });
+      .catch(() => this.createAlertError(AlertEnum.UserAlreadyExists));
   }
 
   private createAlertError(alert: AlertEnum): void {

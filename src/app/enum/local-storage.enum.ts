@@ -1,4 +1,4 @@
 export enum LocalStorageKey {
-  CurrentBook = 'currentbook',
-  LoggedUser = 'loggeduser',
+  CurrentBook = "currentbook",
+  LoggedUserID = "loggeduserid",
 }

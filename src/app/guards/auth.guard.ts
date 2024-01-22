@@ -1,18 +1,18 @@
-import { Injectable, inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
-import { DemiLocalStorageService } from 'demiurge';
-import { LocalStorageKey } from '@enum/local-storage.enum';
-import { User } from '@interfaces/user.interface';
+import { Injectable, inject } from "@angular/core";
+import { CanActivateFn } from "@angular/router";
+import { DemiLocalStorageService } from "demiurge";
+import { LocalStorageKey } from "@enum/local-storage.enum";
+import { User } from "@interfaces/user.interface";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 class AuthGuard {
   constructor(private readonly localstorage: DemiLocalStorageService) {}
 
   canActivate(): boolean {
     const isAuth: User | undefined = this.localstorage.get<User>(
-      LocalStorageKey.LoggedUser
+      LocalStorageKey.LoggedUserID
     );
 
     return isAuth !== undefined;

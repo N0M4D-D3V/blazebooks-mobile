@@ -1,23 +1,19 @@
-import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RoutePath } from '@enum/route.enum';
-import { NgClass } from '@angular/common';
-import { AuthService } from '@services/auth.service';
-import {
-  DemiAlertService,
-  DemiLocalStorageService,
-  DemiModalService,
-} from 'demiurge';
-import { FormFactoryService } from '@services/form.service';
-import { ALERT_CONFIG, AlertEnum } from '@config/alert.config';
-import { ModalEnum, getModalConfig } from '@config/modal.config';
-import { LocalStorageKey } from '@enum/local-storage.enum';
-import { Subscription, filter, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from "@angular/core";
+import { Router } from "@angular/router";
+import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RoutePath } from "@enum/route.enum";
+import { NgClass } from "@angular/common";
+import { AuthService } from "@services/auth.service";
+import { DemiAlertService, DemiModalService } from "demiurge";
+import { FormFactoryService } from "@services/form.service";
+import { ALERT_CONFIG, AlertEnum } from "@config/alert.config";
+import { ModalEnum, getModalConfig } from "@config/modal.config";
+import { Subscription, filter, tap } from "rxjs";
+import { User } from "@interfaces/user.interface";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
+  selector: "app-login",
+  templateUrl: "./login.page.html",
   standalone: true,
   imports: [NgClass, FormsModule, ReactiveFormsModule],
   styles: `
@@ -38,11 +34,11 @@ export class LoginPage implements OnInit, OnDestroy {
   public form: FormGroup = this.formFactory.getEmailLoginForm();
 
   public get email() {
-    return this.form.get('email');
+    return this.form.get("email");
   }
 
   public get pass() {
-    return this.form.get('pass');
+    return this.form.get("pass");
   }
 
   constructor(
@@ -67,14 +63,14 @@ export class LoginPage implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public loginWithEmail(): void {
+  public async loginWithEmail(): Promise<void> {
     if (this.form.valid) {
-      const isAuth: boolean = this.authService.emailLogin(
+      const user: User | undefined = await this.authService.emailLogin(
         this.email?.value,
         this.pass?.value
       );
 
-      if (isAuth) this.router.navigate([RoutePath.Home]);
+      if (user) this.router.navigate([RoutePath.Home]);
       else this.wrongCredentialsAlert();
     }
   }

@@ -1,4 +1,4 @@
-import { DemiAlertItem } from 'demiurge';
+import { DemiAlertItem } from "demiurge";
 
 export enum AlertEnum {
   Login,
@@ -6,33 +6,39 @@ export enum AlertEnum {
   EmailNotMatch,
   PassNotMatch,
   CanNotCreateAccount,
+  UserAlreadyExists,
 }
 
 export const ALERT_CONFIG: DemiAlertItem[] = [
   {
-    title: 'ERROR',
-    message: 'Credentials are incorrect, malformed or has expired. ',
-    buttons: [{ label: 'OK' }],
+    title: "ERROR",
+    message: "Credentials are incorrect, malformed or has expired. ",
+    buttons: [{ label: "OK" }],
   },
   {
-    title: 'ERROR',
-    message: 'Invalid form! ',
-    buttons: [{ label: 'ok' }],
+    title: "ERROR",
+    message: "Invalid form! ",
+    buttons: [{ label: "ok" }],
   },
   {
-    title: 'ERROR',
-    message: 'Email not match! ',
-    buttons: [{ label: 'ok' }],
+    title: "ERROR",
+    message: "Email not match! ",
+    buttons: [{ label: "ok" }],
   },
   {
-    title: 'ERROR',
-    message: 'Password not match! ',
-    buttons: [{ label: 'ok' }],
+    title: "ERROR",
+    message: "Password not match! ",
+    buttons: [{ label: "ok" }],
   },
   {
-    title: 'ERROR',
-    message: 'An error occurs. Try again later',
-    buttons: [{ label: 'ok' }],
+    title: "ERROR",
+    message: "An error occurs. Try again later",
+    buttons: [{ label: "ok" }],
+  },
+  {
+    title: "ERROR",
+    message: "User already exists!",
+    buttons: [{ label: "ok" }],
   },
 ];
 

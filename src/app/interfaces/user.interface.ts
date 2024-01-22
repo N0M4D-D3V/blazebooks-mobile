@@ -1,3 +1,3 @@
-import { DemiUser } from 'demiurge';
+import { DemiUser } from "demiurge";
 
 export interface User extends DemiUser {}

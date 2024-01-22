@@ -27,6 +27,7 @@
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
     "demiurge": "file:../demiurge/dist/demiurge",
+    "dexie": "^3.2.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

@@ -17,7 +17,6 @@ export class AuthService {
     private readonly localStorage: DemiLocalStorageService,
     private readonly localDb: LocalDbService
   ) {}
-
   public async emailLogin(
     email: string,
     passwd: string

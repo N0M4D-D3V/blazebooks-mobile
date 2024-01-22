@@ -1,8 +1,8 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Book } from '@interfaces/book.interface';
-import { RoutePath } from '@enum/route.enum';
+import { AsyncPipe } from "@angular/common";
+import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Book } from "@interfaces/book.interface";
+import { RoutePath } from "@enum/route.enum";
 import {
   BsIcon,
   DemiCardConfig,
@@ -11,11 +11,11 @@ import {
   DemiCardSize,
   DemiModalService,
   DemiSeparePipe,
-} from 'demiurge';
-import { CurrentBookService } from '@services/current-book.service';
+} from "demiurge";
+import { CurrentBookService } from "@services/current-book.service";
 
 @Component({
-  selector: 'app-book-detail',
+  selector: "app-book-detail",
   template: `
     <a class="btn btn-dark btn-detail-close" (click)="onClose()">X</a>
     @if (book) {
@@ -36,7 +36,7 @@ import { CurrentBookService } from '@services/current-book.service';
     </div>
     }
   `,
-  styleUrls: ['./book-detail.component.scss'],
+  styleUrls: ["./book-detail.component.scss"],
   standalone: true,
   imports: [
     DemiCardListComponent,

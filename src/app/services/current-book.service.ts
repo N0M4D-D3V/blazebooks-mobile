@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { LocalStorageKey } from '@enum/local-storage.enum';
-import { Book } from '@interfaces/book.interface';
-import { DemiLocalStorageService } from 'demiurge';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { LocalStorageKey } from "@enum/local-storage.enum";
+import { Book } from "@interfaces/book.interface";
+import { DemiLocalStorageService } from "demiurge";
+import { BehaviorSubject, Observable } from "rxjs";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class CurrentBookService {
   private bsCurrentBook: BehaviorSubject<Book | undefined> =
     new BehaviorSubject<Book | undefined>(undefined);

@@ -19,7 +19,7 @@ export class LocalDbRepository extends Dexie {
     return this.users;
   }
 
-  public getUserConfigs(): Table<UserConfig, string> {
+  public getAllUserConfigs(): Table<UserConfig, string> {
     return this.userConfigs;
   }
 }

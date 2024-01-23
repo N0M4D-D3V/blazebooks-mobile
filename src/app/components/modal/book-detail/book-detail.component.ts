@@ -78,7 +78,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   public async onRead(book: Book): Promise<void> {
     if (this.user) {
       this.user.lastOpened = book;
-      await this.userService.updateUser(this.user);
+      await this.userService.update(this.user);
       this.router.navigate([RoutePath.Reader]);
     }
   }

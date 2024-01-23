@@ -36,7 +36,7 @@ export class AuthService {
       (await this.userService.getUserByCredentials(user)) !== undefined;
 
     if (exists) throw new Error(`User ${user.email} already exists!`);
-    else return this.userService.updateUser(user);
+    else return this.userService.update(user);
   }
 
   public async signOut(): Promise<void> {
@@ -49,7 +49,7 @@ export class AuthService {
     );
 
     if (userID) {
-      this.userService.getUserById(userID).then((user) => {
+      this.userService.getById(userID).then((user) => {
         this.bsUser.next(user);
       });
     }

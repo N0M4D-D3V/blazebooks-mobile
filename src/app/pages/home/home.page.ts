@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewContainerRef } from "@angular/core";
 import {
   BsIcon,
   DemiCardConfig,
@@ -7,28 +7,30 @@ import {
   DemiCardSize,
   DemiModalInitialization,
   DemiModalService,
-} from 'demiurge';
-import { Observable } from 'rxjs';
-import { BookService } from '@services/book.service';
-import { AsyncPipe } from '@angular/common';
-import { Book } from '@interfaces/book.interface';
-import { Router } from '@angular/router';
-import { RoutePath } from '@enum/route.enum';
-import { ModalEnum, getModalConfig } from '@config/modal.config';
-import { CurrentBookService } from '@services/current-book.service';
+} from "demiurge";
+import { Observable, Subscription } from "rxjs";
+import { BookService } from "@services/book.service";
+import { AsyncPipe } from "@angular/common";
+import { Book } from "@interfaces/book.interface";
+import { Router } from "@angular/router";
+import { RoutePath } from "@enum/route.enum";
+import { ModalEnum, getModalConfig } from "@config/modal.config";
+import { AuthService } from "@services/auth.service";
+import { User } from "@interfaces/user.interface";
+import { LocalDbService } from "@services/local-db.service";
 
 @Component({
-  selector: 'app-home',
+  selector: "app-home",
   template: `
     <div class="container">
-      @if(currentBook$ | async; as current){
+      @if($user | async; as usr){ @if(usr.lastOpened; as lastOpened){
       <demi-card-img
-        [item]="current"
+        [item]="lastOpened"
         [config]="mainCardConfig"
         (onReadTouched)="onReadTouched($event)"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-img>
-      }
+      } }
 
       <demi-card-list
         [items$]="books$"
@@ -42,8 +44,12 @@ import { CurrentBookService } from '@services/current-book.service';
   imports: [AsyncPipe, DemiCardImgComponent, DemiCardListComponent],
 })
 export class HomePage implements OnInit, OnDestroy {
-  public currentBook$!: Observable<Book | undefined>;
+  private subUser!: Subscription;
+
+  public $user!: Observable<User | undefined>;
   public books$!: Observable<Book[]>;
+
+  private user?: User;
 
   public mainCardConfig: DemiCardConfig = {
     isClickable: true,
@@ -60,20 +66,25 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
     private readonly bookService: BookService,
-    private readonly currentBookService: CurrentBookService
+    private readonly localDB: LocalDbService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.demiModal.initModalService(this.ref);
 
-    this.currentBook$ = this.currentBookService.$getCurrentBook();
-
     this.books$ = this.bookService.getBooks$();
+    this.$user = this.authService.$getUser();
+
+    this.subUser = this.$user.subscribe((usr) => (this.user = usr));
   }
 
-  public onReadTouched(book: Book): void {
-    this.currentBookService.setCurrentBook(book);
-    this.router.navigate([RoutePath.Reader]);
+  public async onReadTouched(book: Book): Promise<void> {
+    if (this.user) {
+      this.user.lastOpened = book;
+      await this.localDB.updateUser(this.user);
+      this.router.navigate([RoutePath.Reader]);
+    }
   }
 
   public onCardTouched(book: Book): void {
@@ -81,5 +92,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.demiModal.create({ ...config, data: { book: book } });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subUser.unsubscribe();
+  }
 }

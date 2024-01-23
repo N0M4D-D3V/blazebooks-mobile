@@ -1,24 +1,24 @@
-import { AsyncPipe, NgIf, UpperCasePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AsyncPipe, NgIf, UpperCasePipe } from "@angular/common";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import {
   Book,
   BookChapter,
   BookOption,
   BookPage,
   OptionRole,
-} from '@interfaces/book.interface';
-import { RoutePath } from '@enum/route.enum';
-import { BookControllerService } from '@services/local-book.service';
-import { Observable, Subscription } from 'rxjs';
-import { CurrentBookService } from '@services/current-book.service';
-import { BookStylesDirective } from '@directives/book-styles.directive';
-import { Location } from '@angular/common';
+} from "@interfaces/book.interface";
+import { RoutePath } from "@enum/route.enum";
+import { BookControllerService } from "@services/local-book.service";
+import { Observable, Subscription, map } from "rxjs";
+import { BookStylesDirective } from "@directives/book-styles.directive";
+import { Location } from "@angular/common";
+import { AuthService } from "@services/auth.service";
 
 @Component({
-  selector: 'app-reader',
-  templateUrl: './reader.page.html',
-  styleUrls: ['./reader.page.scss'],
+  selector: "app-reader",
+  templateUrl: "./reader.page.html",
+  styleUrls: ["./reader.page.scss"],
   standalone: true,
   imports: [NgIf, AsyncPipe, UpperCasePipe, BookStylesDirective],
 })
@@ -34,12 +34,12 @@ export class ReaderPage implements OnInit, OnDestroy {
   constructor(
     private readonly location: Location,
     private readonly router: Router,
-    private readonly currentBookService: CurrentBookService,
-    private readonly localBookService: BookControllerService
+    private readonly localBookService: BookControllerService,
+    private readonly auth: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.book$ = this.currentBookService.$getCurrentBook();
+    this.book$ = this.auth.$getUser().pipe(map((res) => res?.lastOpened));
 
     this.subBook = this.book$.subscribe((book: Book | undefined) => {
       if (!book) this.router.navigate([RoutePath.Home]);

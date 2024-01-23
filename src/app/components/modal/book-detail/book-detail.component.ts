@@ -1,5 +1,5 @@
 import { AsyncPipe } from "@angular/common";
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Book } from "@interfaces/book.interface";
 import { RoutePath } from "@enum/route.enum";
@@ -12,7 +12,10 @@ import {
   DemiModalService,
   DemiSeparePipe,
 } from "demiurge";
-import { CurrentBookService } from "@services/current-book.service";
+import { AuthService } from "@services/auth.service";
+import { LocalDbService } from "@services/local-db.service";
+import { Subscription } from "rxjs";
+import { User } from "@interfaces/user.interface";
 
 @Component({
   selector: "app-book-detail",
@@ -45,7 +48,10 @@ import { CurrentBookService } from "@services/current-book.service";
     AsyncPipe,
   ],
 })
-export class BookDetailComponent implements OnInit {
+export class BookDetailComponent implements OnInit, OnDestroy {
+  private subUser!: Subscription;
+  private user?: User;
+
   @Input() book!: Book;
 
   public cardConfig: DemiCardConfig = {
@@ -57,17 +63,27 @@ export class BookDetailComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
-    private readonly currentBookService: CurrentBookService
+    private readonly auth: AuthService,
+    private readonly localDB: LocalDbService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subUser = this.auth.$getUser().subscribe((usr) => (this.user = usr));
+  }
 
   public onClose(): void {
     this.demiModal.close();
   }
 
-  public onRead(book: Book): void {
-    this.currentBookService.setCurrentBook(book);
-    this.router.navigate([RoutePath.Reader]);
+  public async onRead(book: Book): Promise<void> {
+    if (this.user) {
+      this.user.lastOpened = book;
+      await this.localDB.updateUser(this.user);
+      this.router.navigate([RoutePath.Reader]);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subUser.unsubscribe();
   }
 }

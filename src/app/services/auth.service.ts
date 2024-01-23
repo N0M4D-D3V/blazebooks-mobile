@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { LocalStorageKey } from "@enum/local-storage.enum";
 import { User } from "@interfaces/user.interface";
 import { DemiLocalStorageService } from "demiurge";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, distinctUntilChanged } from "rxjs";
 import { LocalDbService } from "./local-db.service";
+import { distinct } from "@functions/utils";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -53,7 +54,9 @@ export class AuthService {
       });
     }
 
-    return this.$current;
+    return this.$current.pipe(
+      distinctUntilChanged((prev, curr) => distinct(prev, curr))
+    );
   }
 
   public setUserId(usr: User): void {

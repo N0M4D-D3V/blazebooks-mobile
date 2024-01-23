@@ -30,7 +30,8 @@
       "@enum/*": ["src/app/enum/*"],
       "@guard/*": ["src/app/guard/*"],
       "@components/*": ["src/app/components/*"],
-      "@directives/*": ["src/app/directives/*"]
+      "@directives/*": ["src/app/directives/*"],
+      "@functions/*": ["src/app/functions/*"]
     }
   },
   "angularCompilerOptions": {

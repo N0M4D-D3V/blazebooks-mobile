@@ -1,21 +1,21 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { NavigationStart, Router, RouterOutlet } from '@angular/router';
-import { DemiToolbarComponent, DemiToolbarConfig } from 'demiurge';
-import { TOOLBAR_CONFIG } from '@config/toolbar.config';
-import { RoutePath } from './enum/route.enum';
-import { AuthService } from '@services/auth.service';
-import { Subscription, filter } from 'rxjs';
-import { User } from '@interfaces/user.interface';
-import { AsyncPipe } from '@angular/common';
-import { StatusBar } from '@capacitor/status-bar';
-import { Capacitor } from '@capacitor/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import { NavigationStart, Router, RouterOutlet } from "@angular/router";
+import { DemiToolbarComponent, DemiToolbarConfig } from "demiurge";
+import { TOOLBAR_CONFIG } from "@config/toolbar.config";
+import { RoutePath } from "./enum/route.enum";
+import { AuthService } from "@services/auth.service";
+import { Observable, Subscription, filter, tap } from "rxjs";
+import { User } from "@interfaces/user.interface";
+import { AsyncPipe } from "@angular/common";
+import { StatusBar } from "@capacitor/status-bar";
+import { Capacitor } from "@capacitor/core";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
   imports: [DemiToolbarComponent, RouterOutlet, AsyncPipe],
   template: `
-    @if (user && !isReader) {
+    @if (showToolbar) {
     <demi-toolbar
       [user]="user"
       [config]="toolbarConfig"
@@ -26,11 +26,11 @@ import { Capacitor } from '@capacitor/core';
   `,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private subUser?: Subscription;
+  private subUser!: Subscription;
   private subRoute!: Subscription;
 
   public readonly toolbarConfig: DemiToolbarConfig = TOOLBAR_CONFIG;
-  public isReader: boolean = false;
+  public showToolbar: boolean = true;
 
   public user?: User;
 
@@ -53,15 +53,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subUser = this.authService
       .$getUser()
       .pipe(filter((response) => !!response))
-      .subscribe((usr) => {
-        this.user = usr;
-        this.cdref.detectChanges();
-      });
+      .subscribe((res) => (this.user = res));
 
     this.subRoute = this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((ev: any) => {
-        this.isReader = ev?.url === RoutePath.Reader;
+        this.showToolbar =
+          ev?.url !== RoutePath.Reader && ev?.url !== RoutePath.Login;
         this.cdref.detectChanges();
       });
   }
@@ -73,7 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subUser?.unsubscribe();
     this.subRoute.unsubscribe();
   }
 }

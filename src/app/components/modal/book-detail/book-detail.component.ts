@@ -13,9 +13,9 @@ import {
   DemiSeparePipe,
 } from "demiurge";
 import { AuthService } from "@services/auth.service";
-import { LocalDbService } from "@services/local-db.service";
 import { Subscription } from "rxjs";
 import { User } from "@interfaces/user.interface";
+import { UserService } from "@services/user.service";
 
 @Component({
   selector: "app-book-detail",
@@ -64,7 +64,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
     private readonly auth: AuthService,
-    private readonly localDB: LocalDbService
+    private readonly userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +78,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   public async onRead(book: Book): Promise<void> {
     if (this.user) {
       this.user.lastOpened = book;
-      await this.localDB.updateUser(this.user);
+      await this.userService.updateUser(this.user);
       this.router.navigate([RoutePath.Reader]);
     }
   }

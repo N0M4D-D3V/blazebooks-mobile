@@ -17,7 +17,7 @@ import { RoutePath } from "@enum/route.enum";
 import { ModalEnum, getModalConfig } from "@config/modal.config";
 import { AuthService } from "@services/auth.service";
 import { User } from "@interfaces/user.interface";
-import { LocalDbService } from "@services/local-db.service";
+import { UserService } from "@services/user.service";
 
 @Component({
   selector: "app-home",
@@ -66,15 +66,15 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
     private readonly bookService: BookService,
-    private readonly localDB: LocalDbService,
-    private readonly authService: AuthService
+    private readonly auth: AuthService,
+    private readonly userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.demiModal.initModalService(this.ref);
 
     this.books$ = this.bookService.getBooks$();
-    this.$user = this.authService.$getUser();
+    this.$user = this.auth.$getUser();
 
     this.subUser = this.$user.subscribe((usr) => (this.user = usr));
   }
@@ -82,7 +82,7 @@ export class HomePage implements OnInit, OnDestroy {
   public async onReadTouched(book: Book): Promise<void> {
     if (this.user) {
       this.user.lastOpened = book;
-      await this.localDB.updateUser(this.user);
+      await this.userService.updateUser(this.user);
       this.router.navigate([RoutePath.Reader]);
     }
   }

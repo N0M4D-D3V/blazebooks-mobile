@@ -31,7 +31,8 @@
       "@guard/*": ["src/app/guard/*"],
       "@components/*": ["src/app/components/*"],
       "@directives/*": ["src/app/directives/*"],
-      "@functions/*": ["src/app/functions/*"]
+      "@functions/*": ["src/app/functions/*"],
+      "@repositories/*": ["src/app/repositories/*"]
     }
   },
   "angularCompilerOptions": {

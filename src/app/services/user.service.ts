@@ -1,30 +1,20 @@
 import { Injectable } from "@angular/core";
-import { LOCAL_DB_CONF } from "@config/db.config";
+import { LocalDbRepository } from "@repositories/local-db.repository";
 import { Credentials, User } from "@interfaces/user.interface";
-import Dexie, { Table } from "dexie";
 
-@Injectable({
-  providedIn: "root",
-})
-export class LocalDbService extends Dexie {
-  private users!: Table<User, string>;
-
-  constructor() {
-    super(LOCAL_DB_CONF.name);
-    this.version(LOCAL_DB_CONF.version).stores({
-      users: "++id,email,passwd",
-    });
-  }
+@Injectable({ providedIn: "root" })
+export class UserService {
+  constructor(private readonly localDb: LocalDbRepository) {}
 
   public async getUserById(userId: string): Promise<User | undefined> {
-    return await this.users.get(userId).catch();
+    return await this.localDb.getAllUsers().get(userId).catch();
   }
 
   public async getUserByCredentials(
     credentials: Credentials
   ): Promise<User | undefined> {
     try {
-      return await this.users.get({
+      return await this.localDb.getAllUsers().get({
         email: credentials.email,
         passwd: credentials.passwd,
       });
@@ -35,12 +25,12 @@ export class LocalDbService extends Dexie {
   }
 
   public async updateUser(user: User): Promise<string | number> {
-    if (user.id) return this.users.update(user.id, user);
-    else return this.users.add(user);
+    if (user.id) return this.localDb.getAllUsers().update(user.id, user);
+    else return this.localDb.getAllUsers().add(user);
   }
 
   public async deleteUser(user: User) {
-    if (user.id) await this.users.delete(user.id);
+    if (user.id) await this.localDb.getAllUsers().delete(user.id);
     else
       throw new Error(
         `The user ${user.email} can not be deleted because there is no ID!`

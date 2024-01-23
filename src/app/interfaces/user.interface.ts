@@ -1,5 +1,5 @@
 import { DemiUser } from "demiurge";
-import { Book } from "./book.interface";
+import { Book, BookChapter, BookPage } from "./book.interface";
 
 export interface Credentials {
   email: string;
@@ -8,4 +8,13 @@ export interface Credentials {
 
 export interface User extends DemiUser {
   lastOpened?: Book;
+}
+
+export interface UserConfig {
+  id?: string;
+  userId: string;
+
+  lastBook?: Book;
+  lastChapter?: BookChapter;
+  lastPage?: BookPage;
 }

@@ -3,8 +3,8 @@ import { LocalStorageKey } from "@enum/local-storage.enum";
 import { User } from "@interfaces/user.interface";
 import { DemiLocalStorageService } from "demiurge";
 import { BehaviorSubject, Observable, distinctUntilChanged } from "rxjs";
-import { LocalDbService } from "./local-db.service";
 import { distinct } from "@functions/utils";
+import { UserService } from "./user.service";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -16,13 +16,13 @@ export class AuthService {
 
   constructor(
     private readonly localStorage: DemiLocalStorageService,
-    private readonly localDb: LocalDbService
+    private readonly userService: UserService
   ) {}
   public async emailLogin(
     email: string,
     passwd: string
   ): Promise<User | undefined> {
-    const usr: User | undefined = await this.localDb.getUserByCredentials({
+    const usr: User | undefined = await this.userService.getUserByCredentials({
       email,
       passwd,
     });
@@ -33,10 +33,10 @@ export class AuthService {
 
   public async register(user: User): Promise<string | number | undefined> {
     const exists: boolean =
-      (await this.localDb.getUserByCredentials(user)) !== undefined;
+      (await this.userService.getUserByCredentials(user)) !== undefined;
 
     if (exists) throw new Error(`User ${user.email} already exists!`);
-    else return this.localDb.updateUser(user);
+    else return this.userService.updateUser(user);
   }
 
   public async signOut(): Promise<void> {
@@ -49,7 +49,7 @@ export class AuthService {
     );
 
     if (userID) {
-      this.localDb.getUserById(userID).then((user) => {
+      this.userService.getUserById(userID).then((user) => {
         this.bsUser.next(user);
       });
     }

@@ -1,7 +1,6 @@
 import { DemiAlertItem } from "demiurge";
 
 export enum AlertEnum {
-  Login,
   InvalidForm,
   EmailNotMatch,
   PassNotMatch,
@@ -10,11 +9,6 @@ export enum AlertEnum {
 }
 
 export const ALERT_CONFIG: DemiAlertItem[] = [
-  {
-    title: "ERROR",
-    message: "Credentials are incorrect, malformed or has expired. ",
-    buttons: [{ label: "OK" }],
-  },
   {
     title: "ERROR",
     message: "Invalid form! ",

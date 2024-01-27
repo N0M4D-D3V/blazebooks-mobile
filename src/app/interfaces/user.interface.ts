@@ -6,9 +6,7 @@ export interface Credentials {
   passwd: string;
 }
 
-export interface User extends DemiUser {
-  lastOpened?: Book;
-}
+export interface User extends DemiUser {}
 
 export interface UserConfig {
   id?: string;

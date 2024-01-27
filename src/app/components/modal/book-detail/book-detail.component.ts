@@ -1,8 +1,8 @@
 import { AsyncPipe } from "@angular/common";
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Book } from "@interfaces/book.interface";
 import { RoutePath } from "@enum/route.enum";
+import { Book } from "@interfaces/book.interface";
 import {
   BsIcon,
   DemiCardConfig,
@@ -12,10 +12,6 @@ import {
   DemiModalService,
   DemiSeparePipe,
 } from "demiurge";
-import { AuthService } from "@services/auth.service";
-import { Subscription } from "rxjs";
-import { User } from "@interfaces/user.interface";
-import { UserService } from "@services/user.service";
 
 @Component({
   selector: "app-book-detail",
@@ -49,9 +45,6 @@ import { UserService } from "@services/user.service";
   ],
 })
 export class BookDetailComponent implements OnInit, OnDestroy {
-  private subUser!: Subscription;
-  private user?: User;
-
   @Input() book!: Book;
 
   public cardConfig: DemiCardConfig = {
@@ -62,28 +55,20 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly router: Router,
-    private readonly demiModal: DemiModalService,
-    private readonly auth: AuthService,
-    private readonly userService: UserService
+    private readonly demiModal: DemiModalService
   ) {}
 
-  ngOnInit(): void {
-    this.subUser = this.auth.$getUser().subscribe((usr) => (this.user = usr));
-  }
+  ngOnInit(): void {}
 
   public onClose(): void {
     this.demiModal.close();
   }
 
   public async onRead(book: Book): Promise<void> {
-    if (this.user) {
-      this.user.lastOpened = book;
-      await this.userService.update(this.user);
-      this.router.navigate([RoutePath.Reader]);
-    }
+    this.demiModal
+      .close()
+      .then(() => this.router.navigate([RoutePath.Reader, book.id]));
   }
 
-  ngOnDestroy(): void {
-    this.subUser.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

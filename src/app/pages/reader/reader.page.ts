@@ -1,6 +1,5 @@
 import { AsyncPipe, NgIf, UpperCasePipe } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import {
   Book,
   BookChapter,
@@ -8,12 +7,11 @@ import {
   BookPage,
   OptionRole,
 } from "@interfaces/book.interface";
-import { RoutePath } from "@enum/route.enum";
 import { BookControllerService } from "@services/local-book.service";
-import { Observable, Subscription, map } from "rxjs";
+import { Subscription } from "rxjs";
 import { BookStylesDirective } from "@directives/book-styles.directive";
 import { Location } from "@angular/common";
-import { AuthService } from "@services/auth.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-reader",
@@ -23,32 +21,28 @@ import { AuthService } from "@services/auth.service";
   imports: [NgIf, AsyncPipe, UpperCasePipe, BookStylesDirective],
 })
 export class ReaderPage implements OnInit, OnDestroy {
-  private subBook!: Subscription;
+  private subParam!: Subscription;
   private subChapter!: Subscription;
-  private book$!: Observable<Book | undefined>;
+
+  private bookId?: string;
 
   public currentBook!: Book;
   public currentChapter!: BookChapter | undefined;
   public currentPage!: BookPage | undefined;
 
   constructor(
+    private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
-    private readonly router: Router,
-    private readonly localBookService: BookControllerService,
-    private readonly auth: AuthService
+    private readonly localBookService: BookControllerService
   ) {}
 
   ngOnInit(): void {
-    this.book$ = this.auth.$getUser().pipe(map((res) => res?.lastOpened));
-
-    this.subBook = this.book$.subscribe((book: Book | undefined) => {
-      if (!book) this.router.navigate([RoutePath.Home]);
-      else this.onLoadBook(book);
+    this.subParam = this.activatedRoute.params.subscribe((params) => {
+      this.bookId = params["id"];
     });
   }
 
-  private onLoadBook(book: Book): void {
-    this.currentBook = book;
+  private onLoadBook(): void {
     this.getChapter();
   }
 
@@ -75,7 +69,7 @@ export class ReaderPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subBook?.unsubscribe();
+    this.subParam?.unsubscribe();
     this.subChapter?.unsubscribe();
   }
 }

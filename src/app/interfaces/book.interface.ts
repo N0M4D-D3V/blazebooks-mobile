@@ -1,4 +1,4 @@
-import { DemiCardItem } from 'demiurge';
+import { DemiCardItem } from "demiurge";
 
 export interface Book extends DemiCardItem {
   id: string;
@@ -43,5 +43,12 @@ export interface BookQuote {
 }
 
 export enum OptionRole {
-  End = 'end',
+  End = "end",
+}
+
+export interface Bookmark {
+  userId: string;
+  bookId: string;
+  chapterId: string;
+  pageId: string;
 }

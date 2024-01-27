@@ -1,25 +1,20 @@
 import { Injectable } from "@angular/core";
 import { LOCAL_DB_CONF } from "@config/db.config";
-import { User, UserConfig } from "@interfaces/user.interface";
+import { Bookmark } from "@interfaces/book.interface";
 import Dexie, { Table } from "dexie";
 
 @Injectable({
   providedIn: "root",
 })
 export class LocalDbRepository extends Dexie {
-  private users!: Table<User, string>;
-  private userConfigs!: Table<UserConfig, string>;
+  private bookmarks!: Table<Bookmark, string>;
 
   constructor() {
     super(LOCAL_DB_CONF.name);
     this.version(LOCAL_DB_CONF.version).stores(LOCAL_DB_CONF.tables);
   }
 
-  public getAllUsers(): Table<User, string> {
-    return this.users;
-  }
-
-  public getAllUserConfigs(): Table<UserConfig, string> {
-    return this.userConfigs;
+  public getBookmarks(): Table<Bookmark, string> {
+    return this.bookmarks;
   }
 }

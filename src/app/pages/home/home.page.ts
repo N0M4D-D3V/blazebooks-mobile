@@ -8,32 +8,30 @@ import {
   DemiModalInitialization,
   DemiModalService,
 } from "demiurge";
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subscription, map, of } from "rxjs";
 import { BookService } from "@services/book.service";
 import { AsyncPipe } from "@angular/common";
 import { Book } from "@interfaces/book.interface";
 import { Router } from "@angular/router";
 import { RoutePath } from "@enum/route.enum";
 import { ModalEnum, getModalConfig } from "@config/modal.config";
-import { AuthService } from "@services/auth.service";
 import { User } from "@interfaces/user.interface";
-import { UserService } from "@services/user.service";
 
 @Component({
   selector: "app-home",
   template: `
     <div class="container">
-      @if($user | async; as usr){ @if(usr.lastOpened; as lastOpened){
+      @if($lastBook | async; as lstBook){
       <demi-card-img
-        [item]="lastOpened"
+        [item]="lstBook"
         [config]="mainCardConfig"
         (onReadTouched)="onReadTouched($event)"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-img>
-      } }
+      }
 
       <demi-card-list
-        [items$]="books$"
+        [items$]="$books"
         [config]="cardListConfig"
         (onCardTouched)="onCardTouched($event)"
       ></demi-card-list>
@@ -44,12 +42,8 @@ import { UserService } from "@services/user.service";
   imports: [AsyncPipe, DemiCardImgComponent, DemiCardListComponent],
 })
 export class HomePage implements OnInit, OnDestroy {
-  private subUser!: Subscription;
-
-  public $user!: Observable<User | undefined>;
-  public books$!: Observable<Book[]>;
-
-  private user?: User;
+  public $books!: Observable<Book[]>;
+  public $lastBook!: Observable<Book | undefined>;
 
   public mainCardConfig: DemiCardConfig = {
     isClickable: true,
@@ -65,26 +59,28 @@ export class HomePage implements OnInit, OnDestroy {
     private readonly ref: ViewContainerRef,
     private readonly router: Router,
     private readonly demiModal: DemiModalService,
-    private readonly bookService: BookService,
-    private readonly auth: AuthService,
-    private readonly userService: UserService
+    private readonly bookService: BookService
   ) {}
 
   ngOnInit(): void {
     this.demiModal.initModalService(this.ref);
 
-    this.books$ = this.bookService.getBooks$();
-    this.$user = this.auth.$getUser();
+    this.$books = this.bookService.getBooks$();
+    //this.$user = this.auth.$getUser();
 
-    this.subUser = this.$user.subscribe((usr) => (this.user = usr));
+    //this.subUser = this.$user.subscribe((usr) => {
+    //this.user = usr;
+    // this.$lastBook = of(this.userConfig.getByUser(this.user)).pipe(
+    //   map((res: any) => res?.lastBook)
+    // );
+    //});
   }
 
   public async onReadTouched(book: Book): Promise<void> {
-    if (this.user) {
-      this.user.lastOpened = book;
-      await this.userService.update(this.user);
-      this.router.navigate([RoutePath.Reader]);
-    }
+    // console.log(book);
+    // this.demiModal
+    //   .close()
+    //   .then(() => this.router.navigate([RoutePath.Reader, book.id]));
   }
 
   public onCardTouched(book: Book): void {
@@ -92,7 +88,5 @@ export class HomePage implements OnInit, OnDestroy {
     this.demiModal.create({ ...config, data: { book: book } });
   }
 
-  ngOnDestroy(): void {
-    this.subUser.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }

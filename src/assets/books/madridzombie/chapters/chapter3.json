@@ -1,11 +1,11 @@
 {
-  "id": "chapterXXXI",
+  "id": "chapter3",
   "title": "Capítulo XXXI",
   "options": [
     {
-      "id": "chapterXXXI_initial_option",
+      "id": "chapter3_initial_option",
       "text": "solo se oye un reloj de fondo",
-      "goToPage": "chapterXXXI_page1"
+      "goToPage": "chapter3_page1"
     }
   ],
   "quote": {
@@ -15,7 +15,7 @@
   },
   "pages": [
     {
-      "id": "chapterXXXI_page1",
+      "id": "chapter3_page1",
       "paragraphs": [
         "- ¿Cómo que no habéis traido nada?",
         "El puño de Victor golpea la mesa.",
@@ -25,24 +25,24 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page1_option1",
+          "id": "chapter3_page1_option1",
           "text": "estabamos ocupados sobreviviendo",
-          "goToPage": "chapterXXXI_page2"
+          "goToPage": "chapter3_page2"
         },
         {
-          "id": "chapterXXXI_page1_option2",
+          "id": "chapter3_page1_option2",
           "text": "tranquilizate",
-          "goToPage": "chapterXXXI_page3"
+          "goToPage": "chapter3_page3"
         },
         {
-          "id": "chapterXXXI_page1_option3",
+          "id": "chapter3_page1_option3",
           "text": "no dices nada",
-          "goToPage": "chapterXXXI_page4"
+          "goToPage": "chapter3_page4"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page2",
+      "id": "chapter3_page2",
       "paragraphs": [
         "- ¿Sabes cómo se sobrevive en este y en cualquier otro mundo, querido Nomad? Con agua y comida...",
         "- Y yo aquí sin mi libreta para apuntarlo ...",
@@ -51,36 +51,36 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page2_option1",
+          "id": "chapter3_page2_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXXI_page5"
+          "goToPage": "chapter3_page5"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page3",
+      "id": "chapter3_page3",
       "paragraphs": ["Texto opción 2 seleccionada"],
       "options": [
         {
-          "id": "chapterXXXI_page3_option1",
+          "id": "chapter3_page3_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXXI_page5"
+          "goToPage": "chapter3_page5"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page4",
+      "id": "chapter3_page4",
       "paragraphs": ["Texto opción 3 seleccionada"],
       "options": [
         {
-          "id": "chapterXXXI_page4_option1",
+          "id": "chapter3_page4_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXXI_page5"
+          "goToPage": "chapter3_page5"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page5",
+      "id": "chapter3_page5",
       "paragraphs": [
         "- ¿Y ahora nos lo dices?¿En dónde?",
         "- En la iglesia.",
@@ -93,14 +93,14 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page5_option1",
+          "id": "chapter3_page5_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXXI_page6"
+          "goToPage": "chapter3_page6"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page6",
+      "id": "chapter3_page6",
       "paragraphs": [
         "- Conozco al padre Manuel - continúa Eduardo -. Semanas antes de perder contacto con el mundo exterior hablé con él. Me dijo que estaba aprovisionando la iglesia y que cualquier feligrés que no tuviese donde ir podía refugiarse allí. No he vuelto a saber nada de él desde entonces. Puede que haya gente y comida allí, o no. No lo sé.",
         "- 'No lo sé' es nuestra mejor opción ahora mismo, ¿no? - pregunta María.",
@@ -110,14 +110,14 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page6_option1",
+          "id": "chapter3_page6_option1",
           "text": "siguiente",
-          "goToPage": "chapterXXXI_page7"
+          "goToPage": "chapter3_page7"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page7",
+      "id": "chapter3_page7",
       "paragraphs": [
         "- Tienes razón, Eduardo, actuemos con calma. Repasaré el plan hoy por la noche y mañana organizo la misión. Ya han sido suficientes decepciones por hoy. ¿Cristina?",
         "La joven se pone de pie y ambos desaparecen tras la puerta.",
@@ -128,19 +128,19 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page6_option1",
+          "id": "chapter3_page6_option1",
           "text": "sí",
-          "goToPage": "chapterXXXI_page8"
+          "goToPage": "chapter3_page8"
         },
         {
-          "id": "chapterXXXI_page6_option1",
+          "id": "chapter3_page6_option1",
           "text": "no",
-          "goToPage": "chapterXXXI_page9"
+          "goToPage": "chapter3_page9"
         }
       ]
     },
     {
-      "id": "chapterXXXI_page8",
+      "id": "chapter3_page8",
       "paragraphs": [
         "- Vale, no hay problema. Dale un beso a tu padre, Claudia.",
         "Los ojos de la niña recorren tu figura pero su cuerpo no se mueve.",
@@ -155,7 +155,7 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page8_option1",
+          "id": "chapter3_page8_option1",
           "text": "siguiente capítulo",
           "goToPage": "chapterXXIX",
           "role": "end"
@@ -163,7 +163,7 @@
       ]
     },
     {
-      "id": "chapterXXXI_page9",
+      "id": "chapter3_page9",
       "paragraphs": [
         "- No hace falta, gracias.",
         "- Vale, Claudia, ve con tu padre.",
@@ -185,9 +185,9 @@
       ],
       "options": [
         {
-          "id": "chapterXXXI_page8_option1",
+          "id": "chapter3_page8_option1",
           "text": "siguiente capítulo",
-          "goToPage": "chapterXXIX",
+          "goToPage": "chapter1",
           "role": "end"
         }
       ]

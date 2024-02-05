@@ -1,8 +1,10 @@
 import { AsyncPipe } from "@angular/common";
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { DEFAULT_USER_ID } from "@config/db.config";
 import { RoutePath } from "@enum/route.enum";
 import { Book } from "@interfaces/book.interface";
+import { LastReadedService } from "@services/last-readed.service";
 import {
   BsIcon,
   DemiCardConfig,
@@ -55,7 +57,8 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly router: Router,
-    private readonly demiModal: DemiModalService
+    private readonly demiModal: DemiModalService,
+    private readonly lastReadedService: LastReadedService
   ) {}
 
   ngOnInit(): void {}
@@ -65,6 +68,10 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   }
 
   public async onRead(book: Book): Promise<void> {
+    await this.lastReadedService.update({
+      userId: DEFAULT_USER_ID,
+      book,
+    });
     this.demiModal
       .close()
       .then(() => this.router.navigate([RoutePath.Reader, book.id]));

@@ -27,9 +27,14 @@ import {
     ></demi-card-img>
 
     <div class="px-3 fadein">
-      <p class="text-primary text-end">
-        <b>Géneros: </b> {{ book.genres | separe }}
-      </p>
+      <div class="row">
+        <p class="col text-primary text-start">
+          <b>Autor: </b> {{ book.author }}
+        </p>
+        <p class="col text-primary text-end">
+          <b>Géneros: </b> {{ book.genres | separe }}
+        </p>
+      </div>
       <h5 class="text-primary">Sinopsis</h5>
       <div class="container">
         <p>{{ book.description }}</p>

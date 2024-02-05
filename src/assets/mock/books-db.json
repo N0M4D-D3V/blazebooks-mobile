@@ -6,7 +6,6 @@
       "subtitle": "Conoce al Gran Hermano",
       "author": "George Orwell",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vestibulum finibus nisl id interdum. Curabitur viverra, lectus at porttitor scelerisque, augue quam tincidunt tellus, vel varius nulla mauris ut ex. Ut sem leo, laoreet in leo at, facilisis cursus odio. Nullam ac sapien felis. Sed hendrerit quis erat egestas sollicitudin. Curabitur sit amet volutpat elit. Ut at enim accumsan, laoreet ex sed, vehicula nibh. Mauris sapien elit, auctor tincidunt condimentum in, tristique vitae eros. Proin cursus vestibulum urna non tincidunt. Suspendisse eget maximus ante.",
-      "chapterIDs": ["chapter1", "chapter2", "chapter3"],
       "genres": ["distopic", "classic"],
       "imgUrl": "assets/books/1984/cover.jpg"
     },
@@ -16,7 +15,6 @@
       "subtitle": "¡Rambo no!",
       "author": "Bruno Piqué",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vestibulum finibus nisl id interdum. Curabitur viverra, lectus at porttitor scelerisque, augue quam tincidunt tellus, vel varius nulla mauris ut ex. Ut sem leo, laoreet in leo at, facilisis cursus odio. Nullam ac sapien felis. Sed hendrerit quis erat egestas sollicitudin. Curabitur sit amet volutpat elit. Ut at enim accumsan, laoreet ex sed, vehicula nibh. Mauris sapien elit, auctor tincidunt condimentum in, tristique vitae eros. Proin cursus vestibulum urna non tincidunt. Suspendisse eget maximus ante.",
-      "chapterIDs": ["chapterXXIX", "chapterXXX", "chapterXXXI"],
       "genres": ["zombi", "adventure"],
       "imgUrl": "assets/books/madridzombie/cover.jpg"
     }

@@ -66,7 +66,9 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     private readonly lastReadedService: LastReadedService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.book);
+  }
 
   public onClose(): void {
     this.demiModal.close();

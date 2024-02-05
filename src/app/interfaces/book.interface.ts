@@ -9,7 +9,6 @@ export interface Book extends DemiCardItem {
   imgUrl?: string;
   description?: string;
   genres?: string[];
-  chapterIDs: string[];
 }
 
 export interface BookChapter {

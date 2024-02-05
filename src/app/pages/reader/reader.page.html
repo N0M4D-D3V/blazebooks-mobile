@@ -14,7 +14,7 @@
   id="chapter-main"
   class="px-5 pt-5 text-center overflow-visible"
   bookstyles
-  [book]="currentBook"
+  [bookId]="bookId"
 >
   <h1 class="fw-bolder">{{ currentChapter.title }}</h1>
   <p class="fst-italic">{{ currentChapter.quote.text }}</p>
@@ -28,7 +28,7 @@
 </div>
 } @else if (currentChapter && currentPage) {
 <!-- NORMAL PAGE -->
-<div id="chapter-page" class="px-4 py-3 pt-5" bookstyles [book]="currentBook">
+<div id="chapter-page" class="px-4 py-3 pt-5" bookstyles [bookId]="bookId">
   @for (p of currentPage.paragraphs; track $index) {
   <p>{{p}}</p>
   }

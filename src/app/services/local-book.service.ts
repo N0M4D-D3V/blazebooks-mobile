@@ -1,23 +1,25 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Book, BookChapter, BookPage } from '@interfaces/book.interface';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Book, BookChapter, BookPage } from "@interfaces/book.interface";
+import { Observable } from "rxjs";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class BookControllerService {
-  private path: string = 'assets/books';
+  private path: string = "assets/books";
 
   constructor(private readonly http: HttpClient) {}
 
-  public getChapter(book: Book, chapterId?: string): Observable<BookChapter> {
+  public getChapter(
+    bookId: string,
+    chapterId?: string
+  ): Observable<BookChapter> {
     if (chapterId)
       return this.http.get<BookChapter>(
-        `${this.path}/${book.id}/chapters/${chapterId}.json`
+        `${this.path}/${bookId}/chapters/${chapterId}.json`
       );
     else {
-      const chapters: string[] = book.chapterIDs;
       return this.http.get<BookChapter>(
-        `${this.path}/${book.id}/chapters/${chapters[0]}.json`
+        `${this.path}/${bookId}/chapters/chapter1.json`
       );
     }
   }

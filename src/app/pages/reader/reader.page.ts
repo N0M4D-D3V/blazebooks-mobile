@@ -1,7 +1,6 @@
 import { AsyncPipe, NgIf, UpperCasePipe } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
-  Book,
   BookChapter,
   BookOption,
   BookPage,
@@ -24,9 +23,8 @@ export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;
   private subChapter!: Subscription;
 
-  private bookId?: string;
+  public bookId!: string;
 
-  public currentBook!: Book;
   public currentChapter!: BookChapter | undefined;
   public currentPage!: BookPage | undefined;
 
@@ -39,6 +37,7 @@ export class ReaderPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subParam = this.activatedRoute.params.subscribe((params) => {
       this.bookId = params["id"];
+      this.onLoadBook();
     });
   }
 
@@ -57,7 +56,7 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   private getChapter(option?: BookOption): void {
     this.subChapter = this.localBookService
-      .getChapter(this.currentBook, option?.goToPage)
+      .getChapter(this.bookId, option?.goToPage)
       .subscribe((response) => {
         this.currentChapter = response;
         this.currentPage = this.localBookService.getPage(this.currentChapter);

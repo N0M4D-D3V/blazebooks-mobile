@@ -22,13 +22,6 @@ export class BookmarkService {
   }
 
   public async update(bookmark: Bookmark): Promise<any> {
-    const query = {
-      bookId: bookmark.bookId,
-      userId: bookmark.bookId,
-    };
-    const exists: boolean = (await this.getById(query)) !== undefined;
-
-    if (exists) return this.table.where(query).modify(bookmark);
-    else return this.table.add(bookmark);
+    return this.table.put(bookmark);
   }
 }

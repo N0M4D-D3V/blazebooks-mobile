@@ -1,6 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Book, BookChapter, BookPage } from "@interfaces/book.interface";
+import {
+  Book,
+  BookChapter,
+  BookPage,
+  Bookmark,
+} from "@interfaces/book.interface";
 import { Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
@@ -9,17 +14,14 @@ export class BookControllerService {
 
   constructor(private readonly http: HttpClient) {}
 
-  public getChapter(
-    bookId: string,
-    chapterId?: string
-  ): Observable<BookChapter> {
-    if (chapterId)
+  public getChapter(bookmark: Bookmark): Observable<BookChapter> {
+    if (bookmark.chapterId)
       return this.http.get<BookChapter>(
-        `${this.path}/${bookId}/chapters/${chapterId}.json`
+        `${this.path}/${bookmark.bookId}/chapters/${bookmark.chapterId}.json`
       );
     else {
       return this.http.get<BookChapter>(
-        `${this.path}/${bookId}/chapters/chapter1.json`
+        `${this.path}/${bookmark.bookId}/chapters/chapter1.json`
       );
     }
   }

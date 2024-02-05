@@ -50,7 +50,6 @@ export interface Bookmark {
   userId: string;
   bookId: string;
   chapterId: string;
-  pageId: string;
 }
 
 export interface LastReaded {

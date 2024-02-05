@@ -4,6 +4,7 @@ import {
   BookChapter,
   BookOption,
   BookPage,
+  Bookmark,
   OptionRole,
 } from "@interfaces/book.interface";
 import { BookControllerService } from "@services/local-book.service";
@@ -11,6 +12,8 @@ import { Subscription } from "rxjs";
 import { BookStylesDirective } from "@directives/book-styles.directive";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
+import { BookmarkService } from "@services/bookmark.service";
+import { DEFAULT_USER_ID } from "@config/db.config";
 
 @Component({
   selector: "app-reader",
@@ -23,7 +26,11 @@ export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;
   private subChapter!: Subscription;
 
-  public bookId!: string;
+  public bookmark: Bookmark = {
+    userId: DEFAULT_USER_ID,
+    bookId: "",
+    chapterId: "",
+  };
 
   public currentChapter!: BookChapter | undefined;
   public currentPage!: BookPage | undefined;
@@ -31,14 +38,25 @@ export class ReaderPage implements OnInit, OnDestroy {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
-    private readonly localBookService: BookControllerService
+    private readonly localBookService: BookControllerService,
+    private readonly bookmarkService: BookmarkService
   ) {}
 
   ngOnInit(): void {
-    this.subParam = this.activatedRoute.params.subscribe((params) => {
-      this.bookId = params["id"];
+    this.subParam = this.activatedRoute.params.subscribe(async (params) => {
+      await this.loadBookmark(params["id"]);
       this.onLoadBook();
     });
+  }
+
+  private async loadBookmark(bookId: string): Promise<void> {
+    const mark: Bookmark | undefined = await this.bookmarkService.getById({
+      userId: DEFAULT_USER_ID,
+      bookId,
+    });
+
+    if (mark) this.bookmark = mark;
+    else this.bookmark.bookId = bookId;
   }
 
   private onLoadBook(): void {
@@ -47,18 +65,23 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   public loadPage(option: BookOption): void {
     if (!option.role) this.currentPage = this.getPage(option);
-    else if (option.role === OptionRole.End) this.getChapter(option);
+    else if (option.role === OptionRole.End) {
+      this.bookmark.chapterId = option.goToPage;
+      this.getChapter();
+    }
   }
 
-  public onBack(): void {
+  public async onBack(): Promise<void> {
+    await this.bookmarkService.update(this.bookmark);
     this.location.back();
   }
 
-  private getChapter(option?: BookOption): void {
+  private getChapter(): void {
     this.subChapter = this.localBookService
-      .getChapter(this.bookId, option?.goToPage)
+      .getChapter(this.bookmark)
       .subscribe((response) => {
         this.currentChapter = response;
+        this.bookmark.chapterId = response.id;
         this.currentPage = this.localBookService.getPage(this.currentChapter);
       });
   }

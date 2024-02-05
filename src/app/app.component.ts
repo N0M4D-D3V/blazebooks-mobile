@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subRoute = this.router.events
       .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((ev: any) => {
-        this.showToolbar = ev?.url !== RoutePath.Reader;
+        this.showToolbar = !ev?.url.includes(RoutePath.Reader);
         this.cdref.detectChanges();
       });
   }

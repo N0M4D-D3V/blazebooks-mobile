@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationStart, Router, RouterOutlet } from "@angular/router";
+import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { DemiToolbarComponent, DemiToolbarConfig } from "demiurge";
 import { TOOLBAR_CONFIG } from "@config/toolbar.config";
 import { RoutePath } from "./enum/route.enum";
@@ -41,9 +41,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private manageSubscriptions(): void {
     this.subRoute = this.router.events
-      .pipe(filter((event) => event instanceof NavigationStart))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((ev: any) => {
-        this.showToolbar = !ev?.url.includes(RoutePath.Reader);
+        const url: string = ev.url;
+
+        this.showToolbar = !url.includes(RoutePath.Reader);
         this.cdref.detectChanges();
       });
   }

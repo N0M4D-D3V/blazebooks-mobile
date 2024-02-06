@@ -24,6 +24,13 @@ export const TOOLBAR_CONFIG: DemiToolbarConfig = {
       activeButtons: ["back", "search"],
     },
     {
+      label: RouteName.Config,
+      url: RoutePath.Config,
+      icon: "bi-gear",
+      toggleable: true,
+      activeButtons: ["back"],
+    },
+    {
       label: RouteName.Reader,
       url: RoutePath.Reader,
       activeButtons: ["back"],

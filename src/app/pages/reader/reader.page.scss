@@ -16,9 +16,14 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9;
 }
 
 #chapter-main,
 #chapter-page {
   min-height: 100vh;
+}
+
+.filter {
+  filter: brightness(80%) contrast(80%) sepia(60%) grayscale(30%);
 }

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf, UpperCasePipe } from "@angular/common";
+import { AsyncPipe, NgClass, NgIf, UpperCasePipe } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
   BookChapter,
@@ -14,13 +14,15 @@ import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { BookmarkService } from "@services/bookmark.service";
 import { DEFAULT_USER_ID } from "@config/db.config";
+import { ConfigService } from "@services/config.service";
+import { Config } from "@interfaces/config.interface";
 
 @Component({
   selector: "app-reader",
   templateUrl: "./reader.page.html",
   styleUrls: ["./reader.page.scss"],
   standalone: true,
-  imports: [NgIf, AsyncPipe, UpperCasePipe, BookStylesDirective],
+  imports: [NgIf, NgClass, AsyncPipe, UpperCasePipe, BookStylesDirective],
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;
@@ -35,11 +37,14 @@ export class ReaderPage implements OnInit, OnDestroy {
   public currentChapter!: BookChapter | undefined;
   public currentPage!: BookPage | undefined;
 
+  public config: Config = this.configService.get();
+
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
     private readonly localBookService: BookControllerService,
-    private readonly bookmarkService: BookmarkService
+    private readonly bookmarkService: BookmarkService,
+    private readonly configService: ConfigService
   ) {}
 
   ngOnInit(): void {

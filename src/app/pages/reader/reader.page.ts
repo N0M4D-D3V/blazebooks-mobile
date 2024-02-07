@@ -1,4 +1,10 @@
-import { AsyncPipe, NgClass, NgIf, UpperCasePipe } from "@angular/common";
+import {
+  AsyncPipe,
+  NgClass,
+  NgIf,
+  NgStyle,
+  UpperCasePipe,
+} from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import {
   BookChapter,
@@ -22,7 +28,14 @@ import { Config } from "@interfaces/config.interface";
   templateUrl: "./reader.page.html",
   styleUrls: ["./reader.page.scss"],
   standalone: true,
-  imports: [NgIf, NgClass, AsyncPipe, UpperCasePipe, BookStylesDirective],
+  imports: [
+    NgIf,
+    NgClass,
+    NgStyle,
+    AsyncPipe,
+    UpperCasePipe,
+    BookStylesDirective,
+  ],
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;

@@ -18,7 +18,9 @@
   [bookId]="bookmark.bookId"
 >
   <h1 class="fw-bolder">{{ currentChapter.title }}</h1>
-  <p class="fst-italic">{{ currentChapter.quote.text }}</p>
+  <p class="fst-italic" [ngStyle]="{'font-size': config.fontSize+'px'}">
+    {{ currentChapter.quote.text }}
+  </p>
   <p>{{ currentChapter.quote.book }}<br />{{ currentChapter.quote.year }}</p>
 
   @for (option of currentChapter.options; track option.id) {
@@ -37,7 +39,7 @@
   [bookId]="bookmark.bookId"
 >
   @for (p of currentPage.paragraphs; track $index) {
-  <p>{{p}}</p>
+  <p [ngStyle]="{'font-size': config.fontSize+'px'}">{{p}}</p>
   }
   <div class="btn-group-options">
     @for (option of currentPage.options; track option.id) {

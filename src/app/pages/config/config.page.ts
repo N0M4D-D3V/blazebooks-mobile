@@ -1,7 +1,13 @@
 import { NgStyle } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { Subscription, debounce, debounceTime, delay } from "rxjs";
+import { Config } from "@interfaces/config.interface";
+import { ConfigService } from "@services/config.service";
+import { Subscription, debounceTime } from "rxjs";
+
+const DEBOUNCE_TIME: number = 500;
+const NOT_IMPLEMENTED =
+  "Funcionalidad no implementada. Estamos trabajando en ello =)";
 
 @Component({
   selector: "app-config",
@@ -12,10 +18,11 @@ import { Subscription, debounce, debounceTime, delay } from "rxjs";
 })
 export class ConfigPage implements OnInit, OnDestroy {
   private subForm!: Subscription;
+  private config: Config = this.configService.get();
 
   public form: FormGroup = this.fb.group({
-    lightFilter: [true],
-    fontSize: [22],
+    lightFilter: [this.config.lightFilter],
+    fontSize: [this.config.fontSize],
   });
 
   public get isLightFilterOn(): boolean {
@@ -26,20 +33,23 @@ export class ConfigPage implements OnInit, OnDestroy {
     return this.form.get("fontSize")!.value as number;
   }
 
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly configService: ConfigService
+  ) {}
 
   ngOnInit() {
     this.subForm = this.form.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe(console.log);
+      .pipe(debounceTime(DEBOUNCE_TIME))
+      .subscribe((config: Config) => this.configService.save(config));
   }
 
   public onDeleteLocalData(): void {
-    alert("Funcionalidad no implementada. Estamos trabajando en ello =)");
+    alert(NOT_IMPLEMENTED);
   }
 
   public onDeleteLocalBooks(): void {
-    alert("Funcionalidad no implementada. Estamos trabajando en ello =)");
+    alert(NOT_IMPLEMENTED);
   }
 
   ngOnDestroy(): void {

@@ -4,6 +4,7 @@ import { SearchPage } from "@pages/search/search.page";
 import { ReaderPage } from "@pages/reader/reader.page";
 import { RouteName } from "@enum/route.enum";
 import { ConfigPage } from "@pages/config/config.page";
+import { CommunityPage } from "@pages/community/community.page";
 
 export const ROUTES: Routes = [
   { path: "", redirectTo: RouteName.Home, pathMatch: "full" },
@@ -22,5 +23,9 @@ export const ROUTES: Routes = [
   {
     path: `${RouteName.Reader}/:id`,
     component: ReaderPage,
+  },
+  {
+    path: RouteName.Community,
+    component: CommunityPage,
   },
 ];

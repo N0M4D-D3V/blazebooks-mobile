@@ -3,6 +3,7 @@ export enum RouteName {
   Search = "search",
   Config = "config",
   Reader = "reader",
+  Community = "community",
 }
 
 export enum RoutePath {
@@ -10,4 +11,5 @@ export enum RoutePath {
   Search = "/search",
   Config = "/config",
   Reader = "/reader",
+  Community = "/community",
 }

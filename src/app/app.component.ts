@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationEnd, Router, RouterOutlet } from "@angular/router";
+import { NavigationStart, Router, RouterOutlet } from "@angular/router";
 import { DemiToolbarComponent, DemiToolbarConfig } from "demiurge";
 import { TOOLBAR_CONFIG } from "@config/toolbar.config";
 import { RoutePath } from "./enum/route.enum";
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private manageSubscriptions(): void {
     this.subRoute = this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationStart))
       .subscribe((ev: any) => {
         const url: string = ev.url;
 

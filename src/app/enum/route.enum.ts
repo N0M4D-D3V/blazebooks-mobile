@@ -4,6 +4,7 @@ export enum RouteName {
   Config = "config",
   Reader = "reader",
   Community = "community",
+  About = "about",
 }
 
 export enum RoutePath {
@@ -12,4 +13,5 @@ export enum RoutePath {
   Config = "/config",
   Reader = "/reader",
   Community = "/community",
+  About = "/about",
 }

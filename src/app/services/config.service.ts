@@ -11,11 +11,14 @@ export class ConfigService {
   constructor(private readonly localStorage: DemiLocalStorageService) {}
 
   public save(conf: Config): void {
-    console.log(conf);
     this.localStorage.save(LocalStorageKey.Config, conf);
   }
 
   public get(): Config {
     return this.localStorage.get(LocalStorageKey.Config) ?? DEFAULT_CONFIG;
+  }
+
+  public clear(): void {
+    this.localStorage.delete(LocalStorageKey.Config);
   }
 }

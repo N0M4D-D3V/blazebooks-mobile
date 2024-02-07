@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pb-3">
   <div class="card border-dark bg-transparent mb-3">
     <div class="card-header">Lector</div>
     <form [formGroup]="form" class="card-body">
@@ -44,6 +44,17 @@
       >
         {{fontSize}}px
       </p>
+
+      <hr />
+      <p>
+        Restaura la configuración por defecto. Recuerda que se perderá la
+        anterior.
+      </p>
+      <div class="text-end">
+        <button class="btn btn-dark" (click)="onRestoreConfig()">
+          Restaurar
+        </button>
+      </div>
     </form>
   </div>
 
@@ -56,9 +67,11 @@
         Elimina todos los datos almacenados localmente referentes a los usuario.
         Las partidas guardadas <b>SE PERDERÁN</b> si se ejecuta esta acción.
       </p>
-      <button class="btn btn-danger" (click)="onDeleteLocalData()">
-        Eliminar datos locales
-      </button>
+      <div class="text-end">
+        <button class="btn btn-danger" (click)="onDeleteLocalData()">
+          Eliminar datos locales
+        </button>
+      </div>
 
       <hr />
 
@@ -68,9 +81,11 @@
         asociado. Las partidas guardadas <b>NO SE PERDERÁN</b> si se ejecuta
         esta acción.
       </p>
-      <button class="btn btn-danger" (click)="onDeleteLocalBooks()">
-        Eliminar libros descargados
-      </button>
+      <div class="text-end">
+        <button class="btn btn-danger" (click)="onDeleteLocalBooks()">
+          Eliminar libros descargados
+        </button>
+      </div>
     </div>
   </div>
 </div>

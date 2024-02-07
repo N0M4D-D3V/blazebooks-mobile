@@ -44,6 +44,14 @@ export class ConfigPage implements OnInit, OnDestroy {
       .subscribe((config: Config) => this.configService.save(config));
   }
 
+  public onRestoreConfig(): void {
+    this.configService.clear();
+
+    this.config = this.configService.get();
+    this.form.get("lightFilter")?.setValue(this.config.lightFilter);
+    this.form.get("fontSize")?.setValue(this.config.fontSize);
+  }
+
   public onDeleteLocalData(): void {
     alert(NOT_IMPLEMENTED);
   }

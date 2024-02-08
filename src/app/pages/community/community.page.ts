@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Email } from "@enum/links.enum";
+import { Email, SocialMedia } from "@enum/links.enum";
 
 @Component({
   selector: "app-community",
@@ -10,4 +10,10 @@ import { Email } from "@enum/links.enum";
 })
 export class CommunityPage {
   public supportEmail: string = Email.Support;
+  public socialNetworkLinks = {
+    FB: SocialMedia.FB,
+    IG: SocialMedia.IG,
+    YT: SocialMedia.YT,
+    WEB: SocialMedia.Web,
+  };
 }

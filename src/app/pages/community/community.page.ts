@@ -1,10 +1,13 @@
 import { Component } from "@angular/core";
+import { Email } from "@enum/links.enum";
 
 @Component({
   selector: "app-community",
-  template: `<h1>Community Page</h1>`,
-  styleUrls: [],
+  templateUrl: "./community.page.html",
+  styleUrls: ["./community.page.scss"],
   standalone: true,
   imports: [],
 })
-export class CommunityPage {}
+export class CommunityPage {
+  public supportEmail: string = Email.Support;
+}

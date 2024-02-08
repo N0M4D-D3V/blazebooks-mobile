@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.router.navigate([RoutePath.Home]);
     this.managePlugins();
     this.manageSubscriptions();
   }

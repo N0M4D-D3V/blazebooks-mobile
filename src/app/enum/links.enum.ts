@@ -7,4 +7,6 @@ export enum SocialMedia {
   IG = "#",
   YT = "#",
   Web = "#",
+  PayPal = "#",
+  Coffee = "#",
 }

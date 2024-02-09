@@ -7,6 +7,7 @@ import { Subscription, filter } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 import { StatusBar } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
+import { ApiDbRepository } from "@repositories/api-db.repository";
 
 @Component({
   selector: "app-root",
@@ -27,13 +28,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly cdref: ChangeDetectorRef,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly api: ApiDbRepository
   ) {}
 
   ngOnInit(): void {
     this.router.navigate([RoutePath.Home]);
     this.managePlugins();
     this.manageSubscriptions();
+
+    this.api.get().subscribe(console.log);
   }
 
   private async managePlugins(): Promise<void> {

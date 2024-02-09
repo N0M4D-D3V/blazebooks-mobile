@@ -3,10 +3,11 @@
   "version": "1.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "prepare:android": "npm run build && npx cap copy android && npx cap open android",
-    "watch": "ng build --watch --configuration development",
+    "start": "ng serve --configuration=development",
+    "build:dev": "ng build --configuration=development",
+    "build:prod": "ng build --configuration=production",
+    "prepare:android": "npm run build:prod && npx cap copy android && npx cap open android",
+    "watch": "ng build:dev --watch --configuration development",
     "test": "ng test"
   },
   "private": true,

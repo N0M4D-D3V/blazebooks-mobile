@@ -1,15 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Book } from '@interfaces/book.interface';
-import mockDBJson from '../../assets/mock/books-db.json';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Book } from "@interfaces/book.interface";
+import { ApiDbRepository } from "@repositories/api-db.repository";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class BookService {
-  private books: Book[] = mockDBJson.books;
-
-  constructor() {}
+  constructor(private readonly api: ApiDbRepository) {}
 
   public getBooks$(): Observable<Book[]> {
-    return of(this.books);
+    return this.api.get("books");
   }
 }

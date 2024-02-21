@@ -11,7 +11,7 @@ export class ApiDbRepository {
 
   constructor(private readonly http: HttpClient) {}
 
-  public get(): Observable<any> {
-    return this.http.get(this.url);
+  public get(url: string): Observable<any> {
+    return this.http.get(`${this.url}/${url}`);
   }
 }

@@ -6,15 +6,8 @@ import {
   UpperCasePipe,
 } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import {
-  BookChapter,
-  BookOption,
-  BookPage,
-  Bookmark,
-  OptionRole,
-} from "@interfaces/book.interface";
-import { BookControllerService } from "@services/local-book.service";
-import { Subscription } from "rxjs";
+import { Book, Bookmark, LastReaded, Page } from "@interfaces/book.interface";
+import { Observable, Subscription, tap } from "rxjs";
 import { BookStylesDirective } from "@directives/book-styles.directive";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
@@ -22,6 +15,8 @@ import { BookmarkService } from "@services/bookmark.service";
 import { DEFAULT_USER_ID } from "@config/db.config";
 import { ConfigService } from "@services/config.service";
 import { Config } from "@interfaces/config.interface";
+import { LastReadedService } from "@services/last-readed.service";
+import { PageService } from "@services/page.service";
 
 @Component({
   selector: "app-reader",
@@ -39,35 +34,36 @@ import { Config } from "@interfaces/config.interface";
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;
-  private subChapter!: Subscription;
+
+  private book!: Book;
+  public page$!: Observable<Page>;
 
   public bookmark: Bookmark = {
     userId: DEFAULT_USER_ID,
     bookId: "",
-    chapterId: "",
+    chapterId: 0,
   };
-
-  public currentChapter!: BookChapter | undefined;
-  public currentPage!: BookPage | undefined;
 
   public config: Config = this.configService.get();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly location: Location,
-    private readonly localBookService: BookControllerService,
+    private readonly lastReadedService: LastReadedService,
     private readonly bookmarkService: BookmarkService,
+    private readonly pageService: PageService,
     private readonly configService: ConfigService
   ) {}
 
   ngOnInit(): void {
     this.subParam = this.activatedRoute.params.subscribe(async (params) => {
-      await this.loadBookmark(params["id"]);
-      this.onLoadBook();
+      await this.getBookmark(params["id"]);
+      await this.getBook();
+      await this.getPage();
     });
   }
 
-  private async loadBookmark(bookId: string): Promise<void> {
+  private async getBookmark(bookId: string): Promise<void> {
     const mark: Bookmark | undefined = await this.bookmarkService.getById({
       userId: DEFAULT_USER_ID,
       bookId,
@@ -77,15 +73,17 @@ export class ReaderPage implements OnInit, OnDestroy {
     else this.bookmark.bookId = bookId;
   }
 
-  private onLoadBook(): void {
-    this.getChapter();
+  private async getBook(): Promise<void> {
+    const lastReaded: LastReaded | undefined =
+      await this.lastReadedService.getById(DEFAULT_USER_ID);
+    this.book = lastReaded!.book;
   }
 
-  public loadPage(option: BookOption): void {
-    if (!option.role) this.currentPage = this.getPage(option);
-    else if (option.role === OptionRole.End) {
-      this.bookmark.chapterId = option.goToPage;
-      this.getChapter();
+  public async getPage(id?: string): Promise<void> {
+    if (id) this.page$ = this.pageService.getPage(id);
+    else {
+      const firstPage: number = this.book.content[this.bookmark.chapterId][0];
+      this.page$ = this.pageService.getPage(firstPage).pipe(tap(console.log));
     }
   }
 
@@ -94,22 +92,7 @@ export class ReaderPage implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  private getChapter(): void {
-    this.subChapter = this.localBookService
-      .getChapter(this.bookmark)
-      .subscribe((response) => {
-        this.currentChapter = response;
-        this.bookmark.chapterId = response.id;
-        this.currentPage = this.localBookService.getPage(this.currentChapter);
-      });
-  }
-
-  private getPage(option?: BookOption): BookPage | undefined {
-    return this.localBookService.getPage(this.currentChapter, option?.goToPage);
-  }
-
   ngOnDestroy(): void {
     this.subParam?.unsubscribe();
-    this.subChapter?.unsubscribe();
   }
 }

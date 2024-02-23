@@ -4,33 +4,7 @@
   </button>
 </div>
 
-@if(!currentChapter && !currentPage){
-<p class="text-danger mt-5 text-center">
-  Tuvimos un problema cargando su libro :( Por favor, intentelo de nuevo.
-</p>
-} @else if (currentChapter && !currentPage) {
-<!-- CHAPTER MAIN PAGE -->
-<div
-  id="chapter-main"
-  class="px-5 pt-5 text-center overflow-visible"
-  [ngClass]="{'filter': config.lightFilter}"
-  bookstyles
-  [bookId]="bookmark.bookId"
->
-  <h1 class="fw-bolder">{{ currentChapter.title }}</h1>
-  <p class="fst-italic" [ngStyle]="{'font-size': config.fontSize+'px'}">
-    {{ currentChapter.quote.text }}
-  </p>
-  <p>{{ currentChapter.quote.book }}<br />{{ currentChapter.quote.year }}</p>
-
-  @for (option of currentChapter.options; track option.id) {
-  <button class="btn btn-dark" (click)="loadPage(option)">
-    {{ option.text | uppercase }}
-  </button>
-  }
-</div>
-} @else if (currentChapter && currentPage) {
-<!-- NORMAL PAGE -->
+@if(page$ | async; as page){
 <div
   id="chapter-page"
   class="px-4 py-3 pt-5"
@@ -38,17 +12,15 @@
   bookstyles
   [bookId]="bookmark.bookId"
 >
-  @for (p of currentPage.paragraphs; track $index) {
+  <!-- @for (p of page.paragraphs; track $index) {
   <p [ngStyle]="{'font-size': config.fontSize+'px'}">{{p}}</p>
-  }
+  } -->
   <div class="btn-group-options">
-    @for (option of currentPage.options; track option.id) {
-    <button class="btn btn-dark" (click)="loadPage(option)">
+    @for (option of page.options; track $index) {
+    <button class="btn btn-dark" (click)="getPage(option.nextPageId)">
       {{ option.text | uppercase }}
     </button>
     }
   </div>
 </div>
-} @else {
-<p class="text-center text-success">Capítulo cargado correctamente</p>
 }

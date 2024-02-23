@@ -4,7 +4,6 @@
   </button>
 </div>
 
-@if(page$ | async; as page){
 <div
   id="chapter-page"
   class="px-4 py-3 pt-5"
@@ -12,15 +11,18 @@
   bookstyles
   [bookId]="bookmark.bookId"
 >
-  <!-- @for (p of page.paragraphs; track $index) {
-  <p [ngStyle]="{'font-size': config.fontSize+'px'}">{{p}}</p>
-  } -->
+  @if(page$ | async; as page){
+  <div
+    [ngStyle]="{'font-size': config.fontSize+'px'}"
+    htmlInjector
+    [plainHtml]="page.html"
+  ></div>
   <div class="btn-group-options">
     @for (option of page.options; track $index) {
     <button class="btn btn-dark" (click)="getPage(option.nextPageId)">
-      {{ option.text | uppercase }}
+      {{ option.displayText | uppercase }}
     </button>
     }
   </div>
+  }
 </div>
-}

@@ -17,6 +17,7 @@ import { ConfigService } from "@services/config.service";
 import { Config } from "@interfaces/config.interface";
 import { LastReadedService } from "@services/last-readed.service";
 import { PageService } from "@services/page.service";
+import { HtmlInjectorDirective } from "@directives/html-injector.directive";
 
 @Component({
   selector: "app-reader",
@@ -30,6 +31,7 @@ import { PageService } from "@services/page.service";
     AsyncPipe,
     UpperCasePipe,
     BookStylesDirective,
+    HtmlInjectorDirective,
   ],
 })
 export class ReaderPage implements OnInit, OnDestroy {

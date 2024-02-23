@@ -9,6 +9,15 @@ export interface Book extends DemiCardItem {
   imgUrl?: string;
   description?: string;
   genres?: string[];
+
+  createdAt?: Date;
+  updatedAt?: Date;
+
+  /**
+   * Stores the content. First level refers to chapters and
+   * second level refers to pageIDs
+   */
+  content: string[][];
 }
 
 export interface BookChapter {

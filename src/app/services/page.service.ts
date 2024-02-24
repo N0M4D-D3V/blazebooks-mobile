@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
 export class PageService {
   constructor(private readonly api: ApiDbRepository) {}
 
-  public getPage(id: string | number): Observable<any> {
-    return this.api.get(`pages/${id}`);
+  public getPage(ref: string): Observable<any> {
+    return this.api.get(`pages/${ref}`);
   }
 }

@@ -17,17 +17,20 @@ export interface Book extends DemiCardItem {
    * Stores the content. First level refers to chapters and
    * second level refers to pageIDs
    */
-  content: number[][];
+  content: string[][];
 }
 
 export interface Page {
+  // book title + chapter number + page number
+  reference: string;
+
   html: string;
   options: Option[];
 }
 
 export interface Option {
   displayText: string;
-  nextPageId: number;
+  nextPageId: string;
 
   role?: OptionRole;
 }
@@ -39,7 +42,7 @@ export enum OptionRole {
 export interface Bookmark {
   userId: string;
   bookId: string;
-  chapterId: number;
+  chapterId: string;
 }
 
 export interface LastReaded {

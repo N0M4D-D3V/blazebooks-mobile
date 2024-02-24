@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { APP_VERSION } from "@config/app-info.config";
 import { Email, SocialMedia } from "@enum/links.enum";
 
 @Component({
@@ -9,6 +10,7 @@ import { Email, SocialMedia } from "@enum/links.enum";
   imports: [],
 })
 export class AboutPage {
+  public version: string = APP_VERSION;
   public supportEmail: string = Email.Support;
   public socialNetworkLinks = {
     IG: SocialMedia.IG,

@@ -27,7 +27,7 @@ export interface Page {
 
 export interface Option {
   displayText: string;
-  nextPageId: string;
+  nextPageId: number;
 
   role?: OptionRole;
 }

@@ -81,10 +81,13 @@ export class ReaderPage implements OnInit, OnDestroy {
     this.book = lastReaded!.book;
   }
 
-  public async getPage(id?: string): Promise<void> {
-    if (id) this.page$ = this.pageService.getPage(id);
+  public async getPage(id?: number): Promise<void> {
+    if (id && this.checkId(id)) this.page$ = this.pageService.getPage(id);
     else {
-      const firstPage: number = this.book.content[this.bookmark.chapterId][0];
+      const chapter: number = this.bookmark?.chapterId ?? 0;
+      const page: number = 0;
+      console.log(this.book.content);
+      const firstPage: number = this.book.content[chapter][page];
       this.page$ = this.pageService.getPage(firstPage).pipe(tap(console.log));
     }
   }
@@ -92,6 +95,12 @@ export class ReaderPage implements OnInit, OnDestroy {
   public async onBack(): Promise<void> {
     await this.bookmarkService.update(this.bookmark);
     this.location.back();
+  }
+
+  private checkId(id?: number): boolean {
+    const chapter: number = this.bookmark.chapterId;
+    const check = id && this.book.content[chapter].includes(id);
+    return check ? true : false;
   }
 
   ngOnDestroy(): void {

@@ -18,6 +18,9 @@ export interface Book extends DemiCardItem {
    * second level refers to pageIDs
    */
   content: string[][];
+
+  // specific styles for this book
+  scss?: string;
 }
 
 export interface Page {
@@ -26,6 +29,9 @@ export interface Page {
 
   html: string;
   options: Option[];
+
+  // styles to apply for this page
+  scss?: string;
 }
 
 export interface Option {

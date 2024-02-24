@@ -43,16 +43,14 @@ import { HtmlInjectorDirective } from "@directives/html-injector.directive";
 export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;
 
-  private book!: Book;
   public page$!: Observable<Page>;
 
+  public config: Config = this.configService.get();
   public bookmark: Bookmark = {
     userId: DEFAULT_USER_ID,
     bookId: "",
     chapterId: "0",
   };
-
-  public config: Config = this.configService.get();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -84,14 +82,7 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   private async start(params: Params): Promise<void> {
     await this.getBookmark(params["id"]);
-    await this.getBook();
     await this.getNext();
-  }
-
-  private async getBook(): Promise<void> {
-    const lastReaded: LastReaded | undefined =
-      await this.lastReadedService.getById(DEFAULT_USER_ID);
-    this.book = lastReaded!.book;
   }
 
   private async getBookmark(bookId: string): Promise<void> {

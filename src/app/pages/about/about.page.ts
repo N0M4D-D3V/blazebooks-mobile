@@ -17,4 +17,17 @@ export class AboutPage {
     PayPal: SocialMedia.PayPal,
     Coffee: SocialMedia.Coffee,
   };
+
+  public onBuyCoffee(): void {
+    alert("Not implemented yet");
+  }
+  public onDonate(): void {
+    alert("Not implemented yet");
+  }
+  public onRateApp(): void {
+    alert("Not implemented yet");
+  }
+  public onReportBug(): void {
+    alert("Not implemented yet");
+  }
 }

@@ -1,82 +1,47 @@
 <div class="container pb-3">
-  <div class="card bg-transparent border-primary">
-    <div class="card-header text-primary">Conócenos</div>
-    <div class="card-body">
-      <p>
-        Tan solo somos dos viejos amigos con una pasión compartida por la
-        lectura y la escritura. Juntos, hemos dado vida a una idea que creemos
-        que puede cambiar la forma en que interactuamos con los libros.
-      </p>
-      <p>
-        Que nuestro mundo moderno evoluciona muy rápido no es ningún
-        descubrimiento. Como consecuencia, la lectura ha perdido terreno frente
-        a otras formas culturales a pasos de gigante.
-      </p>
-      <p>
-        Con nuestra plataforma planeamos dotar a los libros de interacción y
-        dinamismo, siempre sin perder la esencia y la belleza de este ancestral
-        arte.
-      </p>
-      <p>
-        Lo que comenzó como la locura de dos amigos ahora se está convirtiendo
-        en una realidad más allá de nosotros mismos.
-        <span class="text-primary">Pero no podemos hacerlo solos.</span>
-      </p>
-    </div>
+  <div class="w-100 text-center m-3">
+    <img id="mainicon" src="assets/icon-blazebook.svg" alt="app main icon" />
+    <p>Version 1.1.0</p>
   </div>
 
-  <div class="card bg-transparent border-primary mt-3">
-    <div class="card-body">
-      <p>
-        Si a ti también te apasiona esta idea y quieres formar parte del viaje,
-        ¡te invitamos a contribuir! Puedes marcar la diferencia y ayudarnos a
-        hacer crecer este proyecto. Ya sea
-        <a href="{{socialNetworkLinks.Coffee}}" class="text-primary"
-          >invitandonos a un café</a
+  <div class="text-center row px-3">
+    <button class="btn btn-lg btn-dark my-1" (click)="onBuyCoffee()">
+      Compranos un café
+    </button>
+    <button class="btn btn-lg btn-dark my-1" (click)="onDonate()">Dona</button>
+    <button class="btn btn-lg btn-dark my-1" (click)="onRateApp()">
+      Valora nuestra app
+    </button>
+    <button class="btn btn-lg btn-dark my-1" (click)="onReportBug()">
+      Reporta un bug
+    </button>
+  </div>
+
+  <div class="fixed-bottom">
+    <div class="card bg-transparent border-primary m-3">
+      <div class="card-body row">
+        <a
+          class="btn btn-lg col"
+          href="{{socialNetworkLinks.IG}}"
+          target="_blank"
         >
-        o haciendo una donación a través de
-        <a href="{{socialNetworkLinks.PayPal}}" class="text-primary">paypal</a>.
-        Cada pequeño gesto cuenta.
-      </p>
-    </div>
-  </div>
-
-  <div class="card bg-transparent border-primary mt-3">
-    <div class="card-body">
-      <p>
-        Estaremos encantados de escuchar tus ideas, comentarios o sugerencias.
-        Puedes comunicarte con nosotros a través de las redes sociales o
-        enviando un email a
-        <a class="text-primary" href="mailto:{{supportEmail}}"
-          >{{supportEmail}}.</a
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a
+          class="btn btn-lg col"
+          href="{{socialNetworkLinks.FB}}"
+          target="_blank"
         >
-      </p>
-    </div>
-  </div>
-
-  <div class="card bg-transparent border-primary mt-3">
-    <div class="card-body row">
-      <a
-        class="btn btn-lg col"
-        href="{{socialNetworkLinks.IG}}"
-        target="_blank"
-      >
-        <i class="bi bi-instagram"></i>
-      </a>
-      <a
-        class="btn btn-lg col"
-        href="{{socialNetworkLinks.FB}}"
-        target="_blank"
-      >
-        <i class="bi bi-facebook"></i>
-      </a>
-      <a
-        class="btn btn-lg col"
-        href="{{socialNetworkLinks.YT}}"
-        target="_blank"
-      >
-        <i class="bi bi-youtube"></i>
-      </a>
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a
+          class="btn btn-lg col"
+          href="{{socialNetworkLinks.YT}}"
+          target="_blank"
+        >
+          <i class="bi bi-youtube"></i>
+        </a>
+      </div>
     </div>
   </div>
 </div>

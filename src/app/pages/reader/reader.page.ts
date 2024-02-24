@@ -13,8 +13,7 @@ import {
   OptionRole,
   Page,
 } from "@interfaces/book.interface";
-import { Observable, Subscription, tap } from "rxjs";
-import { BookStylesDirective } from "@directives/book-styles.directive";
+import { Observable, Subscription } from "rxjs";
 import { Location } from "@angular/common";
 import { ActivatedRoute, Params } from "@angular/router";
 import { BookmarkService } from "@services/bookmark.service";
@@ -24,6 +23,7 @@ import { Config } from "@interfaces/config.interface";
 import { LastReadedService } from "@services/last-readed.service";
 import { PageService } from "@services/page.service";
 import { HtmlInjectorDirective } from "@directives/html-injector.directive";
+import { ScssInjectorDirective } from "@directives/book-styles.directive";
 
 @Component({
   selector: "app-reader",
@@ -36,15 +36,15 @@ import { HtmlInjectorDirective } from "@directives/html-injector.directive";
     NgStyle,
     AsyncPipe,
     UpperCasePipe,
-    BookStylesDirective,
+    ScssInjectorDirective,
     HtmlInjectorDirective,
   ],
 })
 export class ReaderPage implements OnInit, OnDestroy {
   private subParam!: Subscription;
 
+  public book!: Book;
   public page$!: Observable<Page>;
-
   public config: Config = this.configService.get();
   public bookmark: Bookmark = {
     userId: DEFAULT_USER_ID,
@@ -82,7 +82,14 @@ export class ReaderPage implements OnInit, OnDestroy {
 
   private async start(params: Params): Promise<void> {
     await this.getBookmark(params["id"]);
+    await this.getBook();
     await this.getNext();
+  }
+
+  private async getBook(): Promise<void> {
+    const lastReaded: LastReaded | undefined =
+      await this.lastReadedService.getById(DEFAULT_USER_ID);
+    this.book = lastReaded!.book;
   }
 
   private async getBookmark(bookId: string): Promise<void> {

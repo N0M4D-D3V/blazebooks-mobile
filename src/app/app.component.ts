@@ -38,7 +38,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private async managePlugins(): Promise<void> {
-    if (Capacitor.isNativePlatform()) await StatusBar.hide();
+    if (Capacitor.isNativePlatform()) {
+      await StatusBar.setOverlaysWebView({ overlay: false });
+      await StatusBar.setBackgroundColor({ color: "transparent" });
+      await StatusBar.hide();
+    }
   }
 
   private manageSubscriptions(): void {

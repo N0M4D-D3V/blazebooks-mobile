@@ -19,7 +19,7 @@
   ></div>
   <div class="btn-group-options">
     @for (option of page.options; track $index) {
-    <button class="btn btn-dark" (click)="getPage(option.nextPageId)">
+    <button class="btn btn-dark" (click)="getNext(option.nextPageId)">
       {{ option.displayText | uppercase }}
     </button>
     }

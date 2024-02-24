@@ -36,6 +36,7 @@ export interface Option {
 }
 
 export enum OptionRole {
+  Next = "nextchapter",
   End = "end",
 }
 

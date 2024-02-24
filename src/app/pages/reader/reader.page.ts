@@ -6,11 +6,17 @@ import {
   UpperCasePipe,
 } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Book, Bookmark, LastReaded, Page } from "@interfaces/book.interface";
+import {
+  Book,
+  Bookmark,
+  LastReaded,
+  OptionRole,
+  Page,
+} from "@interfaces/book.interface";
 import { Observable, Subscription, tap } from "rxjs";
 import { BookStylesDirective } from "@directives/book-styles.directive";
 import { Location } from "@angular/common";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 import { BookmarkService } from "@services/bookmark.service";
 import { DEFAULT_USER_ID } from "@config/db.config";
 import { ConfigService } from "@services/config.service";
@@ -58,11 +64,34 @@ export class ReaderPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subParam = this.activatedRoute.params.subscribe(async (params) => {
-      await this.getBookmark(params["id"]);
-      await this.getBook();
-      await this.getPage();
-    });
+    this.subParam = this.activatedRoute.params.subscribe(
+      async (params) => await this.start(params)
+    );
+  }
+
+  public async getNext(ref?: string): Promise<void> {
+    const isEnd: boolean = this.manageEndBook(ref);
+    if (isEnd) return;
+
+    this.manageNextChapter(ref);
+    this.manageNextPage(ref);
+  }
+
+  public async onBack(): Promise<void> {
+    await this.bookmarkService.update(this.bookmark);
+    this.location.back();
+  }
+
+  private async start(params: Params): Promise<void> {
+    await this.getBookmark(params["id"]);
+    await this.getBook();
+    await this.getNext();
+  }
+
+  private async getBook(): Promise<void> {
+    const lastReaded: LastReaded | undefined =
+      await this.lastReadedService.getById(DEFAULT_USER_ID);
+    this.book = lastReaded!.book;
   }
 
   private async getBookmark(bookId: string): Promise<void> {
@@ -75,27 +104,20 @@ export class ReaderPage implements OnInit, OnDestroy {
     else this.bookmark.bookId = bookId;
   }
 
-  private async getBook(): Promise<void> {
-    const lastReaded: LastReaded | undefined =
-      await this.lastReadedService.getById(DEFAULT_USER_ID);
-    this.book = lastReaded!.book;
+  private manageNextPage(ref?: string): void {
+    ref = `${this.bookmark.bookId}${this.bookmark.chapterId}${ref ?? 0}`;
+    this.page$ = this.pageService.getPage(ref);
   }
 
-  public async getPage(ref?: string): Promise<void> {
-    if (ref) {
-      ref = `${this.bookmark.bookId}${this.bookmark.chapterId}${ref}`;
-      this.page$ = this.pageService.getPage(ref);
-    } else {
-      const chapter: string = this.bookmark?.chapterId ?? "0";
-      const page: number = 0;
-      const firstPage: string = this.book.content[+chapter][page];
-      this.page$ = this.pageService.getPage(firstPage).pipe(tap(console.log));
+  private manageNextChapter(ref?: string): void {
+    if (ref && ref === OptionRole.Next) {
+      let current: number = +this.bookmark.chapterId;
+      this.bookmark.bookId = (++current).toString();
     }
   }
 
-  public async onBack(): Promise<void> {
-    await this.bookmarkService.update(this.bookmark);
-    this.location.back();
+  private manageEndBook(ref?: string): boolean {
+    return ref === OptionRole.End;
   }
 
   ngOnDestroy(): void {

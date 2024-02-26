@@ -68,6 +68,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.demiModal.initModalService(this.ref);
 
     this.books$ = this.bookService.getBooks$();
+    this.books$.subscribe(console.log);
     this.getLastBook();
   }
 

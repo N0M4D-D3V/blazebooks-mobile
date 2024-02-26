@@ -12,11 +12,6 @@ export class ApiDbRepository {
   constructor(private readonly http: HttpClient) {}
 
   public get<T>(url: string): Observable<T> {
-    return this.http.get<T>(`${this.url}/${url}`).pipe(
-      catchError((error: any, caught: Observable<T>) => {
-        console.error(error);
-        return of();
-      })
-    );
+    return this.http.get<T>(`${this.url}/${url}`);
   }
 }

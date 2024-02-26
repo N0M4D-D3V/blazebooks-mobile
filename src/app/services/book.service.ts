@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, catchError, map } from "rxjs";
+import { Observable, catchError, map, of } from "rxjs";
 import { Book } from "@interfaces/book.interface";
 import { ApiDbRepository } from "@repositories/api-db.repository";
 import { Links } from "@enum/links.enum";
@@ -14,9 +14,12 @@ export class BookService {
     return this.api.get<Book[]>("books").pipe(
       map((books: Book[]) =>
         books.map((book) => {
-          return { ...book, imgUrl: `${this.url}/books/cover/${book.imgUrl}` };
+          return { ...book, imgUrl: `${this.url}/books/cover/${book?.imgUrl}` };
         })
-      )
+      ),
+      catchError((error: any, caught: Observable<Book[]>) => {
+        return of([]);
+      })
     );
   }
 }

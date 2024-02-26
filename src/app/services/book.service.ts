@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { Observable, catchError, map } from "rxjs";
 import { Book } from "@interfaces/book.interface";
 import { ApiDbRepository } from "@repositories/api-db.repository";
 import { Links } from "@enum/links.enum";

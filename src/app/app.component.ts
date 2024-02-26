@@ -7,7 +7,6 @@ import { Subscription, filter } from "rxjs";
 import { AsyncPipe } from "@angular/common";
 import { StatusBar } from "@capacitor/status-bar";
 import { Capacitor } from "@capacitor/core";
-import { BookService } from "@services/book.service";
 
 @Component({
   selector: "app-root",

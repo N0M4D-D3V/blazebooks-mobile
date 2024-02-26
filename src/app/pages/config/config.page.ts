@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Config } from "@interfaces/config.interface";
 import { ConfigService } from "@services/config.service";
+import { DemiAlertService, DemiLocalStorageService } from "demiurge";
 import { Subscription, debounceTime } from "rxjs";
 
 const DEBOUNCE_TIME: number = 500;
@@ -35,7 +36,9 @@ export class ConfigPage implements OnInit, OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly configService: ConfigService
+    private readonly configService: ConfigService,
+    private readonly demiLocalStorage: DemiLocalStorageService,
+    private readonly demiAlertService: DemiAlertService
   ) {}
 
   ngOnInit() {
@@ -53,11 +56,23 @@ export class ConfigPage implements OnInit, OnDestroy {
   }
 
   public onDeleteLocalData(): void {
-    alert(NOT_IMPLEMENTED);
-  }
-
-  public onDeleteLocalBooks(): void {
-    alert(NOT_IMPLEMENTED);
+    this.demiAlertService.create({
+      title: "ALERTA",
+      message:
+        "¿Estás seguro de que quieres eliminar los datos locales? Esta acción no puede deshacerse.",
+      buttons: [
+        {
+          label: "CONTINUAR",
+          role: "cancel",
+          handler: () => {
+            this.demiLocalStorage.clear();
+            window.location.reload();
+          },
+        },
+        { label: "CANCELAR", role: "continue" },
+      ],
+      darkMode: true,
+    });
   }
 
   ngOnDestroy(): void {

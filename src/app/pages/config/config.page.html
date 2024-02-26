@@ -64,8 +64,8 @@
     <div class="card-body">
       <!-- Delete local user data -->
       <p>
-        Elimina todos los datos almacenados localmente referentes a los usuario.
-        Las partidas guardadas <b>SE PERDERÁN</b> si se ejecuta esta acción.
+        Elimina todos los datos almacenados localmente. Las partidas guardadas
+        <b>SE PERDERÁN</b> si se ejecuta esta acción.
       </p>
       <div class="text-end">
         <button class="btn btn-danger" (click)="onDeleteLocalData()">
@@ -74,18 +74,6 @@
       </div>
 
       <hr />
-
-      <!-- Delete downloaded/stored books -->
-      <p>
-        Elimina todos los libros descargados localmente y todo el material
-        asociado. Las partidas guardadas <b>NO SE PERDERÁN</b> si se ejecuta
-        esta acción.
-      </p>
-      <div class="text-end">
-        <button class="btn btn-danger" (click)="onDeleteLocalBooks()">
-          Eliminar libros descargados
-        </button>
-      </div>
     </div>
   </div>
 </div>

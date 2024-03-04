@@ -1,4 +1,4 @@
-import { NgStyle } from "@angular/common";
+import { NgClass, NgStyle } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Config } from "@interfaces/config.interface";
@@ -7,15 +7,22 @@ import { DemiAlertService, DemiLocalStorageService } from "demiurge";
 import { Subscription, debounceTime } from "rxjs";
 
 const DEBOUNCE_TIME: number = 500;
-const NOT_IMPLEMENTED =
-  "Funcionalidad no implementada. Estamos trabajando en ello =)";
 
 @Component({
   selector: "app-config",
   templateUrl: "./config.page.html",
-  styleUrls: [],
+  styles: `
+  p {
+    color: whitesmoke;
+  }
+
+  .lighFilterOn{
+    color: var(--color-primary);
+    font-weight: bold;
+  }
+  `,
   standalone: true,
-  imports: [ReactiveFormsModule, NgStyle],
+  imports: [ReactiveFormsModule, NgStyle, NgClass],
 })
 export class ConfigPage implements OnInit, OnDestroy {
   private subForm!: Subscription;

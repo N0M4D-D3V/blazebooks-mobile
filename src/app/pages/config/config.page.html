@@ -1,15 +1,17 @@
 <div class="container pb-3">
   <div class="card border-dark bg-transparent mb-3">
-    <div class="card-header">Lector</div>
+    <div class="card-header text-primary">Lector</div>
     <form [formGroup]="form" class="card-body">
       <!-- Light filter -->
-      <h3 class="text-primary">Filtro de la luz</h3>
       <p>
-        Activa o desactiva un filtro de luz sepia mientras se está leyendo una
-        historia.
+        Filtro de Luz. Activa o desactiva un filtro de luz sepia mientras se
+        está leyendo una historia.
       </p>
       <div class="form-check form-switch">
-        <label class="form-check-label" for="flexSwitchCheckDefault"
+        <label
+          class="form-check-label"
+          for="flexSwitchCheckDefault"
+          [ngClass]="{'lighFilterOn': isLightFilterOn}"
           >{{isLightFilterOn ? 'Activado' : 'Desactivado'}}</label
         >
         <input
@@ -22,10 +24,9 @@
 
       <hr />
       <!-- font size-->
-      <h3 class="text-primary">Tamaño de la letra</h3>
       <p>
-        Aumenta o reduce el tamaño de la letra que se utiliza mientras se está
-        leyendo una historia.
+        Tamaño de la letra. Aumenta o reduce el tamaño de la letra que se
+        utiliza mientras se está leyendo una historia.
       </p>
       <input
         formControlName="fontSize"

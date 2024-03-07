@@ -1,4 +1,5 @@
 # Blazebooks
+Blazebooks is a Netflix-style entertainment platform for interactive novels. Instead of following a predetermined linear plot, interactive novels empower readers to influence the story's direction through key decisions. In Blazebooks, you'll immerse yourself in stories where every choice you make impacts the plot development and the fate of the characters.
 
 ## Generate Android APK with no Android Studio or Ionic
 

@@ -103,7 +103,7 @@ export class ReaderPage implements OnInit, OnDestroy {
   }
 
   private manageNextPage(ref?: string): void {
-    ref = `${this.bookmark.bookId}${this.bookmark.chapterId}${ref ?? 0}`;
+    if (!ref) ref = `${this.bookmark.bookId}${this.bookmark.chapterId}0`;
     this.page$ = this.pageService.getPage(ref);
   }
 

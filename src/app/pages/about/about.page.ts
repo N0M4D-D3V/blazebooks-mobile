@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { APP_VERSION } from "@config/app-info.config";
 import { Email, SocialMedia } from "@enum/links.enum";
+import packageJson from "../../../../package.json";
 
 @Component({
   selector: "app-about",
@@ -10,7 +10,7 @@ import { Email, SocialMedia } from "@enum/links.enum";
   imports: [],
 })
 export class AboutPage {
-  public version: string = APP_VERSION;
+  public version: string = packageJson.version;
   public supportEmail: string = Email.Support;
   public socialNetworkLinks = {
     IG: SocialMedia.IG,

@@ -23,7 +23,7 @@ import { Config } from "@interfaces/config.interface";
 import { LastReadedService } from "@services/last-readed.service";
 import { PageService } from "@services/page.service";
 import { HtmlInjectorDirective } from "@directives/html-injector.directive";
-import { ScssInjectorDirective } from "@directives/book-styles.directive";
+import { ScssInjectorDirective } from "@directives/scss-injector.directive";
 
 @Component({
   selector: "app-reader",

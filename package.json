@@ -3,7 +3,10 @@
   "version": "1.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration=development",
+    "start:local": "ng serve --configuration=local",
+    "start:dev": "ng serve --configuration=development",
+    "start:prod": "ng serve --configuration=production",
+    "build:local": "ng build --configuration=local",
     "build:dev": "ng build --configuration=development",
     "build:prod": "ng build --configuration=production",
     "prepare:android": "npm run build:prod && npx cap copy android && npx cap open android",

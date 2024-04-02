@@ -1,13 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Links } from "@enum/links.enum";
-import { Observable, catchError, of } from "rxjs";
+import { Observable } from "rxjs";
+import { environment } from "@environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiDbRepository {
-  private url: string = Links.API;
+  private url: string = environment.apiUrl;
 
   constructor(private readonly http: HttpClient) {}
 

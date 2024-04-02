@@ -2,11 +2,11 @@ import { Injectable } from "@angular/core";
 import { Observable, catchError, map, of } from "rxjs";
 import { Book } from "@interfaces/book.interface";
 import { ApiDbRepository } from "@repositories/api-db.repository";
-import { Links } from "@enum/links.enum";
+import { environment } from "@environments/environment";
 
 @Injectable({ providedIn: "root" })
 export class BookService {
-  private url: string = Links.API;
+  private url: string = environment.apiUrl;
 
   constructor(private readonly api: ApiDbRepository) {}
 

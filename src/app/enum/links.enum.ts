@@ -10,7 +10,3 @@ export enum SocialMedia {
   PayPal = "#",
   Coffee = "#",
 }
-
-export enum Links {
-  API = "http://localhost:3000/api/v1",
-}

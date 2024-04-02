@@ -32,7 +32,8 @@
       "@components/*": ["src/app/components/*"],
       "@directives/*": ["src/app/directives/*"],
       "@functions/*": ["src/app/functions/*"],
-      "@repositories/*": ["src/app/repositories/*"]
+      "@repositories/*": ["src/app/repositories/*"],
+      "@environments/*": ["src/environments/*"]
     }
   },
   "angularCompilerOptions": {

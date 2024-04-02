@@ -1,5 +1,5 @@
 import { DemiToolbarConfig } from "demiurge";
-import { RouteName, RoutePath } from "@enum/route.enum";
+import { RouteLabelES, RoutePath } from "@enum/route.enum";
 import packageJson from "../../../package.json";
 import { Assets } from "@enum/assets.enum";
 
@@ -10,42 +10,42 @@ export const TOOLBAR_CONFIG: DemiToolbarConfig = {
   defaultTitle: "Anónimo",
   items: [
     {
-      label: RouteName.Home,
+      label: RouteLabelES.Home,
       url: RoutePath.Home,
       icon: "bi-house",
       toggleable: true,
       activeButtons: ["toggle", "search"],
     },
     {
-      label: RouteName.Search,
+      label: RouteLabelES.Search,
       url: RoutePath.Search,
       icon: "bi-search",
       toggleable: true,
       activeButtons: ["back", "search"],
     },
     {
-      label: RouteName.Community,
+      label: RouteLabelES.Community,
       url: RoutePath.Community,
       icon: "bi-people",
       toggleable: true,
       activeButtons: ["back"],
     },
     {
-      label: RouteName.About,
+      label: RouteLabelES.About,
       url: RoutePath.About,
       icon: "bi-info-circle",
       toggleable: true,
       activeButtons: ["back"],
     },
     {
-      label: RouteName.Config,
+      label: RouteLabelES.Config,
       url: RoutePath.Config,
       icon: "bi-gear",
       toggleable: true,
       activeButtons: ["back"],
     },
     {
-      label: RouteName.Reader,
+      label: RouteLabelES.Reader,
       url: RoutePath.Reader,
       activeButtons: ["back"],
       hidden: true,

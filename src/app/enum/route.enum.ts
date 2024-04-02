@@ -1,3 +1,12 @@
+export enum RouteLabelES {
+  Home = "home",
+  Search = "buscar",
+  Config = "opciones",
+  Reader = "lector",
+  Community = "comunidad",
+  About = "info",
+}
+
 export enum RouteName {
   Home = "home",
   Search = "search",
